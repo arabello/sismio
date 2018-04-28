@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace io.sismio.sensor
 {
-    interface Station
+    class Station
     {
 
     }
