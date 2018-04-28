@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sismio.io.sismio.source
+namespace io.sismio.source
 {
     class DataSourceFactory
     {

@@ -51,10 +51,19 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="io\sismio\analysis\Analysis.cs" />
+    <Compile Include="io\sismio\analysis\FrequencyAnalysis.cs" />
+    <Compile Include="io\sismio\analysis\IAnalysis.cs" />
+    <Compile Include="io\sismio\analysis\MagnitudeAnalysis.cs" />
+    <Compile Include="io\sismio\analysis\RawAnalysis.cs" />
     <Compile Include="io\sismio\sensor\ISensor.cs" />
     <Compile Include="io\sismio\sensor\SerialSensor.cs" />
+    <Compile Include="io\sismio\source\DataSource.cs" />
     <Compile Include="io\sismio\source\DataSourceFactory.cs" />
+    <Compile Include="io\sismio\source\FileDataSource.cs" />
     <Compile Include="io\sismio\source\IDataSource.cs" />
+    <Compile Include="io\sismio\source\RemoteDataSource.cs" />
+    <Compile Include="io\sismio\source\SensorDataSourceAdapter.cs" />
     <Compile Include="io\sismio\station\IStationRepository.cs" />
     <Compile Include="io\sismio\station\Station.cs" />
     <Compile Include="Program.cs" />
