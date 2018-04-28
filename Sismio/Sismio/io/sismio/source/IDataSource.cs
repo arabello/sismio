@@ -1,5 +1,4 @@
-﻿using io.sismio.analysis;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,14 +10,10 @@ namespace io.sismio.source
     {
         // TODO: add analysis
 
-        void AddAnalysis(IAnalysis analysis);
-
-        void OnDataAvailable(int[] data);
+        void AddAnalysis();
 
         void Mainloop();
 
-        string GetLocation();
 
-        void Dispose();
     }
 }
