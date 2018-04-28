@@ -52,6 +52,11 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="io\sismio\sensor\ISensor.cs" />
+    <Compile Include="io\sismio\sensor\SerialSensor.cs" />
+    <Compile Include="io\sismio\source\DataSourceFactory.cs" />
+    <Compile Include="io\sismio\source\IDataSource.cs" />
+    <Compile Include="io\sismio\station\IStationRepository.cs" />
+    <Compile Include="io\sismio\station\Station.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
