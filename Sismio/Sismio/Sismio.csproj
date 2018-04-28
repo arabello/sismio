@@ -57,6 +57,7 @@
     <Compile Include="io\sismio\source\IDataSource.cs" />
     <Compile Include="io\sismio\station\IStationRepository.cs" />
     <Compile Include="io\sismio\station\Station.cs" />
+    <Compile Include="io\sismio\transmission\ConnectionBuilder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
