@@ -9,20 +9,20 @@ namespace io.sismio.sensor
 {
     public class Station
     {
-        private string name;
-        private string location;
-        private IPAddress ipAddress;
-        private int port;
-        private string publicKeyFingerprint;
+        private string Name { get; }
+        private string Location { get; }
+        private IPAddress IpAddress { get; }
+        private int Port { get; }
+        private string PublicKeyFingerprint { get; }
 
         public Station(string name, string location, IPAddress ipAddress,
             int port, string publicKeyFingerprint)
         {
-            this.name = name;
-            this.location = location;
-            this.ipAddress = ipAddress;
-            this.port = port;
-            this.publicKeyFingerprint = publicKeyFingerprint;
+            Name = name;
+            Location = location;
+            IpAddress = ipAddress;
+            Port = port;
+            PublicKeyFingerprint = publicKeyFingerprint;
         }
     }
 }

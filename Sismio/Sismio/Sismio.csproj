@@ -55,7 +55,13 @@
     <Compile Include="io\sismio\database\DBRepository.cs" />
     <Compile Include="io\sismio\events\DBEventRepository.cs" />
     <Compile Include="io\sismio\events\Event.cs" />
+    <Compile Include="io\sismio\events\IEventFilter.cs" />
     <Compile Include="io\sismio\events\IEventRepository.cs" />
+    <Compile Include="io\sismio\events\Priority.cs" />
+    <Compile Include="io\sismio\events\PriorityFilter.cs" />
+    <Compile Include="io\sismio\events\SearchFilter.cs" />
+    <Compile Include="io\sismio\events\TagFilter.cs" />
+    <Compile Include="io\sismio\events\TimeRangeFilter.cs" />
     <Compile Include="io\sismio\sensor\ISensor.cs" />
     <Compile Include="io\sismio\sensor\SerialSensor.cs" />
     <Compile Include="io\sismio\source\DataSourceFactory.cs" />
