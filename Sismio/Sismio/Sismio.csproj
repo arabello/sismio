@@ -55,6 +55,7 @@
     <Compile Include="io\sismio\database\DBRepository.cs" />
     <Compile Include="io\sismio\events\DBEventRepository.cs" />
     <Compile Include="io\sismio\events\Event.cs" />
+    <Compile Include="io\sismio\events\EventManager.cs" />
     <Compile Include="io\sismio\events\IEventFilter.cs" />
     <Compile Include="io\sismio\events\IEventRepository.cs" />
     <Compile Include="io\sismio\events\Priority.cs" />
