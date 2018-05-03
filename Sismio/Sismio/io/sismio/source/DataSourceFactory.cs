@@ -12,14 +12,14 @@ namespace Sismio.io.sismio.source
     {
         public IDataSource NewLocalSource(string serialPort, int baudRate)
         {
-            // TODO
-            return null;
+            //TODO: Implement
+            throw new System.NotImplementedException();
         }
 
-        // TODO
         public IDataSource NewRemoteSource(Station station)
         {
-            return null;
+            //TODO: Implement
+            throw new System.NotImplementedException();
         }
     }
 }

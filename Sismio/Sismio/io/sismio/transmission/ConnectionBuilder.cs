@@ -8,6 +8,10 @@ namespace io.sismio.transmission
 {
     class ConnectionBuilder
     {
-        
+        static void CreateConnection(string host, int port)
+        {
+            //TODO: Implement
+            throw new System.NotImplementedException();
+        }
     }
 }

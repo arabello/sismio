@@ -20,16 +20,20 @@ namespace io.sismio.sensor
             BaudRate = baudRate;
 
             // Serial port initialization code here
+            //TODO: Implement
+            throw new System.NotImplementedException();
         }
 
         public void Mainloop()
         {
-            throw new NotImplementedException();
+            //TODO: Implement
+            throw new System.NotImplementedException();
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            //TODO: Implement
+            throw new System.NotImplementedException();
         }
     }
 }

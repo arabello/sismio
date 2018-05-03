@@ -14,6 +14,5 @@ namespace io.sismio.source
 
         void Mainloop();
 
-
     }
 }
