@@ -9,9 +9,9 @@
             Priority = priority;
         }
 
-        public bool Filter(Event evnt)
+        public bool Filter(IEvent seismicEvent)
         {
-            return evnt.Priority == Priority;
+            return seismicEvent.Priority == Priority;
         }
     }
 }

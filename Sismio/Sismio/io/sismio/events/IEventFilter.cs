@@ -4,6 +4,6 @@ namespace Sismio.io.sismio.events
 {
     public interface IEventFilter
     {
-        bool Filter(Event evnt);
+        bool Filter(IEvent seismicEvent);
     }
 }

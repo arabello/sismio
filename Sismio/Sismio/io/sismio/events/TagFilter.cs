@@ -9,9 +9,9 @@
             Tag = tag;
         }
 
-        public bool Filter(Event evnt)
+        public bool Filter(IEvent seismicEvent)
         {
-            return evnt.Tag.Equals(Tag);
+            return seismicEvent.Tag.Equals(Tag);
         }
     }
 }

@@ -11,9 +11,9 @@
             End = end;
         }
 
-        public bool Filter(Event evnt)
+        public bool Filter(IEvent seismicEvent)
         {
-            return evnt.Timestamp >= Start && evnt.Timestamp <= End;
+            return seismicEvent.Timestamp >= Start && seismicEvent.Timestamp <= End;
         }
     }
 }

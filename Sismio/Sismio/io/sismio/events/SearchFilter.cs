@@ -4,17 +4,17 @@ namespace Sismio.io.sismio.events
 {
     public class SearchFilter: IEventFilter
     {
-        private string query;
+        private string _query;
 
         public SearchFilter(string query)
         {
-            this.query = query;
+            this._query = query;
         }
 
-        public bool Filter(Event evnt)
+        public bool Filter(IEvent seismicEvent)
         {
-            //TODO: Implement
-            throw new NotImplementedException();
+            return seismicEvent.Tag.IndexOf(_query, StringComparison.OrdinalIgnoreCase) >= 0
+                   || seismicEvent.Message.IndexOf(_query, StringComparison.OrdinalIgnoreCase) >= 0;
         }
     }
 }
