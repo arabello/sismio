@@ -2,11 +2,11 @@
 
 namespace io.sismio.events
 {
-    public delegate void OnEvent(Event evnt);
+    public delegate void OnSeismicEvent(Event seismicEvent);
 
     public class EventManager
     {
-        public event OnEvent EventReceivers;
+        public event OnSeismicEvent SeismicEventReceivers;
        
         public void RegisterEvent(Event evnt)
         {

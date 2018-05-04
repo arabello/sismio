@@ -67,8 +67,12 @@
     <Compile Include="io\sismio\log\Logger.cs" />
     <Compile Include="io\sismio\sensor\ISensor.cs" />
     <Compile Include="io\sismio\sensor\SerialSensor.cs" />
+    <Compile Include="io\sismio\source\DataSource.cs" />
     <Compile Include="io\sismio\source\DataSourceFactory.cs" />
+    <Compile Include="io\sismio\source\FileDataSource.cs" />
     <Compile Include="io\sismio\source\IDataSource.cs" />
+    <Compile Include="io\sismio\source\RemoteDataSource.cs" />
+    <Compile Include="io\sismio\source\SensorDataSourceAdapter.cs" />
     <Compile Include="io\sismio\station\DBStationRepository.cs" />
     <Compile Include="io\sismio\station\IStation.cs" />
     <Compile Include="io\sismio\station\IStationRepository.cs" />
