@@ -77,7 +77,13 @@
     <Compile Include="io\sismio\transmission\NotTrustedException.cs" />
     <Compile Include="io\sismio\transmission\StationServer.cs" />
     <Compile Include="io\sismio\user\Account.cs" />
+    <Compile Include="io\sismio\user\AccountManager.cs" />
+    <Compile Include="io\sismio\user\AdminAccount.cs" />
+    <Compile Include="io\sismio\user\DBAccountRepository.cs" />
     <Compile Include="io\sismio\user\IAccount.cs" />
+    <Compile Include="io\sismio\user\IAccountRepository.cs" />
+    <Compile Include="io\sismio\user\InvalidCredentialException.cs" />
+    <Compile Include="io\sismio\user\UserAccount.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using io.sismio.database;
+using io.sismio.user;
 
 namespace io.sismio.sensor
 {
