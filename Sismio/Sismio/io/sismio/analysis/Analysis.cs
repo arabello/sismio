@@ -15,7 +15,7 @@ namespace io.sismio.analysis
          * Circular buffer
          */
         private Queue<int> _buffer;
-        private Dictionary<string, double[]> results;
-        public abstract void PerformAnalysis(Queue<int> buffer);
+        private IDictionary<string, double[]> results;
+        public abstract void PerformAnalysis(int[] buffer);
     }
 }
