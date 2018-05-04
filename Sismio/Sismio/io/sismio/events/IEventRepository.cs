@@ -5,8 +5,8 @@ namespace Sismio.io.sismio.events
 {
     public interface IEventRepository
     {
-        void StoreEvent(Event evnt);
-        IList<Event> GetEvents();
-        IList<Event> GetEvents(IList<IEventFilter> filters);
+        void StoreEvent(IEvent evnt);
+        IList<IEvent> GetEvents();
+        IList<IEvent> GetEvents(IList<IEventFilter> filters);
     }
 }

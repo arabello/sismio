@@ -7,16 +7,11 @@ namespace SismioTest.io.sismio.events
     [TestClass]
     public class EventFilterTest
     {
-        static IEvent createMockEvent()
-        {
-            return new Event("Magnitude", Priority.Fatal, "Sorry bro", 123456, null);
-        }
-
         [TestMethod]
         public void TestPriorityFilter()
         {
             IEventFilter filter = new PriorityFilter(Priority.Info);
-            IEvent e = createMockEvent();
+            IEvent e = EventTest.createMockEvent();
 
             // Should be false
             Assert.IsFalse(filter.Filter(e));
@@ -29,7 +24,7 @@ namespace SismioTest.io.sismio.events
         [TestMethod]
         public void TestSearchFilter()
         {
-            IEvent e = createMockEvent();
+            IEvent e = EventTest.createMockEvent();
 
             // Should be false
             IEventFilter filter = new SearchFilter("yeah");
@@ -47,7 +42,7 @@ namespace SismioTest.io.sismio.events
         [TestMethod]
         public void TestTagFilter()
         {
-            IEvent e = createMockEvent();
+            IEvent e = EventTest.createMockEvent();
             
             IEventFilter filter = new TagFilter("Magnitude");
             Assert.IsTrue(filter.Filter(e));
@@ -59,7 +54,7 @@ namespace SismioTest.io.sismio.events
         [TestMethod]
         public void TestTimeRangeFilter()
         {
-            IEvent e = createMockEvent();
+            IEvent e = EventTest.createMockEvent();
 
             IEventFilter filter = new TimeRangeFilter(123000, 123999);
             Assert.IsTrue(filter.Filter(e));

@@ -7,10 +7,15 @@ namespace SismioTest.io.sismio.events
     [TestClass]
     public class EventTest
     {
+        public static IEvent createMockEvent()
+        {
+            return new Event("Magnitude", Priority.Fatal, "Sorry bro", 123456, null);
+        }
+
         [TestMethod]
         public void TestEventId()
         {
-            Event e = new Event("Magnitude", Priority.Fatal, "Sory", 123456, null);
+            Event e = (Event) createMockEvent();
             Assert.AreEqual(e.Id, -1);
 
             e.Id = 12345;

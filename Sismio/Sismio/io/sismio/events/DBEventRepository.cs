@@ -12,19 +12,19 @@ namespace Sismio.io.sismio.events
             throw new NotImplementedException();
         }
 
-        public void StoreEvent(Event evnt)
+        public void StoreEvent(IEvent evnt)
         {
             //TODO: Implement
             throw new NotImplementedException();
         }
 
-        public IList<Event> GetEvents()
+        public IList<IEvent> GetEvents()
         {
             //TODO: Implement
             throw new NotImplementedException();
         }
 
-        public IList<Event> GetEvents(IList<IEventFilter> filters)
+        public IList<IEvent> GetEvents(IList<IEventFilter> filters)
         {
             //TODO: Implement
             throw new NotImplementedException();
