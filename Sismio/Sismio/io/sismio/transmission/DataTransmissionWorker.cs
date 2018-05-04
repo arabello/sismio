@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Net.Security;
-using io.sismio.sensor;
+using Sismio.io.sismio.sensor;
 
-namespace io.sismio.transmission
+namespace Sismio.io.sismio.transmission
 {
     public class DataTransmissionWorker
     {

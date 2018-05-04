@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using io.sismio.events;
+using Sismio.io.sismio.events;
 
-namespace io.sismio.events
+namespace Sismio.io.sismio.events
 {
     public interface IEventRepository
     {

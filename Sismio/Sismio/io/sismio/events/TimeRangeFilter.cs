@@ -1,4 +1,4 @@
-﻿namespace io.sismio.events
+﻿namespace Sismio.io.sismio.events
 {
     public class TimeRangeFilter: IEventFilter
     {

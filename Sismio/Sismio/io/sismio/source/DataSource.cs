@@ -1,8 +1,8 @@
-﻿using io.sismio.analysis;
-using io.sismio.sensor;
-using io.sismio.source;
+﻿using Sismio.io.sismio.analysis;
+using Sismio.io.sismio.sensor;
+using Sismio.io.sismio.source;
 
-namespace io.sismio.source
+namespace Sismio.io.sismio.source
 {
     public abstract class DataSource: IDataSource
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace io.sismio.events
+namespace Sismio.io.sismio.events
 {
     public class SearchFilter: IEventFilter
     {

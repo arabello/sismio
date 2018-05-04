@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace io.sismio.user
+namespace Sismio.io.sismio.user
 {
     internal class DBAccountRepository: IAccountRepository
     {

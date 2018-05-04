@@ -1,7 +1,7 @@
-﻿using io.sismio.analysis;
-using io.sismio.sensor;
+﻿using Sismio.io.sismio.analysis;
+using Sismio.io.sismio.sensor;
 
-namespace io.sismio.source
+namespace Sismio.io.sismio.source
 {
     public delegate void OnChunkAvailable(int[] data);
 

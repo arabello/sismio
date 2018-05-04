@@ -1,4 +1,4 @@
-﻿using io.sismio.sensor;
+﻿using Sismio.io.sismio.sensor;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace io.sismio.sensor
+namespace Sismio.io.sismio.sensor
 {
     public class SerialSensor : ISensor
     {

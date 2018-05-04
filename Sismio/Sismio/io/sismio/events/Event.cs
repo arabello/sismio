@@ -1,6 +1,6 @@
-﻿using io.sismio.sensor;
+﻿using Sismio.io.sismio.sensor;
 
-namespace io.sismio.events
+namespace Sismio.io.sismio.events
 {
     public class Event: IEvent
     {
@@ -9,7 +9,7 @@ namespace io.sismio.events
         public string Message { get; }
         public long Timestamp { get; }
         public Station Station { get; }
-        public long Id { get; set;  }
+        public long Id { get; set; } = -1;
 
         public Event(string tag, Priority priority, string message, long timestamp, Station station)
         {

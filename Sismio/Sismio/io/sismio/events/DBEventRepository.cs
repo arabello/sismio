@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using io.sismio.database;
+using Sismio.io.sismio.database;
 
-namespace io.sismio.events
+namespace Sismio.io.sismio.events
 {
     public class DBEventRepository : DBRepository, IEventRepository
     {

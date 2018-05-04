@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Security.Cryptography.X509Certificates;
-using io.sismio.user;
+using Sismio.io.sismio.user;
 
-namespace io.sismio.transmission
+namespace Sismio.io.sismio.transmission
 {
     public class StationServer
     {

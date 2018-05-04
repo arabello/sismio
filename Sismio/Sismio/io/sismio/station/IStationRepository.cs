@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace io.sismio.sensor
+namespace Sismio.io.sismio.sensor
 {
     public interface IStationRepository
     {

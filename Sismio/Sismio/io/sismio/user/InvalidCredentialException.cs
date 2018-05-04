@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace io.sismio.user
+namespace Sismio.io.sismio.user
 {
     public class InvalidCredentialException : Exception
     {

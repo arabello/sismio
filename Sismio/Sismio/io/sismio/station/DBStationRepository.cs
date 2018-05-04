@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using io.sismio.database;
-using io.sismio.user;
+using Sismio.io.sismio.database;
+using Sismio.io.sismio.user;
 
-namespace io.sismio.sensor
+namespace Sismio.io.sismio.sensor
 {
     public class DBStationRepository : DBRepository, IStationRepository
     {

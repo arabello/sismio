@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace io.sismio.analysis
+namespace Sismio.io.sismio.analysis
 {
     public class RawAnalysis: Analysis
     {

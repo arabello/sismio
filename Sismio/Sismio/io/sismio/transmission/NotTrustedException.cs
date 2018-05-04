@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace io.sismio.transmission
+namespace Sismio.io.sismio.transmission
 {
     public class NotTrustedException : Exception
     {

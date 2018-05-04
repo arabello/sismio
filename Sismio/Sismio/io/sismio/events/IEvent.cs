@@ -1,6 +1,6 @@
-﻿using io.sismio.sensor;
+﻿using Sismio.io.sismio.sensor;
 
-namespace io.sismio.events
+namespace Sismio.io.sismio.events
 {
     public interface IEvent
     {

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
-using io.sismio.sensor;
+using Sismio.io.sismio.sensor;
 
-namespace io.sismio.source
+namespace Sismio.io.sismio.source
 {
     public class FileDataSource: DataSource
     {

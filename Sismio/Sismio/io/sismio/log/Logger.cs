@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace io.sismio.log
+namespace Sismio.io.sismio.log
 {
     class Logger
     {

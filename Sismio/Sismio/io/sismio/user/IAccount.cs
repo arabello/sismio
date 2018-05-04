@@ -1,4 +1,4 @@
-﻿namespace io.sismio.user
+﻿namespace Sismio.io.sismio.user
 {
     public interface IAccount
     {

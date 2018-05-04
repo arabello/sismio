@@ -1,4 +1,4 @@
-﻿namespace io.sismio.database
+﻿namespace Sismio.io.sismio.database
 {
     public abstract class DBRepository
     {
