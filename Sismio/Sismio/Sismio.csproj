@@ -56,6 +56,7 @@
     <Compile Include="io\sismio\events\DBEventRepository.cs" />
     <Compile Include="io\sismio\events\Event.cs" />
     <Compile Include="io\sismio\events\EventManager.cs" />
+    <Compile Include="io\sismio\events\IEvent.cs" />
     <Compile Include="io\sismio\events\IEventFilter.cs" />
     <Compile Include="io\sismio\events\IEventRepository.cs" />
     <Compile Include="io\sismio\events\Priority.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="io\sismio\source\DataSourceFactory.cs" />
     <Compile Include="io\sismio\source\IDataSource.cs" />
     <Compile Include="io\sismio\station\DBStationRepository.cs" />
+    <Compile Include="io\sismio\station\IStation.cs" />
     <Compile Include="io\sismio\station\IStationRepository.cs" />
     <Compile Include="io\sismio\station\Station.cs" />
     <Compile Include="io\sismio\transmission\CertificateNotFoundException.cs" />

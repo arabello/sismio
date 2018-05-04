@@ -2,9 +2,12 @@
 
 namespace io.sismio.events
 {
+    public delegate void OnEvent(Event evnt);
+
     public class EventManager
     {
-        // TODO Add delete 
+        public event OnEvent EventReceivers;
+       
         public void RegisterEvent(Event evnt)
         {
             //TODO: Implement

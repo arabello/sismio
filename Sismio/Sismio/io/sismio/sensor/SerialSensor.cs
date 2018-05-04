@@ -1,16 +1,17 @@
 ﻿using io.sismio.sensor;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace io.sismio.sensor
 {
-    class SerialSensor : ISensor
+    public class SerialSensor : ISensor
     {
-        public string SerialPort { get; } // Readonly
-        public int BaudRate { get; }  // Readonly
+        public string SerialPort { get; }
+        public int BaudRate { get; }
 
         public event OnRawDataAvailable SensorDataReceivers;
 
@@ -18,8 +19,19 @@ namespace io.sismio.sensor
         {
             SerialPort = serialPort;
             BaudRate = baudRate;
+            
+            //TODO: Implement
+            throw new System.NotImplementedException();
+        }
 
-            // Serial port initialization code here
+        private void OpenSerial()
+        {
+            //TODO: Implement
+            throw new System.NotImplementedException();
+        }
+
+        public SerialSensor(string configFile)
+        {
             //TODO: Implement
             throw new System.NotImplementedException();
         }

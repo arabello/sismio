@@ -8,12 +8,17 @@ namespace io.sismio.transmission
     {
         public ISensor Sensor { get; }
         public SslStream SslStream { get; }
-        public event OnRawDataAvailable onRawDataAvailable;
 
         public DataTransmissionWorker(ISensor sensor, SslStream sslStream)
         {
-            Sensor = sensor;
-            SslStream = sslStream;
+            //TODO: Implement
+            throw new NotImplementedException();
+        }
+
+        public void OnRawDataAvailable(int[] data)
+        {
+            //TODO: Implement
+            throw new NotImplementedException();
         }
         
         public void Run()

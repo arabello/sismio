@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace io.sismio.sensor
 {
-    interface IStationRepository
+    public interface IStationRepository
     {
         void RegisterStation(Station station);
         void DeleteStation(Station station);

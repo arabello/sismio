@@ -1,17 +1,18 @@
-﻿namespace io.sismio.events
+﻿using io.sismio.sensor;
+
+namespace io.sismio.events
 {
-    public class Event
+    public class Event: IEvent
     {
-        public long Id { get;  }
         public string Tag { get; }
         public Priority Priority { get; }
         public string Message { get; }
         public long Timestamp { get; }
-        public string Station { get; }
+        public Station Station { get; }
+        public long Id { get; set;  }
 
-        public Event(long id, string tag, Priority priority, string message, long timestamp, string station)
+        public Event(string tag, Priority priority, string message, long timestamp, Station station)
         {
-            Id = id;
             Tag = tag;
             Priority = priority;
             Message = message;
