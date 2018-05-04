@@ -9,7 +9,7 @@ namespace SismioTest.io.sismio.events
     {
         static IEvent createMockEvent()
         {
-            return new Event("Magnitude", Priority.Fatal, "Sory bro", 123456, null);
+            return new Event("Magnitude", Priority.Fatal, "Sorry bro", 123456, null);
         }
 
         [TestMethod]
@@ -42,6 +42,33 @@ namespace SismioTest.io.sismio.events
             // Should be true
             IEventFilter filter3 = new SearchFilter("gniTude");  // Test case insensitive
             Assert.IsTrue(filter3.Filter(e));
+        }
+
+        [TestMethod]
+        public void TestTagFilter()
+        {
+            IEvent e = createMockEvent();
+            
+            IEventFilter filter = new TagFilter("Magnitude");
+            Assert.IsTrue(filter.Filter(e));
+
+            IEventFilter filter2 = new TagFilter("Frequency");
+            Assert.IsFalse(filter2.Filter(e));
+        }
+
+        [TestMethod]
+        public void TestTimeRangeFilter()
+        {
+            IEvent e = createMockEvent();
+
+            IEventFilter filter = new TimeRangeFilter(123000, 123999);
+            Assert.IsTrue(filter.Filter(e));
+
+            IEventFilter filter2 = new TimeRangeFilter(123999, 999999);
+            Assert.IsFalse(filter2.Filter(e));
+
+            IEventFilter filter3 = new TimeRangeFilter(123000, 123123);
+            Assert.IsFalse(filter3.Filter(e));
         }
     }
 }
