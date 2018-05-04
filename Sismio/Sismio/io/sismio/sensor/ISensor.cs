@@ -8,7 +8,7 @@ namespace io.sismio.sensor
 {
     public delegate void OnRawDataAvailable(int[] data);
 
-    interface ISensor
+    public interface ISensor
     {
         event OnRawDataAvailable SensorDataReceivers;
 

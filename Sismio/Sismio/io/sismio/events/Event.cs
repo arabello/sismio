@@ -7,16 +7,16 @@
         public Priority Priority { get; }
         public string Message { get; }
         public long Timestamp { get; }
-        public string SourceLocation { get; }
+        public string Station { get; }
 
-        public Event(long id, string tag, Priority priority, string message, long timestamp, string sourceLocation)
+        public Event(long id, string tag, Priority priority, string message, long timestamp, string station)
         {
             Id = id;
             Tag = tag;
             Priority = priority;
             Message = message;
             Timestamp = timestamp;
-            SourceLocation = sourceLocation;
+            Station = station;
         }
     }
 }

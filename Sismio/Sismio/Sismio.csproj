@@ -70,7 +70,11 @@
     <Compile Include="io\sismio\station\DBStationRepository.cs" />
     <Compile Include="io\sismio\station\IStationRepository.cs" />
     <Compile Include="io\sismio\station\Station.cs" />
+    <Compile Include="io\sismio\transmission\CertificateNotFoundException.cs" />
     <Compile Include="io\sismio\transmission\ConnectionBuilder.cs" />
+    <Compile Include="io\sismio\transmission\DataTransmissionWorker.cs" />
+    <Compile Include="io\sismio\transmission\NotTrustedException.cs" />
+    <Compile Include="io\sismio\transmission\StationServer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
