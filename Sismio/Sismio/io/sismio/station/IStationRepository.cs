@@ -8,9 +8,9 @@ namespace Sismio.io.sismio.sensor
 {
     public interface IStationRepository
     {
-        void RegisterStation(Station station);
-        void DeleteStation(Station station);
-        IList<Station> GetStations();
-        IList<Station> Find(string query);
+        void RegisterStation(IStation station);
+        void DeleteStation(IStation station);
+        IList<IStation> GetStations();
+        IList<IStation> Find(string query);
     }
 }

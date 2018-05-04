@@ -13,25 +13,25 @@ namespace Sismio.io.sismio.sensor
             throw new System.NotImplementedException();
         }
 
-        public void DeleteStation(Station station)
+        public void DeleteStation(IStation station)
         {
             //TODO: Implement
             throw new System.NotImplementedException();
         }
 
-        public IList<Station> Find(string query)
+        public IList<IStation> Find(string query)
         {
             //TODO: Implement
             throw new System.NotImplementedException();
         }
 
-        public IList<Station> GetStations()
+        public IList<IStation> GetStations()
         {
             //TODO: Implement
             throw new System.NotImplementedException();
         }
 
-        public void RegisterStation(Station station)
+        public void RegisterStation(IStation station)
         {
             //TODO: Implement
             throw new System.NotImplementedException();
