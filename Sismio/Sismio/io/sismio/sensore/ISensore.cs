@@ -1,4 +1,10 @@
-﻿namespace Sismio.io.sismio.sensore
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Sismio.io.sismio.sensore
 {
     public delegate void OnRisultatiGrezziDisponibili(int[] dati);
 

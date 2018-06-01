@@ -1,4 +1,6 @@
-﻿namespace Sismio.io.sismio.eventi
+﻿using System;
+
+namespace Sismio.io.sismio.eventi
 {
     public delegate void OnEventoSismico(IEventoSismico eventoSismico);
 

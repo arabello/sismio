@@ -1,4 +1,6 @@
-﻿namespace Sismio.io.sismio.analisi
+﻿using System.Collections.Generic;
+
+namespace Sismio.io.sismio.analisi
 {
     public class AnalisiFrequenza: Analisi
     {

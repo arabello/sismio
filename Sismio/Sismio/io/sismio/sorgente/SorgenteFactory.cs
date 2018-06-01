@@ -1,4 +1,4 @@
-﻿using Sismio.io.sismio.stazione;
+﻿using Sismio.io.sismio.sensore;
 
 namespace Sismio.io.sismio.sorgente
 {

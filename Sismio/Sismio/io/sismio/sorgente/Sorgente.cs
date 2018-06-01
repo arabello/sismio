@@ -1,5 +1,6 @@
 ﻿using Sismio.io.sismio.analisi;
-using Sismio.io.sismio.stazione;
+using Sismio.io.sismio.sensore;
+using Sismio.io.sismio.sorgente;
 
 namespace Sismio.io.sismio.sorgente
 {
