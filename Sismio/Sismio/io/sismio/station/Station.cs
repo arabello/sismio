@@ -5,7 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sismio.io.sismio.sensor
+namespace Sismio.io.sismio.sensore
 {
     public class Station: IStation
     {

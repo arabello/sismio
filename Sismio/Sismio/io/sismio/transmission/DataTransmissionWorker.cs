@@ -3,13 +3,13 @@ using System.Collections.Concurrent;
 using System.IO;
 using System.Net.Security;
 using System.Threading;
-using Sismio.io.sismio.sensor;
+using Sismio.io.sismio.sensore;
 
 namespace Sismio.io.sismio.transmission
 {
     public class DataTransmissionWorker
     {
-        private ISensor _sensor;
+        private ISensore _sensore;
         private SslStream _sslStream;
         private BinaryWriter _binaryWriter;
 
@@ -17,9 +17,9 @@ namespace Sismio.io.sismio.transmission
 
         private readonly Thread _networkingThread = null;
 
-        public DataTransmissionWorker(ISensor sensor, SslStream sslStream)
+        public DataTransmissionWorker(ISensore sensore, SslStream sslStream)
         {
-            _sensor = sensor;
+            _sensore = sensore;
             _sslStream = sslStream;
 
             // Create the binary writer from the stream output
@@ -28,9 +28,9 @@ namespace Sismio.io.sismio.transmission
             // Create the networking thread 
             _networkingThread = new Thread(new ThreadStart(Run));
 
-            // Register as a receiver to the sensor to receive
+            // Register as a receiver to the sensore to receive
             // the realtime raw data
-            sensor.SensorDataReceivers += OnRawDataAvailable;
+            sensore.RicevitoriDatiSensore += OnRawDataAvailable;
         }
 
         public void OnRawDataAvailable(int[] data)

@@ -1,21 +1,21 @@
 ﻿using System;
 using System.IO;
-using Sismio.io.sismio.sensor;
+using Sismio.io.sismio.sensore;
 
-namespace Sismio.io.sismio.source
+namespace Sismio.io.sismio.sorgente
 {
-    public class FileDataSource: DataSource
+    public class SorgenteFile: Sorgente
     {
-        public override Station Station { get; } = null;
+        public override Station Stazione { get; } = null;
         private FileStream _fileStream;
 
-        public FileDataSource(string filePath)
+        public SorgenteFile(string percorsoFile)
         {
             //TODO: Implement
             throw new NotImplementedException();
         }
 
-        public override void Mainloop()
+        public override void CicloPrincipale()
         {
             //TODO: Implement
             throw new System.NotImplementedException();
@@ -27,7 +27,7 @@ namespace Sismio.io.sismio.source
             throw new System.NotImplementedException();
         }
 
-        public override void Dispose()
+        public override void Ferma()
         {
             //TODO: Implement
             throw new System.NotImplementedException();

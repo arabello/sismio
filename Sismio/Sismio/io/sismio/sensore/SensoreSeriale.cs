@@ -1,4 +1,4 @@
-﻿using Sismio.io.sismio.sensor;
+﻿using Sismio.io.sismio.sensore;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,43 +6,43 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sismio.io.sismio.sensor
+namespace Sismio.io.sismio.sensore
 {
-    public class SerialSensor : ISensor
+    public class SensoreSeriale : ISensore
     {
-        public string SerialPort { get; }
+        public string PortaSeriale { get; }
         public int BaudRate { get; }
 
-        public event OnRawDataAvailable SensorDataReceivers;
+        public event OnRisultatiGrezziDisponibili RicevitoriDatiSensore;
 
-        public SerialSensor(string serialPort, int baudRate)
+        public SensoreSeriale(string portaSeriale, int baudRate)
         {
-            SerialPort = serialPort;
+            PortaSeriale = portaSeriale;
             BaudRate = baudRate;
             
             //TODO: Implement
             throw new System.NotImplementedException();
         }
 
-        private void OpenSerial()
+        private void ApriSeriale()
         {
             //TODO: Implement
             throw new System.NotImplementedException();
         }
 
-        public SerialSensor(string configFile)
+        public SensoreSeriale(string fileConfigurazione)
         {
             //TODO: Implement
             throw new System.NotImplementedException();
         }
 
-        public void Mainloop()
+        public void CicloPrincipale()
         {
             //TODO: Implement
             throw new System.NotImplementedException();
         }
 
-        public void Dispose()
+        public void Ferma()
         {
             //TODO: Implement
             throw new System.NotImplementedException();

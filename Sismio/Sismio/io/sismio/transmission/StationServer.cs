@@ -60,7 +60,7 @@ namespace Sismio.io.sismio.transmission
                 sslStream.AuthenticateAsServer(_certificate, false, SslProtocols.Tls, true);
 
                 // Create a new DataTransmissionWorker to handle the connection
-                // TODO: inject the correct sensor
+                // TODO: inject the correct sensore
                 DataTransmissionWorker worker = new DataTransmissionWorker(null, sslStream);
                 
                 // Start the worker thread

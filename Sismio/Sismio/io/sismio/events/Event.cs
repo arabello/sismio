@@ -1,4 +1,4 @@
-﻿using Sismio.io.sismio.sensor;
+﻿using Sismio.io.sismio.sensore;
 using System.Collections.Generic;
 
 namespace Sismio.io.sismio.events

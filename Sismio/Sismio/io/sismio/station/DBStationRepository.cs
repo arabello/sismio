@@ -2,7 +2,7 @@
 using Sismio.io.sismio.database;
 using Sismio.io.sismio.user;
 
-namespace Sismio.io.sismio.sensor
+namespace Sismio.io.sismio.sensore
 {
     public class DBStationRepository : DBRepository, IStationRepository
     {

@@ -1,21 +1,21 @@
 ﻿using System.Net.Security;
-using Sismio.io.sismio.sensor;
+using Sismio.io.sismio.sensore;
 
-namespace Sismio.io.sismio.source
+namespace Sismio.io.sismio.sorgente
 {
-    public class RemoteDataSource: DataSource
+    public class SorgenteRemota: Sorgente
     {
-        public override Station Station { get; }
-        private SslStream _connection;
+        public override Station Stazione { get; }
+        private SslStream _connessione;
 
-        public RemoteDataSource(SslStream connection)
+        public SorgenteRemota(SslStream connessione)
         {
-            _connection = connection;
+            _connessione = connessione;
             //TODO: Implement
             throw new System.NotImplementedException();
         }
 
-        public override void Mainloop()
+        public override void CicloPrincipale()
         {
             //TODO: Implement
             throw new System.NotImplementedException();
@@ -27,7 +27,7 @@ namespace Sismio.io.sismio.source
             throw new System.NotImplementedException();
         }
 
-        public override void Dispose()
+        public override void Ferma()
         {
             //TODO: Implement
             throw new System.NotImplementedException();

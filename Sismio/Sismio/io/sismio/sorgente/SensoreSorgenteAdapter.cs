@@ -1,22 +1,22 @@
 ﻿using System;
-using Sismio.io.sismio.sensor;
+using Sismio.io.sismio.sensore;
 
-namespace Sismio.io.sismio.source
+namespace Sismio.io.sismio.sorgente
 {
-    public class SensorDataSourceAdapter: DataSource
+    public class SensoreSorgenteAdapter: Sorgente
     {
-        private ISensor _sensor;
-        public override Station Station { get; } = null;
+        private ISensore _sensore;
+        public override Station Stazione { get; } = null;
     
-        public SensorDataSourceAdapter(ISensor sensor)
+        public SensoreSorgenteAdapter(ISensore sensore)
         {
-            _sensor = sensor;
+            _sensore = sensore;
             //TODO: Implement
             throw new NotImplementedException();
         }
 
 
-        public override void Mainloop()
+        public override void CicloPrincipale()
         {
             throw new NotImplementedException();
         }
@@ -26,7 +26,7 @@ namespace Sismio.io.sismio.source
             throw new NotImplementedException();
         }
 
-        public override void Dispose()
+        public override void Ferma()
         {
             throw new NotImplementedException();
         }

@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace Sismio.io.sismio.sensor
+namespace Sismio.io.sismio.sensore
 {
     public interface IStation
     {

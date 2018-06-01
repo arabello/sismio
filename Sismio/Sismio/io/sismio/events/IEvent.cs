@@ -1,4 +1,4 @@
-﻿using Sismio.io.sismio.sensor;
+﻿using Sismio.io.sismio.sensore;
 
 namespace Sismio.io.sismio.events
 {
