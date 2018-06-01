@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Sismio.io.sismio.stazione;
 using System.Net.Security;
-using System.Text;
-using System.Threading.Tasks;
-using Sismio.io.sismio.sensore;
 
 namespace Sismio.io.sismio.trasmissione
 {

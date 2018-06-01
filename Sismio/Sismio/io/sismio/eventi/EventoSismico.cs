@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Sismio.io.sismio.stazione;
+﻿using Sismio.io.sismio.stazione;
 
 namespace Sismio.io.sismio.eventi
 {

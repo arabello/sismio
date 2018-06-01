@@ -1,7 +1,5 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NUnit.Framework;
 using Sismio.io.sismio.database;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 

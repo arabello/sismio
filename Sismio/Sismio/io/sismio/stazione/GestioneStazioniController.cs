@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Sismio.io.sismio.database;
-using Sismio.io.sismio.user;
 
 namespace Sismio.io.sismio.stazione
 {
