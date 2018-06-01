@@ -8,6 +8,7 @@ using System.Threading;
 
 namespace Sismio.io.sismio.trasmissione
 {
+    // TODO
     public class ServerStazione
     {
         public const int PortaServer = 8001;

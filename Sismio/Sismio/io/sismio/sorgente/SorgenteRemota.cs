@@ -3,6 +3,7 @@ using System.Net.Security;
 
 namespace Sismio.io.sismio.sorgente
 {
+    // TODO
     public class SorgenteRemota: Sorgente
     {
         public override IStazione Stazione { get; }

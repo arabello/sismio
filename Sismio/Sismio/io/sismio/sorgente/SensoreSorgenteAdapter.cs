@@ -4,6 +4,7 @@ using Sismio.io.sismio.stazione;
 
 namespace Sismio.io.sismio.sorgente
 {
+    // TODO
     public class SensoreSorgenteAdapter: Sorgente
     {
         private ISensore _sensore;

@@ -7,12 +7,12 @@ using Sismio.io.sismio.eventi;
 namespace SismioTest.io.sismio.events
 {
     [TestClass]
-    public class EventManagerTest
+    public class GestoreEventiTest
     {
         [TestMethod]
         public void TestEventManager()
         {
-            IEventoSismico e = EventTest.createMockEvent();
+            IEventoSismico e = EventoSismicoTest.createMockEvent();
 
             // Create a mock EventoSismico Repository
             Mock<IStoricoController> eventRepository = new Mock<IStoricoController>();

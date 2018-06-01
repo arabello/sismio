@@ -7,6 +7,6 @@ namespace Sismio.io.sismio.utente
         IList<IUtente> ListaTutti();
         void Registra(IUtente utente);
         void Elimina(IUtente utente);
-        IUtente Autentica(string username, string pass);
+        IUtente ValidaCredenziali(string username, string pass);
     }
 }

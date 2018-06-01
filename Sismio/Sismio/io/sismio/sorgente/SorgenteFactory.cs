@@ -2,6 +2,7 @@
 
 namespace Sismio.io.sismio.sorgente
 {
+    // TODO
     class SorgenteFactory
     {
         public ISorgente NuovaSorgenteLocale(string portaSeriale, int baudRate)
@@ -11,6 +12,12 @@ namespace Sismio.io.sismio.sorgente
         }
 
         public ISorgente NuovaSorgenteRemota(IStazione stazione)
+        {
+            //TODO: Implement
+            throw new System.NotImplementedException();
+        }
+
+        public ISorgente NuovaSorgenteFile(string percorsoFile)
         {
             //TODO: Implement
             throw new System.NotImplementedException();

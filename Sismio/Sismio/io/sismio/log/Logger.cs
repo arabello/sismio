@@ -4,6 +4,7 @@ using System.IO;
 
 namespace Sismio.io.sismio.log
 {
+    // TODO
     class Logger
     {
         private Stream _fileDiLog;

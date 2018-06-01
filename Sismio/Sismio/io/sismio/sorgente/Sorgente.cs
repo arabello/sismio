@@ -3,6 +3,7 @@ using Sismio.io.sismio.stazione;
 
 namespace Sismio.io.sismio.sorgente
 {
+    // TODO
     public abstract class Sorgente: ISorgente
     {
         public event OnDatiDisponibili RicevitoriDati;

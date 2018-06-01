@@ -4,6 +4,7 @@ using Sismio.io.sismio.database;
 
 namespace Sismio.io.sismio.eventi
 {
+    // TODO
     public class StoricoController : DBController, IStoricoController
     {
         public StoricoController(string percorsoDatabase) : base(percorsoDatabase)

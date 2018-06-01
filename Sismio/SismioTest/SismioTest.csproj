@@ -68,10 +68,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="io\sismio\database\DBRepositoryTest.cs" />
-    <Compile Include="io\sismio\events\EventTest.cs" />
-    <Compile Include="io\sismio\events\EventFilterTest.cs" />
-    <Compile Include="io\sismio\events\EventManagerTest.cs" />
+    <Compile Include="io\sismio\database\DbControllerTest.cs" />
+    <Compile Include="io\sismio\events\EventoSismicoTest.cs" />
+    <Compile Include="io\sismio\events\FiltroEventoTest.cs" />
+    <Compile Include="io\sismio\events\GestoreEventiTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

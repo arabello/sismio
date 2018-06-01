@@ -2,6 +2,7 @@
 
 namespace Sismio.io.sismio.analisi
 {
+    // TODO
     public abstract class Analisi: IAnalisi
     {
         public event OnRisultatiAnalisi RicevitoriRisultati;

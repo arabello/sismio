@@ -1,5 +1,6 @@
 ﻿namespace Sismio.io.sismio.sensore
 {
+    // TODO
     public class SensoreSeriale : ISensore
     {
         public string PortaSeriale { get; }

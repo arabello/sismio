@@ -5,7 +5,7 @@ using Sismio.io.sismio.eventi;
 namespace SismioTest.io.sismio.events
 {
     [TestClass]
-    public class EventTest
+    public class EventoSismicoTest
     {
         public static IEventoSismico createMockEvent()
         {

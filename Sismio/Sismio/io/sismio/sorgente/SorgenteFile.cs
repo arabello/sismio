@@ -4,6 +4,7 @@ using System.IO;
 
 namespace Sismio.io.sismio.sorgente
 {
+    // TODO
     public class SorgenteFile: Sorgente
     {
         public override IStazione Stazione { get; } = null;

@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Globalization;
+using System.Threading;
 using System.Windows.Forms;
+using Sismio.io.sismio.utente;
 
 namespace Sismio
 {
@@ -11,9 +14,10 @@ namespace Sismio
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            IGestioneUtentiController gestione = new GestioneUtentiController("prova.db");
+            //Application.EnableVisualStyles();
+            //Application.SetCompatibleTextRenderingDefault(false);
+            //Application.Run(new Form1());
         }
     }
 }
