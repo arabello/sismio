@@ -5,9 +5,9 @@ using System.Net.Security;
 using System.Threading;
 using Sismio.io.sismio.sensore;
 
-namespace Sismio.io.sismio.transmission
+namespace Sismio.io.sismio.trasmissione
 {
-    public class DataTransmissionWorker
+    public class TrasmissioneDatiWorker
     {
         private ISensore _sensore;
         private SslStream _sslStream;
@@ -17,7 +17,7 @@ namespace Sismio.io.sismio.transmission
 
         private readonly Thread _networkingThread = null;
 
-        public DataTransmissionWorker(ISensore sensore, SslStream sslStream)
+        public TrasmissioneDatiWorker(ISensore sensore, SslStream sslStream)
         {
             _sensore = sensore;
             _sslStream = sslStream;
@@ -30,13 +30,13 @@ namespace Sismio.io.sismio.transmission
 
             // Register as a receiver to the sensore to receive
             // the realtime raw data
-            sensore.RicevitoriDatiSensore += OnRawDataAvailable;
+            sensore.RicevitoriDatiSensore += OnRisultatiGrezziDisponibili;
         }
 
-        public void OnRawDataAvailable(int[] data)
+        public void OnRisultatiGrezziDisponibili(int[] dati)
         {
             // Add all the values to the queue
-            foreach (var value in data)
+            foreach (var value in dati)
             {
                 _dataQueue.Add(value);
             }

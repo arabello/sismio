@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Sismio.io.sismio.events;
+using Sismio.io.sismio.eventi;
 
 namespace SismioTest.io.sismio.events
 {
@@ -12,25 +12,25 @@ namespace SismioTest.io.sismio.events
         [TestMethod]
         public void TestEventManager()
         {
-            IEvent e = EventTest.createMockEvent();
+            IEventoSismico e = EventTest.createMockEvent();
 
-            // Create a mock Event Repository
-            Mock<IEventRepository> eventRepository = new Mock<IEventRepository>();
+            // Create a mock EventoSismico Repository
+            Mock<IStoricoController> eventRepository = new Mock<IStoricoController>();
 
-            EventManager eventManager = new EventManager(eventRepository.Object);
+            GestoreEventi gestoreEventi = new GestoreEventi(eventRepository.Object);
 
             // Register two event receivers and make sure they are all called
             bool firstReceived = false;
             bool secondReceived = false;
 
-            eventManager.SeismicEventReceivers += (evnt) =>
+            gestoreEventi.RicevitoriEventoSismico += (evnt) =>
             {
                 // Make sure the received 
                 Assert.AreEqual(e, evnt);
                 firstReceived = true;
             };
 
-            eventManager.SeismicEventReceivers += (evnt) =>
+            gestoreEventi.RicevitoriEventoSismico += (evnt) =>
             {
                 // Make sure the received 
                 Assert.AreEqual(e, evnt);
@@ -38,13 +38,13 @@ namespace SismioTest.io.sismio.events
             };
 
             // Register the event
-            eventManager.RegisterEvent(e);
+            gestoreEventi.NotificaEvento(e);
 
             Assert.IsTrue(firstReceived);
             Assert.IsTrue(secondReceived);
 
-            // Check if the event repository has been called
-            eventRepository.Verify(x => x.StoreEvent(e), Times.Once());
+            // Check if the event controller has been called
+            eventRepository.Verify(x => x.RegistraEvento(e), Times.Once());
         }
     }
 }

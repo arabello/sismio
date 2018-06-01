@@ -30,23 +30,23 @@ namespace SismioTest.io.sismio.database
             // The database should not exists
             Assert.IsFalse(File.Exists(DbFilename));
 
-            DBRepository repository = new TestDBRepository(DbFilename);
+            DBController controller = new TestDbController(DbFilename);
 
             // The database should now exists
             Assert.IsTrue(File.Exists(DbFilename));
 
             // Close the connection and delete the file
-            repository.Dispose();
+            controller.Dispose();
             File.Delete(DbFilename);
         }
     }
 
     /// <summary>
-    /// Used to test the DBRepository
+    /// Used to test the DBController
     /// </summary>
-    class TestDBRepository : DBRepository
+    class TestDbController : DBController
     {
-        public TestDBRepository(string databasePath) : base(databasePath)
+        public TestDbController(string percorsoDatabase) : base(percorsoDatabase)
         {
         }
     }

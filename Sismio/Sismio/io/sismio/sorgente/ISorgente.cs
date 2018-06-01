@@ -1,4 +1,4 @@
-﻿using Sismio.io.sismio.analysis;
+﻿using Sismio.io.sismio.analisi;
 using Sismio.io.sismio.sensore;
 
 namespace Sismio.io.sismio.sorgente
@@ -8,12 +8,11 @@ namespace Sismio.io.sismio.sorgente
     public interface ISorgente
     {
         /**
-         * null for local station, otherwise a remote station
+         * null for local stazione, otherwise a remote stazione
          */
         Station Stazione { get; }
-        void AggiungiAnalisi(IAnalysis analysis);
+        void AggiungiAnalisi(IAnalisi analisi);
         void CicloPrincipale();
-        void OnDataAvailable(int[] data);
         void Ferma();
     }
 }

@@ -2,29 +2,29 @@
 using System.Collections.Generic;
 using Sismio.io.sismio.database;
 
-namespace Sismio.io.sismio.events
+namespace Sismio.io.sismio.eventi
 {
-    public class DBEventRepository : DBRepository, IEventRepository
+    public class StoricoController : DBController, IStoricoController
     {
-        public DBEventRepository(string databasePath) : base(databasePath)
+        public StoricoController(string percorsoDatabase) : base(percorsoDatabase)
         {
             //TODO: Implement
             throw new NotImplementedException();
         }
 
-        public void StoreEvent(IEvent evnt)
+        public void RegistraEvento(IEventoSismico evento)
         {
             //TODO: Implement
             throw new NotImplementedException();
         }
 
-        public IList<IEvent> GetEvents()
+        public IList<IEventoSismico> ListaEventi()
         {
             //TODO: Implement
             throw new NotImplementedException();
         }
 
-        public IList<IEvent> GetEvents(IList<IEventFilter> filters)
+        public IList<IEventoSismico> ListaEventi(IList<IFiltroEvento> filters)
         {
             //TODO: Implement
             throw new NotImplementedException();

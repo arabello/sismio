@@ -6,11 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Sismio.io.sismio.sensore;
 
-namespace Sismio.io.sismio.transmission
+namespace Sismio.io.sismio.trasmissione
 {
-    class ConnectionBuilder
+    class CreatoreConnessioni
     {
-        static SslStream CreateConnection(Station station, string user, string password)
+        static SslStream CreaConnessione(Station stazione, string user, string password)
         {
             //TODO: Implement
             throw new System.NotImplementedException();

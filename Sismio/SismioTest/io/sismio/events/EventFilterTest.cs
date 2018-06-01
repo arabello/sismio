@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Sismio.io.sismio.events;
+using Sismio.io.sismio.eventi;
 
 namespace SismioTest.io.sismio.events
 {
@@ -10,60 +10,60 @@ namespace SismioTest.io.sismio.events
         [TestMethod]
         public void TestPriorityFilter()
         {
-            IEventFilter filter = new PriorityFilter(Priority.Info);
-            IEvent e = EventTest.createMockEvent();
+            IFiltroEvento filter = new FiltroPriorita(Priorita.Info);
+            IEventoSismico e = EventTest.createMockEvent();
 
             // Should be false
-            Assert.IsFalse(filter.Filter(e));
+            Assert.IsFalse(filter.Filtra(e));
 
             // Should be true
-            IEventFilter filter2 = new PriorityFilter(Priority.Fatal);
-            Assert.IsTrue(filter2.Filter(e));
+            IFiltroEvento filter2 = new FiltroPriorita(Priorita.Fatal);
+            Assert.IsTrue(filter2.Filtra(e));
         }
 
         [TestMethod]
         public void TestSearchFilter()
         {
-            IEvent e = EventTest.createMockEvent();
+            IEventoSismico e = EventTest.createMockEvent();
 
             // Should be false
-            IEventFilter filter = new SearchFilter("yeah");
-            Assert.IsFalse(filter.Filter(e));
+            IFiltroEvento filter = new FiltroCerca("yeah");
+            Assert.IsFalse(filter.Filtra(e));
 
             // Should be true
-            IEventFilter filter2 = new SearchFilter("BRO");  // Test case insensitive
-            Assert.IsTrue(filter2.Filter(e));
+            IFiltroEvento filter2 = new FiltroCerca("BRO");  // Test case insensitive
+            Assert.IsTrue(filter2.Filtra(e));
 
             // Should be true
-            IEventFilter filter3 = new SearchFilter("gniTude");  // Test case insensitive
-            Assert.IsTrue(filter3.Filter(e));
+            IFiltroEvento filter3 = new FiltroCerca("gniTude");  // Test case insensitive
+            Assert.IsTrue(filter3.Filtra(e));
         }
 
         [TestMethod]
         public void TestTagFilter()
         {
-            IEvent e = EventTest.createMockEvent();
+            IEventoSismico e = EventTest.createMockEvent();
             
-            IEventFilter filter = new TagFilter("Magnitude");
-            Assert.IsTrue(filter.Filter(e));
+            IFiltroEvento filter = new FiltroTag("Magnitude");
+            Assert.IsTrue(filter.Filtra(e));
 
-            IEventFilter filter2 = new TagFilter("Frequency");
-            Assert.IsFalse(filter2.Filter(e));
+            IFiltroEvento filter2 = new FiltroTag("Frequency");
+            Assert.IsFalse(filter2.Filtra(e));
         }
 
         [TestMethod]
         public void TestTimeRangeFilter()
         {
-            IEvent e = EventTest.createMockEvent();
+            IEventoSismico e = EventTest.createMockEvent();
 
-            IEventFilter filter = new TimeRangeFilter(123000, 123999);
-            Assert.IsTrue(filter.Filter(e));
+            IFiltroEvento filter = new FiltroIntervalloDiTempo(123000, 123999);
+            Assert.IsTrue(filter.Filtra(e));
 
-            IEventFilter filter2 = new TimeRangeFilter(123999, 999999);
-            Assert.IsFalse(filter2.Filter(e));
+            IFiltroEvento filter2 = new FiltroIntervalloDiTempo(123999, 999999);
+            Assert.IsFalse(filter2.Filtra(e));
 
-            IEventFilter filter3 = new TimeRangeFilter(123000, 123123);
-            Assert.IsFalse(filter3.Filter(e));
+            IFiltroEvento filter3 = new FiltroIntervalloDiTempo(123000, 123123);
+            Assert.IsFalse(filter3.Filtra(e));
         }
     }
 }

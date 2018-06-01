@@ -2,36 +2,36 @@
 using Sismio.io.sismio.database;
 using Sismio.io.sismio.user;
 
-namespace Sismio.io.sismio.sensore
+namespace Sismio.io.sismio.stazione
 {
-    public class DBStationRepository : DBRepository, IStationRepository
+    public class GestioneStazioniController : DBController, IGestioneStazioniController
     {
 
-        public DBStationRepository(string databasePath) : base(databasePath)
+        public GestioneStazioniController(string percorsoDatabase) : base(percorsoDatabase)
         {
             //TODO: Implement
             throw new System.NotImplementedException();
         }
 
-        public void DeleteStation(IStation station)
+        public void EliminaStazione(IStazione stazione)
         {
             //TODO: Implement
             throw new System.NotImplementedException();
         }
 
-        public IList<IStation> Find(string query)
+        public IList<IStazione> Cerca(string query)
         {
             //TODO: Implement
             throw new System.NotImplementedException();
         }
 
-        public IList<IStation> GetStations()
+        public IList<IStazione> ListaTutti()
         {
             //TODO: Implement
             throw new System.NotImplementedException();
         }
 
-        public void RegisterStation(IStation station)
+        public void RegistraStazione(IStazione stazione)
         {
             //TODO: Implement
             throw new System.NotImplementedException();

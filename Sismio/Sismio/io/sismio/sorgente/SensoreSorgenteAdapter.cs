@@ -21,7 +21,7 @@ namespace Sismio.io.sismio.sorgente
             throw new NotImplementedException();
         }
 
-        public override void OnDataAvailable(int[] data)
+        public void OnRisultatiGrezziDisponibili(int[] dati)
         {
             throw new NotImplementedException();
         }

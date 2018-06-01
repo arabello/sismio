@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 
-namespace Sismio.io.sismio.analysis
+namespace Sismio.io.sismio.analisi
 {
-    public class RawAnalysis: Analysis
+    public class AnalisiMagnitudine: Analisi
     {
-        public override void PerformAnalysis(int[] buffer)
+        public override void Analizza(int[] buffer)
         {
             //TODO: Implement
             throw new System.NotImplementedException();

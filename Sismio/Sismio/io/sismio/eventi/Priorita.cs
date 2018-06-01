@@ -1,6 +1,6 @@
-﻿namespace Sismio.io.sismio.events
+﻿namespace Sismio.io.sismio.eventi
 {
-    public enum Priority
+    public enum Priorita
     {
         Info,
         Warning,

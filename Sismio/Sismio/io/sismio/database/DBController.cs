@@ -8,20 +8,20 @@ namespace Sismio.io.sismio.database
     /// This abstract class manages the basics of the interactions with a
     /// SQLite database and creates a new one if it doesn't exists.
     /// </summary>
-    public abstract class DBRepository : IDisposable
+    public abstract class DBController : IDisposable
     {
-        private string _databasePath;
+        private string _percorsoDatabase;
         private SQLiteConnection _connection;
 
-        public DBRepository(string databasePath)
+        public DBController(string percorsoDatabase)
         {
-            _databasePath = databasePath;
+            _percorsoDatabase = percorsoDatabase;
 
             // Open the connection to the database
-            this.OpenDBConnection();
+            this.ApriConnessioneDB();
         }
 
-        ~DBRepository()
+        ~DBController()
         {
             Dispose();
         }
@@ -29,31 +29,31 @@ namespace Sismio.io.sismio.database
         public void Dispose()
         {
             // Close the connection with the database
-            this.CloseDBConnection();
+            this.ChiudiConnessioneDB();
         }
 
         /// <summary>
         /// Open the connection with the SQLite database.
         /// If the database doesn't exists, it creates a new one.
         /// </summary>
-        private void OpenDBConnection()
+        private void ApriConnessioneDB()
         {
             // If the database doesn't exist yet, create one.
-            if (!File.Exists(_databasePath))
+            if (!File.Exists(_percorsoDatabase))
             {
                 // Create a new database
-                SQLiteConnection.CreateFile(_databasePath);
+                SQLiteConnection.CreateFile(_percorsoDatabase);
             }
 
             // Open the connection to the database
-            _connection = new SQLiteConnection($"Data Source={_databasePath};Version=3;");
+            _connection = new SQLiteConnection($"Data Source={_percorsoDatabase};Version=3;");
             _connection.Open();
         }
 
         /// <summary>
         /// Close the connection with the SQLite database.
         /// </summary>
-        private void CloseDBConnection()
+        private void ChiudiConnessioneDB()
         {
             _connection.Close();
         }

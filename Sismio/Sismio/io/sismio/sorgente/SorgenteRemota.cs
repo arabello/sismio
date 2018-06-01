@@ -21,12 +21,6 @@ namespace Sismio.io.sismio.sorgente
             throw new System.NotImplementedException();
         }
 
-        public override void OnDataAvailable(int[] data)
-        {
-            //TODO: Implement
-            throw new System.NotImplementedException();
-        }
-
         public override void Ferma()
         {
             //TODO: Implement
