@@ -1,24 +1,25 @@
-﻿using System;
+﻿using Sismio.io.sismio.utente;
+using System;
 
 namespace Sismio.io.sismio.user
 {
-    public class AccountManager
+    public class AutenticazioneController
     {
-        private IAccount _activeUser;
+        private IUtente _utenteAttivo;
 
-        public IAccount GetActiveUser()
+        public IUtente OttieniUtenteAttivo()
         {
             //TODO: Implement
             throw new NotImplementedException();
         }
 
-        public bool Authenticate(string user, string password)
+        public bool Autentica(string username, string pass) 
         {
             //TODO: Implement
             throw new NotImplementedException();
         }
 
-        public bool Logout()
+        public bool Disconnetti()
         {
             //TODO: Implement
             throw new NotImplementedException();

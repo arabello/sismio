@@ -1,6 +1,5 @@
 ﻿using Sismio.io.sismio.analisi;
-using Sismio.io.sismio.sensore;
-using Sismio.io.sismio.sorgente;
+using Sismio.io.sismio.stazione;
 
 namespace Sismio.io.sismio.sorgente
 {
@@ -8,7 +7,7 @@ namespace Sismio.io.sismio.sorgente
     {
         public event OnDatiDisponibili RicevitoriDati;
 
-        public abstract Station Stazione { get; }
+        public abstract IStazione Stazione { get; }
 
         public void AggiungiAnalisi(IAnalisi analisi)
         {

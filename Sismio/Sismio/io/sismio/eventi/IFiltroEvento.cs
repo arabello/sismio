@@ -1,6 +1,4 @@
-﻿using Sismio.io.sismio.eventi;
-
-namespace Sismio.io.sismio.eventi
+﻿namespace Sismio.io.sismio.eventi
 {
     public interface IFiltroEvento
     {

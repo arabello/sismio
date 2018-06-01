@@ -8,6 +8,6 @@ namespace Sismio.io.sismio.eventi
         Priorita Priorita { get; }
         string Messaggio { get; }
         long Timestamp { get; }
-        Stazione Stazione { get; }
+        IStazione Stazione { get; }
     }
 }

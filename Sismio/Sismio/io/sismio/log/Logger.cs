@@ -1,13 +1,22 @@
+using Sismio.io.sismio.utente;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace Sismio.io.sismio.log
 {
     class Logger
     {
+        private Stream _fileDiLog;
 
+        public Logger(Stream fileDiLog)
+        {
+            _fileDiLog = fileDiLog;
+        }
+
+        public int Scrivi(IUtente utente, string messaggio)
+        {
+            // TODO: Implement
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,28 +1,27 @@
 ﻿using System.Collections.Generic;
 
-namespace Sismio.io.sismio.user
+namespace Sismio.io.sismio.utente
 {
-    internal class DBAccountRepository: IAccountRepository
+    internal class GestioneUtentiController : IGestioneUtentiController
     {
-        public IList<IAccount> GeAccounts()
+        public IUtente Autentica(string username, string pass)
         {
             //TODO: Implement
             throw new System.NotImplementedException();
         }
 
-        public void Store(IAccount account)
+        public void Elimina(IUtente utente)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IList<IUtente> ListaTutti()
         {
             //TODO: Implement
             throw new System.NotImplementedException();
         }
 
-        public void Delete(IAccount account)
-        {
-            //TODO: Implement
-            throw new System.NotImplementedException();
-        }
-
-        public IAccount Authenticate(string user, string password)
+        public void Registra(IUtente utente)
         {
             //TODO: Implement
             throw new System.NotImplementedException();

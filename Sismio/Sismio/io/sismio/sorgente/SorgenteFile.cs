@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Sismio.io.sismio.stazione;
+using System;
 using System.IO;
-using Sismio.io.sismio.sensore;
 
 namespace Sismio.io.sismio.sorgente
 {
     public class SorgenteFile: Sorgente
     {
-        public override Station Stazione { get; } = null;
+        public override IStazione Stazione { get; } = null;
         private FileStream _fileStream;
 
         public SorgenteFile(string percorsoFile)

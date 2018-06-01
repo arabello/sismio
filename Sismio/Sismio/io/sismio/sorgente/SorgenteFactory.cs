@@ -1,4 +1,4 @@
-﻿using Sismio.io.sismio.sensore;
+﻿using Sismio.io.sismio.stazione;
 
 namespace Sismio.io.sismio.sorgente
 {
@@ -10,7 +10,7 @@ namespace Sismio.io.sismio.sorgente
             throw new System.NotImplementedException();
         }
 
-        public ISorgente NuovaSorgenteRemota(Station station)
+        public ISorgente NuovaSorgenteRemota(IStazione stazione)
         {
             //TODO: Implement
             throw new System.NotImplementedException();

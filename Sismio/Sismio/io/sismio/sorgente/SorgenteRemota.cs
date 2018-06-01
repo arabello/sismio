@@ -1,11 +1,11 @@
-﻿using System.Net.Security;
-using Sismio.io.sismio.sensore;
+﻿using Sismio.io.sismio.stazione;
+using System.Net.Security;
 
 namespace Sismio.io.sismio.sorgente
 {
     public class SorgenteRemota: Sorgente
     {
-        public override Station Stazione { get; }
+        public override IStazione Stazione { get; }
         private SslStream _connessione;
 
         public SorgenteRemota(SslStream connessione)

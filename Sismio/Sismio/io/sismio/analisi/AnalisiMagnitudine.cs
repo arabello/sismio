@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Sismio.io.sismio.analisi
+﻿namespace Sismio.io.sismio.analisi
 {
     public class AnalisiMagnitudine: Analisi
     {

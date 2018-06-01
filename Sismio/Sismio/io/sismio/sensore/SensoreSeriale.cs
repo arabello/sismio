@@ -1,12 +1,4 @@
-﻿using Sismio.io.sismio.sensore;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Sismio.io.sismio.sensore
+﻿namespace Sismio.io.sismio.sensore
 {
     public class SensoreSeriale : ISensore
     {

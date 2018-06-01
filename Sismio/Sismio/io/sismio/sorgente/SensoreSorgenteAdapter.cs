@@ -1,12 +1,13 @@
 ﻿using System;
 using Sismio.io.sismio.sensore;
+using Sismio.io.sismio.stazione;
 
 namespace Sismio.io.sismio.sorgente
 {
     public class SensoreSorgenteAdapter: Sorgente
     {
         private ISensore _sensore;
-        public override Station Stazione { get; } = null;
+        public override IStazione Stazione { get; } = null;
     
         public SensoreSorgenteAdapter(ISensore sensore)
         {
