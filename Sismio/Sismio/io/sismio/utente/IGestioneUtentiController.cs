@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Sismio.io.sismio.utente
 {
-    public interface IGestioneUtentiController
+    public interface IGestioneUtentiController : IDisposable
     {
         IList<IUtente> ListaTutti();
-        void Registra(IUtente utente);
-        void Elimina(IUtente utente);
+        bool Registra(Utente utente);
+        bool Elimina(Utente utente);
         IUtente ValidaCredenziali(string username, string pass);
     }
 }

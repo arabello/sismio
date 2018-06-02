@@ -7,29 +7,35 @@ namespace Sismio.io.sismio.utente
 {
     // Cosa ho modificato rispetto all'originale:
     // Ho fatto estendere anche da DBController come richiesto
+    // Ho cambiato i tipi di ritorno di Registra ed Elimina
 
     // TODO
-    internal class GestioneUtentiController : DBController, IGestioneUtentiController
+    public class GestioneUtentiController : DBController, IGestioneUtentiController
     {
         public GestioneUtentiController(string percorsoDatabase) : base(percorsoDatabase)
         {
             // Crea la tabella utenti se non è gia presente
             CreaTabellaUtentiSeNonEsiste();
+
+            // Crea l'utente admin se non già presente
+            CreaAdminSeNonEsiste();
         }
 
         private void CreaTabellaUtentiSeNonEsiste()
         {
+            // TODO Aggiungere il log dell'operazione
+
             // Creo la tabella utenti se non esiste già
             using (SQLiteCommand cmd = new SQLiteCommand("CREATE TABLE IF NOT EXISTS utenti (" +
                                                          "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                                                         "nome VARCHAR(100)," +
-                                                         "cognome VARCHAR(100)," +
-                                                         "email VARCHAR(200)," +
-                                                         "username VARCHAR(100)," +
-                                                         "hashPass VARCHAR(64)," +
-                                                         "salt VARCHAR(64)," +
-                                                         "loginRemoto INTEGER," +
-                                                         "type VARCHAR(30)" +
+                                                         "nome VARCHAR(100) NOT NULL," +
+                                                         "cognome VARCHAR(100) NOT NULL," +
+                                                         "email VARCHAR(200) NOT NULL UNIQUE," +
+                                                         "username VARCHAR(100) NOT NULL UNIQUE," +
+                                                         "hashPass VARCHAR(64) NOT NULL," +
+                                                         "salt VARCHAR(64) NOT NULL," +
+                                                         "loginRemoto INTEGER NOT NULL," +
+                                                         "type VARCHAR(30) NOT NULL" +
                                                          ")", _connection))
             {
                 try
@@ -43,27 +49,185 @@ namespace Sismio.io.sismio.utente
             }
         }
 
-        public IUtente ValidaCredenziali(string username, string pass)
+        private void CreaAdminSeNonEsiste()
         {
-            //TODO: Implement
-            throw new System.NotImplementedException();
+            // Verifico se l'admin esiste
+            bool adminPresente = false;
+            using (SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM utenti WHERE username = 'admin'", _connection))
+            {
+                using (SQLiteDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        adminPresente = true;
+                    }
+                }
+            }
+
+            // Se l'admin non è presente, lo aggiungo al database
+            if (!adminPresente)
+            {
+                // Creo l'utente admin
+                var adminUtente = new Amministratore
+                {
+                    Nome = "Admin",
+                    Cognome = "Admin",
+                    Email = "admin@admin.it",
+                    Username = "admin",
+                    LoginRemoto = false
+                };
+                adminUtente.ImpostaPasswordDaOriginale("admin");
+                
+                // Lo aggiungo al database
+                Registra(adminUtente);
+            }
+           
         }
 
-        public void Elimina(IUtente utente)
+        public IUtente ValidaCredenziali(string username, string pass)
         {
-            throw new System.NotImplementedException();
+            IUtente outputUtente = null;
+
+            using (SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM utenti WHERE username = @Username", _connection))
+            {
+                cmd.Prepare();
+                cmd.Parameters.AddWithValue("@Username", username);
+
+                using (SQLiteDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        outputUtente = ConvertiRigaInUtente(reader);
+                    }
+                }
+            }
+
+            // Controllo che l'utente esista e la password corrisponda
+            if (outputUtente == null)
+            {
+                return null;
+            }
+            else
+            {
+                // Controllo che la password corrisponda
+                string hashPrevisto = HashUtil.GeneraSHA256(pass + outputUtente.SaltPass);
+                if (hashPrevisto == outputUtente.HashPass)
+                {
+                    return outputUtente;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        private IUtente ConvertiRigaInUtente(SQLiteDataReader reader)
+        {
+            // Ottengo il tipo dell'utente corrente
+            Type tipoUtente = Type.GetType(this.GetType().Namespace + "." + reader["type"].ToString());
+            if (tipoUtente == null)
+                return null;
+
+            // Genero un istanza per il tipo dell'utente corrente
+            Utente utente = (Utente) Activator.CreateInstance(tipoUtente);
+
+            // Popolo i campi dell'utente
+            utente.Id = Convert.ToInt64(reader["id"]);
+            utente.Nome = reader["nome"].ToString();
+            utente.Cognome = reader["cognome"].ToString();
+            utente.Username = reader["username"].ToString();
+            utente.Email = reader["email"].ToString();
+            utente.HashPass = reader["hashPass"].ToString();
+            utente.SaltPass = reader["salt"].ToString();
+            utente.LoginRemoto = (Convert.ToInt16(reader["loginRemoto"]) == 0 ? false : true);
+
+            return utente;
+        }
+
+        public bool Elimina(Utente utente)
+        {
+            // TODO Aggiungere il log dell'operazione
+
+            // Assicurati che l'utente abbia l'id e quindi possa essere eliminato
+            if (utente.Id == -1)
+                throw new InvalidOperationException("L'utente non contiene l'ID, quindi non può essere eliminato");
+
+            int risultato = -1;
+            using (SQLiteCommand cmd = new SQLiteCommand(_connection))
+            {
+                cmd.CommandText = "DELETE FROM utenti WHERE id = @Id";
+                cmd.Prepare();
+                cmd.Parameters.AddWithValue("@Id", utente.Id);
+                try
+                {
+                    risultato = cmd.ExecuteNonQuery();
+                }
+                catch (SQLiteException e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
+            }
+
+            return risultato > 0 ? true : false;
         }
 
         public IList<IUtente> ListaTutti()
         {
-            //TODO: Implement
-            throw new System.NotImplementedException();
+            List<IUtente> utenti = new List<IUtente>();
+            using (SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM utenti", _connection))
+            {
+                using (SQLiteDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        IUtente utenteCorrente = ConvertiRigaInUtente(reader);
+                        if (utenteCorrente != null)
+                        {
+                            utenti.Add(utenteCorrente);
+                        }
+                    }
+                }
+            }
+
+            return utenti;
         }
 
-        public void Registra(IUtente utente)
+        public bool Registra(Utente utente)
         {
-            //TODO: Implement
-            throw new System.NotImplementedException();
+            // TODO Aggiungere il log dell'operazione
+
+            int risultato = -1;
+            using (SQLiteCommand cmd = new SQLiteCommand(_connection))
+            {
+                // Preparo la query SQL
+                cmd.CommandText = "INSERT INTO utenti(nome, cognome, email, username, hashPass, salt, loginRemoto, type) VALUES (@Nome, @Cognome, @Email, @Username, @HashPass, @Salt, @LoginRemoto, @Type)";
+                cmd.Prepare();
+                cmd.Parameters.AddWithValue("@Nome", utente.Nome);
+                cmd.Parameters.AddWithValue("@Cognome", utente.Cognome);
+                cmd.Parameters.AddWithValue("@Email", utente.Email);
+                cmd.Parameters.AddWithValue("@Username", utente.Username);
+                cmd.Parameters.AddWithValue("@HashPass", utente.HashPass);
+                cmd.Parameters.AddWithValue("@Salt", utente.SaltPass);
+                cmd.Parameters.AddWithValue("@LoginRemoto", utente.LoginRemoto ? 1 : 0);
+                cmd.Parameters.AddWithValue("@Type", utente.GetType().Name);
+                try
+                {
+                    risultato = cmd.ExecuteNonQuery();
+
+                    // Aggiorno il valore dell'id dell'amministratore
+                    if (risultato > 0)
+                    {
+                        utente.Id = _connection.LastInsertRowId;
+                    }
+                }
+                catch (SQLiteException e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
+            }
+
+            return risultato > 0;
         }
     }
 }

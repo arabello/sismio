@@ -16,6 +16,7 @@ namespace Sismio
         static void Main()
         {
             IGestioneUtentiController gestione = new GestioneUtentiController("prova.db");
+            gestione.ValidaCredenziali("admin", "admin");
             //Application.EnableVisualStyles();
             //Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Form1());

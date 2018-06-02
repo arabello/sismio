@@ -91,6 +91,7 @@
     <Compile Include="io\sismio\trasmissione\TrasmissioneDatiWorker.cs" />
     <Compile Include="io\sismio\trasmissione\NonFidatoEccezione.cs" />
     <Compile Include="io\sismio\trasmissione\ServerStazione.cs" />
+    <Compile Include="io\sismio\utente\HashUtil.cs" />
     <Compile Include="io\sismio\utente\Utente.cs" />
     <Compile Include="io\sismio\utente\AutenticazioneController.cs" />
     <Compile Include="io\sismio\utente\Amministratore.cs" />

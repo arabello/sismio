@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Sismio.io.sismio.eventi;
 
-namespace SismioTest.io.sismio.events
+namespace SismioTest.io.sismio.eventi
 {
     [TestClass]
     public class EventoSismicoTest
