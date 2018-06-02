@@ -2,13 +2,14 @@
 
 namespace Sismio.io.sismio.analisi
 {
+    // TODO
     public abstract class Analisi: IAnalisi
     {
         public event OnRisultatiAnalisi RicevitoriRisultati;
         public void OnDatiDisponibili(int[] data)
         {
-            // TODO: Implement
-            throw new System.NotImplementedException();
+            // TODO: da sistemare per ottenere indietro il risultato
+            Analizza(data);
         }
 
         private Queue<int> _buffer;

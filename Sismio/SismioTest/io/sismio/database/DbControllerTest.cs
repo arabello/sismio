@@ -8,7 +8,7 @@ using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 namespace SismioTest.io.sismio.database
 {
     [TestClass]
-    public class DbRepositoryTest
+    public class DbControllerTest
     {
         public const string DbFilename = "testdatabase.db";
 

@@ -17,6 +17,10 @@
             return false;
         }
 
+        public UtenteNormale() : base()
+        {
+        }
+
         public UtenteNormale(string nome, string cognome, string email, string username, string hashPass, string saltPass, bool loginRemoto) : base(nome, cognome, email, username, hashPass, saltPass, loginRemoto)
         {
         }

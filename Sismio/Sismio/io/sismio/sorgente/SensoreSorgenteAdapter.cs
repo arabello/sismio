@@ -4,6 +4,7 @@ using Sismio.io.sismio.stazione;
 
 namespace Sismio.io.sismio.sorgente
 {
+    // TODO
     public class SensoreSorgenteAdapter: Sorgente
     {
         private ISensore _sensore;
@@ -12,24 +13,28 @@ namespace Sismio.io.sismio.sorgente
         public SensoreSorgenteAdapter(ISensore sensore)
         {
             _sensore = sensore;
-            //TODO: Implement
-            throw new NotImplementedException();
+
+            // Aggiungo l'adapter ai ricevitori del sensore
+            sensore.RicevitoriDatiSensore += OnRisultatiGrezziDisponibili;
         }
 
 
         public override void CicloPrincipale()
         {
-            throw new NotImplementedException();
+            // Passo il segnale al sensore sottostante
+            _sensore.CicloPrincipale();
         }
 
         public void OnRisultatiGrezziDisponibili(int[] dati)
         {
-            throw new NotImplementedException();
+            // Notifico i dati del sensore alla sorgente
+            NotificaDatiDisponibili(dati);
         }
 
         public override void Ferma()
         {
-            throw new NotImplementedException();
+            // Passo il segnale al sensore sottostante
+            _sensore.Ferma();
         }
     }
 }

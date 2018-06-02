@@ -2,12 +2,12 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Sismio.io.sismio.eventi;
 
-namespace SismioTest.io.sismio.events
+namespace SismioTest.io.sismio.eventi
 {
     [TestClass]
-    public class EventTest
+    public class EventoSismicoTest
     {
-        public static IEventoSismico createMockEvent()
+        public static EventoSismico createMockEvent()
         {
             return new EventoSismico("Magnitude", Priorita.Fatal, "Sorry bro", 123456, null);
         }
@@ -15,7 +15,7 @@ namespace SismioTest.io.sismio.events
         [TestMethod]
         public void TestEventId()
         {
-            EventoSismico e = (EventoSismico) createMockEvent();
+            EventoSismico e = createMockEvent();
             Assert.AreEqual(e.Id, -1);
 
             e.Id = 12345;
