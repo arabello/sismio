@@ -1,35 +1,22 @@
+using Sismio.io.sismio.utente;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 
-namespace io.sismio.log
+namespace Sismio.io.sismio.log
 {
-    private File logFile;
-    private static Logger instance;
-
     class Logger
     {
-        private Singleton() {
-            
+        private Stream _fileDiLog;
+
+        public Logger(Stream fileDiLog)
+        {
+            _fileDiLog = fileDiLog;
         }
 
-        public void Log()
+        public int Scrivi(IUtente utente, string messaggio)
         {
-            Console.Write(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
-        }
-
-        public static Singleton Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new Logger();
-                }
-                return instance;
-            }
+            // TODO: Implement
+            throw new NotImplementedException();
         }
     }
 }
