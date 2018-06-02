@@ -4,6 +4,15 @@ using System.IO;
 
 namespace Sismio.io.sismio.log
 {
+    /*
+     * Singleton per la scrittura di log.
+     * Il costruttore privato effettua tutto il necessario per la costruzione del path "dinamico".
+     * Il path di destinazione sarà: C:\Users\<userName>\Sismio\fileDiLog.txt
+     * 
+     * Esempio di utilizzo:
+     * Logger.Scrivi(pippo, "messaggio"); 
+     * int bytes = Logger.Scrivi(pippo, "messaggio"); 
+     * */
     public sealed class Logger
     {
         private static readonly Logger instance = new Logger();
@@ -27,6 +36,11 @@ namespace Sismio.io.sismio.log
             }
         }
 
+        /*
+         * Metodo statico per la scrittura sul file di log.
+         * Parametri: IUtente utente che effettua il logging, string messaggio da scrivere
+         * Ritorno: intero che rappresenta il numero di bytes scritti sul file
+         * */
         public static int Scrivi(IUtente utente, string messaggio)
         {
             // Offset: da UTC a CEST
