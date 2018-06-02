@@ -4,6 +4,7 @@ using Sismio.io.sismio.ui;
 using System;
 using System.Drawing;
 using System.Drawing.Text;
+using System.Windows.Forms;
 
 namespace Sismio
 {
@@ -47,28 +48,30 @@ namespace Sismio
             this.titleStorico.Font = robotoMonoBold;
         }
 
+        private void changeTab(TabPage tabPage)
+        {
+            this.tabControl.SelectedTab = tabPage;
+            this.ActiveControl = this.tabControl; // clear focus
+        }
+
         private void navDashboard_Click(object sender, EventArgs e)
         {
-            this.tabControl.SelectedTab = this.tabDashboard;
-            this.ActiveControl = this.tabControl; // clear focus
+            changeTab(this.tabDashboard);
         }
 
         private void navGestioneStazioni_Click(object sender, EventArgs e)
         {
-            this.tabControl.SelectedTab = this.tabGestioneStazioni;
-            this.ActiveControl = this.tabControl; // clear focus
+            changeTab(this.tabGestioneStazioni);
         }
 
         private void navStorico_Click(object sender, EventArgs e)
         {
-            this.tabControl.SelectedTab = this.tabStorico;
-            this.ActiveControl = this.tabControl; // clear focus
+            changeTab(this.tabStorico);
         }
 
         private void navGestioneUtenti_Click(object sender, EventArgs e)
         {
-            this.tabControl.SelectedTab = this.tabGestioneUtenti;
-            this.ActiveControl = this.tabControl; // clear focus
+            changeTab(this.tabGestioneUtenti);
         }
     }
 }

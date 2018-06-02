@@ -171,6 +171,7 @@ namespace Sismio
             // 
             // titleGestioneUtenti
             // 
+            this.titleGestioneUtenti.BackColor = System.Drawing.SystemColors.Window;
             this.titleGestioneUtenti.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.titleGestioneUtenti.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titleGestioneUtenti.Location = new System.Drawing.Point(25, 25);
@@ -193,6 +194,7 @@ namespace Sismio
             // 
             // titleStorico
             // 
+            this.titleStorico.BackColor = System.Drawing.SystemColors.Window;
             this.titleStorico.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.titleStorico.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titleStorico.Location = new System.Drawing.Point(25, 25);
@@ -215,6 +217,7 @@ namespace Sismio
             // 
             // titleGestioneStazioni
             // 
+            this.titleGestioneStazioni.BackColor = System.Drawing.SystemColors.Window;
             this.titleGestioneStazioni.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.titleGestioneStazioni.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titleGestioneStazioni.Location = new System.Drawing.Point(25, 25);
@@ -237,6 +240,7 @@ namespace Sismio
             // 
             // titleDashboard
             // 
+            this.titleDashboard.BackColor = System.Drawing.SystemColors.Window;
             this.titleDashboard.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.titleDashboard.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titleDashboard.Location = new System.Drawing.Point(25, 25);
