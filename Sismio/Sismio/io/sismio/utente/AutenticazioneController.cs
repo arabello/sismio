@@ -7,15 +7,15 @@ namespace Sismio.io.sismio.user
     {
         public IUtente UtenteAttivo { get; set; }
 
-        private IGestioneUtentiController gestioneUtentiController;
+        private readonly IGestioneUtentiController _gestioneUtentiController;
         public AutenticazioneController(IGestioneUtentiController gestioneUtentiController)
         {
-            this.gestioneUtentiController = gestioneUtentiController;
+            this._gestioneUtentiController = gestioneUtentiController;
         }
 
         public bool Autentica(string username, string pass)
         {
-            IUtente user = gestioneUtentiController.ValidaCredenziali(username, pass);
+            IUtente user = _gestioneUtentiController.ValidaCredenziali(username, pass);
             if (user == null)
             {
                 return false;

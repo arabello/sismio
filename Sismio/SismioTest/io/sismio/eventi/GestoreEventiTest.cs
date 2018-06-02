@@ -12,7 +12,7 @@ namespace SismioTest.io.sismio.eventi
         [TestMethod]
         public void TestEventManager()
         {
-            IEventoSismico e = EventoSismicoTest.createMockEvent();
+            EventoSismico e = EventoSismicoTest.createMockEvent();
 
             // Create a mock EventoSismico Repository
             Mock<IStoricoController> eventRepository = new Mock<IStoricoController>();

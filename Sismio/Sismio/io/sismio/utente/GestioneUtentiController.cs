@@ -8,8 +8,8 @@ namespace Sismio.io.sismio.utente
     // Cosa ho modificato rispetto all'originale:
     // Ho fatto estendere anche da DBController come richiesto
     // Ho cambiato i tipi di ritorno di Registra ed Elimina
+    // Da segnalare l'utilizzo della Reflection per ricreare l'istanza del tipo di utente corretto
 
-    // TODO
     public class GestioneUtentiController : DBController, IGestioneUtentiController
     {
         public GestioneUtentiController(string percorsoDatabase) : base(percorsoDatabase)
@@ -97,7 +97,7 @@ namespace Sismio.io.sismio.utente
                 {
                     while (reader.Read())
                     {
-                        outputUtente = ConvertiRigaInUtente(reader);
+                        outputUtente = Utente.ConvertiRigaInUtente(reader);
                     }
                 }
             }
@@ -120,29 +120,6 @@ namespace Sismio.io.sismio.utente
                     return null;
                 }
             }
-        }
-
-        private IUtente ConvertiRigaInUtente(SQLiteDataReader reader)
-        {
-            // Ottengo il tipo dell'utente corrente
-            Type tipoUtente = Type.GetType(this.GetType().Namespace + "." + reader["type"].ToString());
-            if (tipoUtente == null)
-                return null;
-
-            // Genero un istanza per il tipo dell'utente corrente
-            Utente utente = (Utente) Activator.CreateInstance(tipoUtente);
-
-            // Popolo i campi dell'utente
-            utente.Id = Convert.ToInt64(reader["id"]);
-            utente.Nome = reader["nome"].ToString();
-            utente.Cognome = reader["cognome"].ToString();
-            utente.Username = reader["username"].ToString();
-            utente.Email = reader["email"].ToString();
-            utente.HashPass = reader["hashPass"].ToString();
-            utente.SaltPass = reader["salt"].ToString();
-            utente.LoginRemoto = (Convert.ToInt16(reader["loginRemoto"]) == 0 ? false : true);
-
-            return utente;
         }
 
         public bool Elimina(Utente utente)
@@ -181,7 +158,7 @@ namespace Sismio.io.sismio.utente
                 {
                     while (reader.Read())
                     {
-                        IUtente utenteCorrente = ConvertiRigaInUtente(reader);
+                        IUtente utenteCorrente = Utente.ConvertiRigaInUtente(reader);
                         if (utenteCorrente != null)
                         {
                             utenti.Add(utenteCorrente);
@@ -215,7 +192,7 @@ namespace Sismio.io.sismio.utente
                 {
                     risultato = cmd.ExecuteNonQuery();
 
-                    // Aggiorno il valore dell'id dell'amministratore
+                    // Aggiorno il valore dell'id dell'utente
                     if (risultato > 0)
                     {
                         utente.Id = _connection.LastInsertRowId;

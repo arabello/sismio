@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Sismio.io.sismio.eventi
 {
-    public interface IStoricoController
+    public interface IStoricoController: IDisposable
     {
-        void RegistraEvento(IEventoSismico evento);
+        bool RegistraEvento(EventoSismico evento);
         IList<IEventoSismico> ListaEventi();
-        IList<IEventoSismico> ListaEventi(IList<IFiltroEvento> filters);
+        IList<IEventoSismico> ListaEventi(IList<IFiltroEvento> filtri);
     }
 }

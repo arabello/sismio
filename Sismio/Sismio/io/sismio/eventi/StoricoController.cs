@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
+using System.Linq;
 using Sismio.io.sismio.database;
 
 namespace Sismio.io.sismio.eventi
@@ -7,30 +9,111 @@ namespace Sismio.io.sismio.eventi
     // TODO
     public class StoricoController : DBController, IStoricoController
     {
+        // COSE CHE HO CAMBIATO
+        // Ho cambiato i tipi di ritorno di RegistraEvento
+
         public StoricoController(string percorsoDatabase) : base(percorsoDatabase)
         {
-            //TODO: Implement
-            throw new NotImplementedException();
+            // Crea la tabella eventi se non è gia presente
+            CreaTabellaEventiSeNonEsiste();
         }
 
-        public void RegistraEvento(IEventoSismico evento)
+        private void CreaTabellaEventiSeNonEsiste()
         {
-            //TODO: Implement
-            throw new NotImplementedException();
+            // TODO Aggiungere il log dell'operazione
+
+            // Creo la tabella utenti se non esiste già
+            using (SQLiteCommand cmd = new SQLiteCommand("CREATE TABLE IF NOT EXISTS eventi (" +
+                                                         "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                                                         "tag VARCHAR(100) NOT NULL," +
+                                                         "priorita INTEGER NOT NULL," +
+                                                         "messaggio VARCHAR(200) NOT NULL," +
+                                                         "timestamp INTEGER NOT NULL," +
+                                                         "stazione INTEGER," +
+                                                         "FOREIGN KEY(stazione) REFERENCES stazioni(id)" +
+                                                         ")", _connection))
+            {
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (SQLiteException e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
+            }
+        }
+
+        public bool RegistraEvento(EventoSismico evento)
+        {
+            int risultato = -1;
+            using (SQLiteCommand cmd = new SQLiteCommand(_connection))
+            {
+                // Preparo la query SQL
+                cmd.CommandText = "INSERT INTO eventi(tag, priorita, messaggio, timestamp) VALUES (@Tag, @Priorita, @Messaggio, @Timestamp)";
+                cmd.Prepare();
+                cmd.Parameters.AddWithValue("@Tag", evento.Tag);
+                cmd.Parameters.AddWithValue("@Priorita", evento.Priorita);
+                cmd.Parameters.AddWithValue("@Messaggio", evento.Messaggio);
+                cmd.Parameters.AddWithValue("@Timestamp", evento.Timestamp);
+                try
+                {
+                    risultato = cmd.ExecuteNonQuery();
+
+                    // Aggiorno il valore dell'id dell'evento
+                    if (risultato > 0)
+                    {
+                        evento.Id = _connection.LastInsertRowId;
+                    }
+                }
+                catch (SQLiteException e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
+            }
+
+            return risultato > 0;
         }
 
         public IList<IEventoSismico> ListaEventi()
         {
-            //TODO: Implement
-            throw new NotImplementedException();
+            List<IEventoSismico> eventi = new List<IEventoSismico>();
+            
+            // Nella query effettuo una JOIN con la tabella stazioni per ottenere tutti i dati combinati
+            using (SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM eventi JOIN stazioni ON eventi.stazione = stazioni.id", _connection))
+            {
+                using (SQLiteDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        IEventoSismico evento = EventoSismico.ConvertiRigaInEventoSismico(reader);
+                        if (evento != null)
+                        {
+                            eventi.Add(evento);
+                        }
+                    }
+                }
+            }
+
+            return eventi;
         }
 
-        public IList<IEventoSismico> ListaEventi(IList<IFiltroEvento> filters)
+        public IList<IEventoSismico> ListaEventi(IList<IFiltroEvento> filtri)
         {
-            //TODO: Implement
-            throw new NotImplementedException();
+            // Per filtrare la lista originale, converto la lista totale in un enumerabile
+            IList<IEventoSismico> listaOriginale = ListaEventi();
+            IEnumerable<IEventoSismico> output = listaOriginale.AsEnumerable();
+
+            // Poi applico ogni filtro per scremare la collezione
+            foreach (var filtro in filtri)
+            {
+                output = output.Where(evento => filtro.Filtra(evento));
+            }
+
+            // E infine riconverto in lista
+            return output.ToList();
         }
 
-      
+        
     }
 }

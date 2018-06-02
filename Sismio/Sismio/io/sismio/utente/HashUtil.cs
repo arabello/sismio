@@ -31,6 +31,10 @@ namespace Sismio.io.sismio.utente
             return hash.ToString();
         }
 
+        /// <summary>
+        /// Genera una stringa alfanumerica casuale da usare come salt
+        /// </summary>
+        /// <returns></returns>
         public static string GeneraSalt()
         {
             char[] chars = new char[62];

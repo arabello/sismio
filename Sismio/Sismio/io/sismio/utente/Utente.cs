@@ -1,4 +1,7 @@
-﻿namespace Sismio.io.sismio.utente
+﻿using System;
+using System.Data.SQLite;
+
+namespace Sismio.io.sismio.utente
 {
     public abstract class Utente: IUtente
     {
@@ -40,6 +43,34 @@
 
             HashPass = hash;
             SaltPass = salt;
+        }
+
+        /// <summary>
+        /// Utilizzato per convertire una riga di una query sql in un oggetto Utente
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <returns></returns>
+        public static Utente ConvertiRigaInUtente(SQLiteDataReader reader)
+        {
+            // Ottengo il tipo dell'utente corrente
+            Type tipoUtente = Type.GetType(typeof(Utente).Namespace + "." + reader["type"].ToString());
+            if (tipoUtente == null)
+                return null;
+
+            // Genero un istanza per il tipo dell'utente corrente
+            Utente utente = (Utente)Activator.CreateInstance(tipoUtente);
+
+            // Popolo i campi dell'utente
+            utente.Id = Convert.ToInt64(reader["id"]);
+            utente.Nome = reader["nome"].ToString();
+            utente.Cognome = reader["cognome"].ToString();
+            utente.Username = reader["username"].ToString();
+            utente.Email = reader["email"].ToString();
+            utente.HashPass = reader["hashPass"].ToString();
+            utente.SaltPass = reader["salt"].ToString();
+            utente.LoginRemoto = (Convert.ToInt16(reader["loginRemoto"]) == 0 ? false : true);
+
+            return utente;
         }
 
         public abstract bool PuoModificareUtenti();
