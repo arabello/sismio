@@ -31,12 +31,16 @@
 
         public void CicloPrincipale()
         {
+            // TODO Verifica che il sensore non sia già avviato
+
             //TODO: Implement
             throw new System.NotImplementedException();
         }
 
         public void Ferma()
         {
+            // TODO: Verifica che non ci siano piu ricevitori prima di fermare il sensore
+
             //TODO: Implement
             throw new System.NotImplementedException();
         }
