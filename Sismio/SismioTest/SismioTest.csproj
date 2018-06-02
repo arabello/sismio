@@ -72,6 +72,7 @@
     <Compile Include="io\sismio\events\EventTest.cs" />
     <Compile Include="io\sismio\events\EventFilterTest.cs" />
     <Compile Include="io\sismio\events\EventManagerTest.cs" />
+    <Compile Include="io\sismio\log\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
