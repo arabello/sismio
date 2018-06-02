@@ -47,7 +47,7 @@ namespace Sismio.io.sismio.log
                     fs.Dispose();
             }
 
-            return linea.Length; // TODO void invece che int come tipo di ritorno?
+            return linea.Length; // TODO void invece che int come tipo di ritorno? // TODO dovrei leggere i byte effettivamente scritti invece che quelli virtuali (lunghezza stringa)
         }
     }
 }
