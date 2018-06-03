@@ -83,6 +83,16 @@ namespace Sismio.Properties {
         /// <summary>
         ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap baseline_delete_forever_white_48dp {
+            get {
+                object obj = ResourceManager.GetObject("baseline_delete_forever_white_48dp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap baseline_exit_to_app_white_48dp {
             get {
                 object obj = ResourceManager.GetObject("baseline_exit_to_app_white_48dp", resourceCulture);
@@ -126,6 +136,16 @@ namespace Sismio.Properties {
         internal static System.Drawing.Bitmap baseline_settings_input_antenna_white_48dp {
             get {
                 object obj = ResourceManager.GetObject("baseline_settings_input_antenna_white_48dp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap btndelete {
+            get {
+                object obj = ResourceManager.GetObject("btndelete", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

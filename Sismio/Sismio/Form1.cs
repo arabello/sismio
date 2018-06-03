@@ -77,7 +77,20 @@ namespace Sismio
              * SetUp GestioneUtenti ListView
              **/
             seedGestioneUtentiListView();
-            this.listView.CheckBoxes = true;
+            this.gestioneUtentiLV.Depth = 2;
+            this.btnDeleteUtente.Visible = false;
+            this.gestioneUtentiLV.MultiSelect = false;
+            this.gestioneUtentiLV.SelectedIndexChanged += onUtenteSelect;
+        }
+
+        private void onUtenteSelect(object sender, EventArgs e)
+        {
+            if (this.btnDeleteUtente.Visible)
+            {
+                if (this.gestioneUtentiLV.SelectedIndices.Count == 0)
+                    this.btnDeleteUtente.Visible = false;
+            }else
+                 this.btnDeleteUtente.Visible = true;
         }
 
         private void seedGestioneUtentiListView()
@@ -85,18 +98,18 @@ namespace Sismio
             //Define
             var data = new[]
             {
-                new []{"Lollipop", "392", "0.2", "0"},
-                new []{"KitKat", "518", "26.0", "7"},
-                new []{"Ice cream sandwich", "237", "9.0", "4.3"},
-                new []{"Jelly Bean", "375", "0.0", "0.0"},
-                new []{"Honeycomb", "408", "3.2", "6.5"}
+                new []{"Lollipop", "392", "0.2", "v"},
+                new []{"KitKat", "518", "26.0", "v"},
+                new []{"Ice cream sandwich", "237", "9.0", ""},
+                new []{"Jelly Bean", "375", "0.0", ""},
+                new []{"Honeycomb", "408", "3.2", "v"}
             };
 
             //Add
             foreach (string[] version in data)
             {
                 var item = new ListViewItem(version);
-                this.listView.Items.Add(item);
+                this.gestioneUtentiLV.Items.Add(item);
             }
         }
 
@@ -134,6 +147,18 @@ namespace Sismio
         private void navGestioneUtenti_Click(object sender, EventArgs e)
         {
             changeTab(this.tabGestioneUtenti);
+        }
+
+        private void btnAggiungiNuovo_Click(object sender, EventArgs e)
+        {
+            //TODO: Nuovo utente
+        }
+
+        private void btnDeleteUtente_Click(object sender, EventArgs e)
+        {
+            //TODO: Elimina utente
+            //this.gestioneUtentiLV.SelectedItems
+            //this.gestioneUtentiLV.SelectedItems
         }
     }
 }
