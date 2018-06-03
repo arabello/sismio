@@ -72,6 +72,32 @@ namespace Sismio
             this.bgTextCerca.BackColor = SismioColor.Scheme.DarkPrimaryColor;
             this.btnAggiungiNuovo.BackColor = Color.LightGreen;
             this.btnAggiungiNuovo.Font = materialSkinManager.ROBOTO_REGULAR_11;
+
+            /**
+             * SetUp GestioneUtenti ListView
+             **/
+            seedGestioneUtentiListView();
+            this.listView.CheckBoxes = true;
+        }
+
+        private void seedGestioneUtentiListView()
+        {
+            //Define
+            var data = new[]
+            {
+                new []{"Lollipop", "392", "0.2", "0"},
+                new []{"KitKat", "518", "26.0", "7"},
+                new []{"Ice cream sandwich", "237", "9.0", "4.3"},
+                new []{"Jelly Bean", "375", "0.0", "0.0"},
+                new []{"Honeycomb", "408", "3.2", "6.5"}
+            };
+
+            //Add
+            foreach (string[] version in data)
+            {
+                var item = new ListViewItem(version);
+                this.listView.Items.Add(item);
+            }
         }
 
         private void onTextCercaBlur(object sender, EventArgs e)
