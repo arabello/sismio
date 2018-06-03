@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.background = new System.Windows.Forms.Panel();
-            this.title = new System.Windows.Forms.TextBox();
+            this.title = new System.Windows.Forms.Label();
             this.btnAccedi = new MaterialSkin.Controls.MaterialRaisedButton();
             this.textUsername = new System.Windows.Forms.TextBox();
             this.textPassword = new System.Windows.Forms.TextBox();
@@ -44,10 +44,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.background.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(75)))), ((int)(((byte)(160)))));
             this.background.Controls.Add(this.title);
+            this.background.Controls.Add(this.pictureBox1);
             this.background.Controls.Add(this.btnAccedi);
             this.background.Controls.Add(this.textUsername);
             this.background.Controls.Add(this.textPassword);
-            this.background.Controls.Add(this.pictureBox1);
             this.background.Location = new System.Drawing.Point(0, 26);
             this.background.Name = "background";
             this.background.Size = new System.Drawing.Size(900, 524);
@@ -55,13 +55,12 @@
             // 
             // title
             // 
-            this.title.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(75)))), ((int)(((byte)(160)))));
-            this.title.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.title.BackColor = System.Drawing.Color.Transparent;
             this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 56F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.title.ForeColor = System.Drawing.Color.White;
-            this.title.Location = new System.Drawing.Point(348, 87);
+            this.title.Location = new System.Drawing.Point(344, 87);
+            this.title.Margin = new System.Windows.Forms.Padding(0);
             this.title.Name = "title";
-            this.title.ReadOnly = true;
             this.title.Size = new System.Drawing.Size(368, 85);
             this.title.TabIndex = 4;
             this.title.Text = "ismio";
@@ -143,7 +142,7 @@
         private System.Windows.Forms.TextBox textUsername;
         private System.Windows.Forms.TextBox textPassword;
         private MaterialSkin.Controls.MaterialRaisedButton btnAccedi;
-        private System.Windows.Forms.TextBox title;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label title;
     }
 }

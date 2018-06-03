@@ -64,13 +64,15 @@ namespace Sismio
             this.navGestioneStazioni = new System.Windows.Forms.PictureBox();
             this.navDashboard = new System.Windows.Forms.PictureBox();
             this.tabGestioneUtenti = new System.Windows.Forms.TabPage();
-            this.titleGestioneUtenti = new System.Windows.Forms.TextBox();
+            this.textCerca = new System.Windows.Forms.TextBox();
+            this.btnAggiungiNuovo = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.titleGestioneUtenti = new System.Windows.Forms.Label();
             this.tabStorico = new System.Windows.Forms.TabPage();
-            this.titleStorico = new System.Windows.Forms.TextBox();
+            this.titleStorico = new System.Windows.Forms.Label();
             this.tabGestioneStazioni = new System.Windows.Forms.TabPage();
-            this.titleGestioneStazioni = new System.Windows.Forms.TextBox();
+            this.titleGestioneStazioni = new System.Windows.Forms.Label();
             this.tabDashboard = new System.Windows.Forms.TabPage();
-            this.titleDashboard = new System.Windows.Forms.TextBox();
+            this.titleDashboard = new System.Windows.Forms.Label();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.navbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.navGestioneUtenti)).BeginInit();
@@ -160,6 +162,8 @@ namespace Sismio
             // 
             // tabGestioneUtenti
             // 
+            this.tabGestioneUtenti.Controls.Add(this.textCerca);
+            this.tabGestioneUtenti.Controls.Add(this.btnAggiungiNuovo);
             this.tabGestioneUtenti.Controls.Add(this.titleGestioneUtenti);
             this.tabGestioneUtenti.Location = new System.Drawing.Point(23, 4);
             this.tabGestioneUtenti.Name = "tabGestioneUtenti";
@@ -169,14 +173,42 @@ namespace Sismio
             this.tabGestioneUtenti.Text = "tabGestioneUtenti";
             this.tabGestioneUtenti.UseVisualStyleBackColor = true;
             // 
+            // textCerca
+            // 
+            this.textCerca.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textCerca.Location = new System.Drawing.Point(609, 25);
+            this.textCerca.MaximumSize = new System.Drawing.Size(160, 36);
+            this.textCerca.MinimumSize = new System.Drawing.Size(160, 36);
+            this.textCerca.Name = "textCerca";
+            this.textCerca.Size = new System.Drawing.Size(160, 13);
+            this.textCerca.TabIndex = 3;
+            this.textCerca.Text = "Cerca qui";
+            // 
+            // btnAggiungiNuovo
+            // 
+            this.btnAggiungiNuovo.AutoSize = true;
+            this.btnAggiungiNuovo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnAggiungiNuovo.BackColor = System.Drawing.Color.LimeGreen;
+            this.btnAggiungiNuovo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnAggiungiNuovo.Depth = 0;
+            this.btnAggiungiNuovo.Icon = null;
+            this.btnAggiungiNuovo.Location = new System.Drawing.Point(430, 25);
+            this.btnAggiungiNuovo.MaximumSize = new System.Drawing.Size(160, 0);
+            this.btnAggiungiNuovo.MinimumSize = new System.Drawing.Size(160, 0);
+            this.btnAggiungiNuovo.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnAggiungiNuovo.Name = "btnAggiungiNuovo";
+            this.btnAggiungiNuovo.Primary = true;
+            this.btnAggiungiNuovo.Size = new System.Drawing.Size(160, 36);
+            this.btnAggiungiNuovo.TabIndex = 2;
+            this.btnAggiungiNuovo.Text = "Aggiungi Nuovo";
+            this.btnAggiungiNuovo.UseVisualStyleBackColor = false;
+            // 
             // titleGestioneUtenti
             // 
             this.titleGestioneUtenti.BackColor = System.Drawing.SystemColors.Window;
-            this.titleGestioneUtenti.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.titleGestioneUtenti.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titleGestioneUtenti.Location = new System.Drawing.Point(25, 25);
             this.titleGestioneUtenti.Name = "titleGestioneUtenti";
-            this.titleGestioneUtenti.ReadOnly = true;
             this.titleGestioneUtenti.Size = new System.Drawing.Size(232, 37);
             this.titleGestioneUtenti.TabIndex = 1;
             this.titleGestioneUtenti.Text = "Gestione Utenti";
@@ -195,11 +227,9 @@ namespace Sismio
             // titleStorico
             // 
             this.titleStorico.BackColor = System.Drawing.SystemColors.Window;
-            this.titleStorico.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.titleStorico.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titleStorico.Location = new System.Drawing.Point(25, 25);
             this.titleStorico.Name = "titleStorico";
-            this.titleStorico.ReadOnly = true;
             this.titleStorico.Size = new System.Drawing.Size(212, 37);
             this.titleStorico.TabIndex = 1;
             this.titleStorico.Text = "Storico Eventi";
@@ -218,11 +248,9 @@ namespace Sismio
             // titleGestioneStazioni
             // 
             this.titleGestioneStazioni.BackColor = System.Drawing.SystemColors.Window;
-            this.titleGestioneStazioni.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.titleGestioneStazioni.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titleGestioneStazioni.Location = new System.Drawing.Point(25, 25);
             this.titleGestioneStazioni.Name = "titleGestioneStazioni";
-            this.titleGestioneStazioni.ReadOnly = true;
             this.titleGestioneStazioni.Size = new System.Drawing.Size(257, 37);
             this.titleGestioneStazioni.TabIndex = 1;
             this.titleGestioneStazioni.Text = "Gestione Stazioni";
@@ -241,11 +269,9 @@ namespace Sismio
             // titleDashboard
             // 
             this.titleDashboard.BackColor = System.Drawing.SystemColors.Window;
-            this.titleDashboard.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.titleDashboard.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titleDashboard.Location = new System.Drawing.Point(25, 25);
             this.titleDashboard.Name = "titleDashboard";
-            this.titleDashboard.ReadOnly = true;
             this.titleDashboard.Size = new System.Drawing.Size(212, 37);
             this.titleDashboard.TabIndex = 0;
             this.titleDashboard.Text = "Dashboard";
@@ -271,8 +297,8 @@ namespace Sismio
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(101)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(900, 550);
-            this.Controls.Add(this.navbar);
             this.Controls.Add(this.tabControl);
+            this.Controls.Add(this.navbar);
             this.MaximumSize = new System.Drawing.Size(900, 550);
             this.MinimumSize = new System.Drawing.Size(900, 550);
             this.Name = "Form1";
@@ -286,11 +312,8 @@ namespace Sismio
             this.tabGestioneUtenti.ResumeLayout(false);
             this.tabGestioneUtenti.PerformLayout();
             this.tabStorico.ResumeLayout(false);
-            this.tabStorico.PerformLayout();
             this.tabGestioneStazioni.ResumeLayout(false);
-            this.tabGestioneStazioni.PerformLayout();
             this.tabDashboard.ResumeLayout(false);
-            this.tabDashboard.PerformLayout();
             this.tabControl.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -308,10 +331,12 @@ namespace Sismio
         private System.Windows.Forms.TabPage tabGestioneStazioni;
         private System.Windows.Forms.TabPage tabDashboard;
         private System.Windows.Forms.TabControl tabControl;
-        private System.Windows.Forms.TextBox titleDashboard;
-        private System.Windows.Forms.TextBox titleGestioneStazioni;
-        private System.Windows.Forms.TextBox titleGestioneUtenti;
-        private System.Windows.Forms.TextBox titleStorico;
+        private System.Windows.Forms.Label titleDashboard;
+        private System.Windows.Forms.Label titleGestioneStazioni;
+        private System.Windows.Forms.Label titleGestioneUtenti;
+        private System.Windows.Forms.Label titleStorico;
+        private MaterialSkin.Controls.MaterialRaisedButton btnAggiungiNuovo;
+        private System.Windows.Forms.TextBox textCerca;
     }
 
 

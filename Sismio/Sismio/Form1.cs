@@ -43,10 +43,33 @@ namespace Sismio
 
             this.tabControl.SelectedTab = this.tabDashboard;
 
+            /**
+             * Set up titles
+             **/
             this.titleDashboard.Font = robotoMonoBold;
             this.titleGestioneStazioni.Font = robotoMonoBold;
             this.titleGestioneUtenti.Font = robotoMonoBold;
             this.titleStorico.Font = robotoMonoBold;
+
+            /**
+             * Set up GestioneUtenti
+             */
+            this.textCerca.BackColor = SismioColor.Scheme.DarkPrimaryColor;
+            this.textCerca.Font = materialSkinManager.ROBOTO_REGULAR_11;
+            this.textCerca.GotFocus += onTextCercaFocus;
+            this.textCerca.LostFocus += onTextCercaBlur;
+            this.btnAggiungiNuovo.BackColor = Color.LightGreen;
+            this.btnAggiungiNuovo.Font = materialSkinManager.ROBOTO_REGULAR_11;
+        }
+
+        private void onTextCercaBlur(object sender, EventArgs e)
+        {
+            this.textCerca.Text = "Cerca qui";
+        }
+
+        private void onTextCercaFocus(object sender, EventArgs e)
+        {
+            this.textCerca.Text = "";
         }
 
         private void changeTab(TabPage tabPage)

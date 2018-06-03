@@ -33,8 +33,6 @@ namespace Sismio
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = SismioColor.Scheme;
             this.background.BackColor = SismioColor.Scheme.DarkPrimaryColor;
-            this.title.BackColor = SismioColor.Scheme.DarkPrimaryColor;
-            
             //
             // Load Font
             // 
@@ -50,6 +48,9 @@ namespace Sismio
 
             this.textUsername.Font = robotoMono;
             this.title.Font = new Font(fonts.Families[0], 56.0F);
+
+            // Focus at the startup
+            this.ActiveControl = this.textUsername;
         }
     }
 }
