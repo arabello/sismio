@@ -4,15 +4,15 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Sismio.io.sismio.eventi;
 
-namespace SismioTest.io.sismio.events
+namespace SismioTest.io.sismio.eventi
 {
     [TestClass]
-    public class EventManagerTest
+    public class GestoreEventiTest
     {
         [TestMethod]
         public void TestEventManager()
         {
-            IEventoSismico e = EventTest.createMockEvent();
+            EventoSismico e = EventoSismicoTest.createMockEvent();
 
             // Create a mock EventoSismico Repository
             Mock<IStoricoController> eventRepository = new Mock<IStoricoController>();

@@ -6,6 +6,7 @@ using Sismio.io.sismio.sensore;
 
 namespace Sismio.io.sismio.trasmissione
 {
+    // TODO
     public class TrasmissioneDatiWorker
     {
         private ISensore _sensore;

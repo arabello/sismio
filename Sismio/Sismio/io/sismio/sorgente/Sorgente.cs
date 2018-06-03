@@ -5,21 +5,24 @@ namespace Sismio.io.sismio.sorgente
 {
     public abstract class Sorgente: ISorgente
     {
-        public event OnDatiDisponibili RicevitoriDati;
+        // COSE CHE HO CAMBIATO
+        // * ho rinominato la funzione NotificaDatiDisponibili perchè aveva
+        //   lo stesso nome di una cosa completamente diversa
 
-        public abstract IStazione Stazione { get; }
+        public event OnDatiDisponibili RicevitoriDati;
 
         public void AggiungiAnalisi(IAnalisi analisi)
         {
-            //TODO: Implement
-            throw new System.NotImplementedException();
+            RicevitoriDati += analisi.OnDatiDisponibili;
         }
 
-        protected void OnDatiDisponibili(int[] data)
+        protected void NotificaDatiDisponibili(int[] data)
         {
-            //TODO: Implement
-            throw new System.NotImplementedException();
+            // Notifica i dati disponibili a tutte le analisi
+            RicevitoriDati?.Invoke(data);
         }
+
+        public abstract IStazione Stazione { get; }
 
         public abstract void CicloPrincipale();
 

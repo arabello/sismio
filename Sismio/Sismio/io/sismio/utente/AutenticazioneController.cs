@@ -5,24 +5,32 @@ namespace Sismio.io.sismio.user
 {
     public class AutenticazioneController
     {
-        private IUtente _utenteAttivo;
+        public IUtente UtenteAttivo { get; set; }
 
-        public IUtente OttieniUtenteAttivo()
+        private readonly IGestioneUtentiController _gestioneUtentiController;
+        public AutenticazioneController(IGestioneUtentiController gestioneUtentiController)
         {
-            //TODO: Implement
-            throw new NotImplementedException();
+            this._gestioneUtentiController = gestioneUtentiController;
         }
 
-        public bool Autentica(string username, string pass) 
+        public bool Autentica(string username, string pass)
         {
-            //TODO: Implement
-            throw new NotImplementedException();
+            IUtente user = _gestioneUtentiController.ValidaCredenziali(username, pass);
+            if (user == null)
+            {
+                return false;
+            }
+            else
+            {
+                UtenteAttivo = user;
+                return true;
+            }
         }
 
         public bool Disconnetti()
         {
-            //TODO: Implement
-            throw new NotImplementedException();
+            UtenteAttivo = null;
+            return true;
         }
     }
 }
