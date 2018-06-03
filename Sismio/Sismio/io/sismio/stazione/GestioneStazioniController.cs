@@ -3,72 +3,177 @@ using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Net;
 using Sismio.io.sismio.database;
+using Sismio.io.sismio.log;
 
 namespace Sismio.io.sismio.stazione
 {
-    // TODO
+    /// <summary>
+    /// Classe responsabile della persistenza delle stazioni
+    /// </summary>
+    // Cambiato EliminaStazione, RegistraStazione -> Elimina, Registra
+    // Cambiato IStazione -> Stazione in EliminaStazione, RegistraStazione
+    // Cambiato void -> bool in EliminaStazione, RegistraStazione
+    // Cambiare anche nell'interfaccia
     public class GestioneStazioniController : DBController, IGestioneStazioniController
     {
-        //private string _percorso;
-
+        /// <summary>
+        /// Costruttore, crea la tabella se non esistente
+        /// </summary>
+        /// <param name="percorsoDatabase">Percorso del database</param>
         public GestioneStazioniController(string percorsoDatabase) : base(percorsoDatabase)
         {
-            string sql = "CREATE TABLE stazione (id INT NOT NULL PRIMARY KEY, nome VARCHAR(20), locazione VARCHAR(100), indirizzoDiRete VARCHAR(20), porta INT, impronta VARCHAR(20))"; // TODO spostare // TODO ; alla fine delle query?
-            SQLiteCommand command = new SQLiteCommand(sql, controller);
-            command.ExecuteNonQuery();
+            // Crea la tabella stazioni se non è gia presente
+            CreaTabellaStazioniSeNonEsiste();
         }
 
-        public void EliminaStazione(IStazione stazione)
+        private void CreaTabellaStazioniSeNonEsiste()
         {
-            string sql = "DELETE FROM stazione WHERE nome = "+stazione.Nome+" AND locazione = "+stazione.Locazione;
-            SQLiteCommand command = new SQLiteCommand(sql, controller);
-            command.ExecuteNonQuery();
-        }
 
+            // Creo la tabella stazioni se non esiste già
+            using (SQLiteCommand cmd = new SQLiteCommand("CREATE TABLE IF NOT EXISTS stazioni (" +
+                                                         "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                                                         "nome VARCHAR(20) NOT NULL," + // TODO UNIQUE: Nome unico?
+                                                         "locazione VARCHAR(100) NOT NULL," +
+                                                         "indirizzoDiRete VARCHAR(20) NOT NULL," + // TODO UNIQUE: Indirizzo pubblico unico?
+                                                         "porta INTEGER NOT NULL," +
+                                                         "impronta VARCHAR(65) NOT NULL" +
+                                                         ")", _connection))
+            {
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    // Logger.Scrivi("Creata tabella stazioni, prima non esistente"); // TODO Anche se esistente, scrive sul log; bisognerebbe controllare prima che non esista
+                }
+                catch (SQLiteException e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Metodo responsabile della ricerca in base ad una query prestabilita
+        /// </summary>
+        /// <param name="query"> Stringa rappresentante la query da eseguire</param>
+        /// <returns></returns>
         public IList<IStazione> Cerca(string query)
         {
-            SQLiteCommand command = new SQLiteCommand(query, controller);
-            SQLiteDataReader reader = command.ExecuteReader();
-            Stazione stazione;
-            IList<IStazione> result = new List<IStazione>();
-
-            while (reader.Read())
+            List<IStazione> stazioni = new List<IStazione>();
+            using (SQLiteCommand cmd = new SQLiteCommand(query, _connection))
             {
-                stazione = new Stazione(reader["nome"], reader["locazione"], IPAddress.Parse(reader["ip"]), Int32.Parse(reader["porta"]), reader["impronta"]);
-                result.Add(stazione);
+                using (SQLiteDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        // Converto la entry del database in una stazione
+                        IStazione stazioneCorrente = Stazione.ConvertiRigaInStazione(reader);
+                        if (stazioneCorrente != null)
+                        {
+                            stazioni.Add(stazioneCorrente);
+                        }
+                    }
+                }
             }
 
-            return result;
+            return stazioni;
         }
-
+        /// <summary>
+        /// Metodo che si occupa di listare tutte le stazioni del database
+        /// </summary>
+        /// <returns></returns>
         public IList<IStazione> ListaTutti()
         {
-            string sql = "SELECT * FROM stazione";
-            SQLiteCommand command = new SQLiteCommand(sql, controller);
-            SQLiteDataReader reader = command.ExecuteReader();
-            Stazione stazione;
-            IList<IStazione> result = new List<IStazione>();
-
-            while (reader.Read())
+            List<IStazione> stazioni = new List<IStazione>();
+            using (SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM stazioni", _connection))
             {
-                stazione = new Stazione(reader["nome"], reader["locazione"], IPAddress.Parse(reader["ip"]), Int32.Parse(reader["porta"]), reader["impronta"]);
-                result.Add(stazione);
+                using (SQLiteDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        // Converto la entry del database in una stazione
+                        IStazione stazioneCorrente = Stazione.ConvertiRigaInStazione(reader);
+                        if (stazioneCorrente != null)
+                        {
+                            stazioni.Add(stazioneCorrente);
+                        }
+                    }
+                }
             }
 
-            return result;
+            return stazioni;
+        }
+        /// <summary>
+        /// Metodo responsabile della registrazione della stazione
+        /// </summary>
+        /// <param name="stazione"> Stazione da registrare</param>
+        /// <returns></returns>
+        public bool Registra(Stazione stazione)
+        {
+            int risultato = -1;
+            using (SQLiteCommand cmd = new SQLiteCommand(_connection))
+            {
+                // Preparo la query SQL
+                cmd.CommandText = "INSERT INTO stazioni(nome, locazione, indirizzoDiRete, porta, impronta) VALUES (@Nome, @Locazione, @indirizzoDiRete, @Porta, @Impronta)";
+                cmd.Prepare();
+                cmd.Parameters.AddWithValue("@Nome", stazione.Nome);
+                cmd.Parameters.AddWithValue("@Locazione", stazione.Locazione);
+                cmd.Parameters.AddWithValue("@IndirizzoDiRete", stazione.IndirizzoDiRete.ToString());
+                cmd.Parameters.AddWithValue("@Porta", stazione.Porta.ToString());
+                cmd.Parameters.AddWithValue("@Impronta", stazione.ImprontaChiavePubblica);
+                try
+                {
+                    risultato = cmd.ExecuteNonQuery();
+
+                    // Aggiorno il valore dell'id della stazione
+                    if (risultato > 0)
+                    {
+                       stazione.Id = _connection.LastInsertRowId;
+                        // Se true, scrivo sul file di log
+                       Logger.Scrivi("Registrata stazione: " + stazione);
+                    }
+                }
+                catch (SQLiteException e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
+            }
+
+            return risultato > 0;
         }
 
-        public void RegistraStazione(IStazione stazione)
+        /// <summary>
+        /// Metodo responsabile dell'eliminazione di una stazione
+        /// </summary>
+        /// <param name="stazione"> Stazione da eliminare </param>
+        /// <returns></returns>
+        public bool Elimina(Stazione stazione)
         {
-            // _percorso = "C:\\Users\\" + System.Environment.UserName + "\\Sismio\\database\\stazione.sqlite";
 
-            // DBController controller = new GestioneStazioniController(_percorso);
+            if (stazione.Id == -1)
+                throw new InvalidOperationException("La stazione non contiene l'ID, quindi non può essere eliminata");
 
-            string sql = "INSERT INTO stazione () VALUES ()";
-            SQLiteCommand command = new SQLiteCommand(sql, controller);
-            command.ExecuteNonQuery();
-            
-            //controller.Dispose();
+            int risultato = -1;
+            using (SQLiteCommand cmd = new SQLiteCommand(_connection))
+            {
+                // Elimino la stazione che ha come id la stazione che passo come parametro
+                cmd.CommandText = "DELETE FROM stazioni WHERE id = @Id";
+                cmd.Prepare();
+                cmd.Parameters.AddWithValue("@Id", stazione.Id);
+                try
+                {
+                    risultato = cmd.ExecuteNonQuery();
+
+                    // Se true, scrivo sul file di log
+                    if (risultato > 0)
+                        Logger.Scrivi("Eliminata stazione: " + stazione);
+                }
+                catch (SQLiteException e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
+            }
+
+            return risultato > 0 ? true : false;
         }
     }
 }

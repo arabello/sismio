@@ -1,11 +1,15 @@
+using System;
 using System.Collections.Generic;
 
 namespace Sismio.io.sismio.stazione
 {
-    public interface IGestioneStazioniController
+    // Cambiato EliminaStazione, RegistraStazione -> Elimina, Registra
+    // Cambiato IStazione -> Stazione in EliminaStazione, RegistraStazione
+    // Cambiato void -> bool in EliminaStazione, RegistraStazione
+    public interface IGestioneStazioniController : IDisposable
     {
-        void RegistraStazione(IStazione stazione);
-        void EliminaStazione(IStazione stazione);
+        bool Registra(Stazione stazione);
+        bool Elimina(Stazione stazione);
         IList<IStazione> ListaTutti();
         IList<IStazione> Cerca(string query);
     }

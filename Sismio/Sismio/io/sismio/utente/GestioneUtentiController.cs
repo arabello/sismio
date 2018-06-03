@@ -170,6 +170,33 @@ namespace Sismio.io.sismio.utente
             return utenti;
         }
 
+        /// <summary>
+        /// Metodo responsabile della ricerca in base ad una query prestabilita
+        /// </summary>
+        /// <param name="query"> Stringa rappresentante la query da eseguire</param>
+        /// <returns></returns>
+        public IList<IUtente> Cerca(string query)
+        {
+            List<IUtente> utenti = new List<IUtente>();
+            using (SQLiteCommand cmd = new SQLiteCommand(query, _connection))
+            {
+                using (SQLiteDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        // Converto la entry del database in una stazione
+                        IUtente utenteCorrente = Utente.ConvertiRigaInUtente(reader);
+                        if (utenteCorrente != null)
+                        {
+                            utenti.Add(utenteCorrente);
+                        }
+                    }
+                }
+            }
+
+            return utenti;
+        }
+
         public bool Registra(Utente utente)
         {
             // TODO Aggiungere il log dell'operazione

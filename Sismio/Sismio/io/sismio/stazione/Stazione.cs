@@ -1,10 +1,10 @@
 using System;
 using System.Data.SQLite;
 using System.Net;
-using Sismio.io.sismio.eventi;
 
 namespace Sismio.io.sismio.stazione
 {
+    // Cambiato: aggiunto toString
     public class Stazione: IStazione
     {
         public string Nome { get; set; }
@@ -12,7 +12,7 @@ namespace Sismio.io.sismio.stazione
         public IPAddress IndirizzoDiRete { get; set; }
         public int Porta { get; set; }
         public string ImprontaChiavePubblica { get; set; }
-        public long Id { get; set; }
+        public long Id { get; set; } = -1;
 
         public Stazione()
         {
@@ -25,6 +25,11 @@ namespace Sismio.io.sismio.stazione
             IndirizzoDiRete = indirizzoDiRete;
             Porta = porta;
             ImprontaChiavePubblica = improntaChiavePubblica;
+        }
+
+        public override string ToString()
+        {
+            return $"{nameof(Nome)}: {Nome}, {nameof(Locazione)}: {Locazione}, {nameof(IndirizzoDiRete)}: {IndirizzoDiRete}, {nameof(Porta)}: {Porta}, {nameof(ImprontaChiavePubblica)}: {ImprontaChiavePubblica}, {nameof(Id)}: {Id}";
         }
 
         /// <summary>
@@ -42,7 +47,7 @@ namespace Sismio.io.sismio.stazione
             stazione.Locazione = reader["locazione"].ToString();
             stazione.IndirizzoDiRete = IPAddress.Parse(reader["indirizzoDiRete"].ToString());
             stazione.Porta = Convert.ToInt32(reader["porta"]);
-            stazione.ImprontaChiavePubblica = reader["improntaChiavePubblica"].ToString();
+            stazione.ImprontaChiavePubblica = reader["impronta"].ToString();
 
             return stazione;
         }

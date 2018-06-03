@@ -72,6 +72,7 @@
     <Compile Include="io\sismio\eventi\EventoSismicoTest.cs" />
     <Compile Include="io\sismio\eventi\FiltroEventoTest.cs" />
     <Compile Include="io\sismio\eventi\GestoreEventiTest.cs" />
+    <Compile Include="io\sismio\stazione\GestioneStazioniControllerTest.cs" />
     <Compile Include="io\sismio\utente\GestioneUtentiControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

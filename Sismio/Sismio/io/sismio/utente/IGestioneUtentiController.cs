@@ -9,5 +9,6 @@ namespace Sismio.io.sismio.utente
         bool Registra(Utente utente);
         bool Elimina(Utente utente);
         IUtente ValidaCredenziali(string username, string pass);
+        IList<IUtente> Cerca(string query);
     }
 }

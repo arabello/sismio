@@ -23,6 +23,8 @@ namespace SismioTest.io.sismio.utente
                 File.Delete(@"test_database.db");
             }
 
+            Console.WriteLine(Directory.GetCurrentDirectory());
+
             // Creo un nuovo controller
             gestioneUtentiController = new GestioneUtentiController("test_database.db");
         }
