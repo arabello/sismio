@@ -4,6 +4,7 @@ using System.IO;
 
 namespace Sismio.io.sismio.log
 {
+    // TODO summary
     /*
      * Singleton per la scrittura di log.
      * Il costruttore privato effettua tutto il necessario per la costruzione del path "dinamico".
@@ -16,16 +17,16 @@ namespace Sismio.io.sismio.log
     public sealed class Logger
     {
         private static readonly Logger instance = new Logger();
-        private static string _path;
+        private static string _percorso;
 
         static Logger()
         {
             string userName = Environment.UserName;
-            _path = "C:\\Users\\"+userName+"\\Sismio";
+            _percorso = "C:\\Users\\"+userName+"\\Sismio";
             // Crea la directory. Non fa nulla se già esistente
-            System.IO.Directory.CreateDirectory(_path);
+            System.IO.Directory.CreateDirectory(_percorso);
             // Creo il percorso finale del mio file
-            _path += "\\fileDiLog.txt";
+            _percorso += "\\fileDiLog.txt";
         }
 
         public static Logger Instance
@@ -55,7 +56,7 @@ namespace Sismio.io.sismio.log
             try
             {
                 // Apro il file in append
-                fs = new FileStream(_path, FileMode.Append);
+                fs = new FileStream(_percorso, FileMode.Append);
                 using (StreamWriter writer = new StreamWriter(fs))
                 {
                     // Scrivo la linea
