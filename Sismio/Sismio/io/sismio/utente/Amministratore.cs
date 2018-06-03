@@ -18,6 +18,10 @@
             return true;
         }
 
+        public Amministratore() : base()
+        {
+        }
+
         public Amministratore(string nome, string cognome, string email, string username, string hashPass, string saltPass, bool loginRemoto) : base(nome, cognome, email, username, hashPass, saltPass, loginRemoto)
         {
         }

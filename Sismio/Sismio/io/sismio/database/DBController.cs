@@ -4,6 +4,9 @@ using System.IO;
 
 namespace Sismio.io.sismio.database
 {
+    // Per documentazione su sqlite multi-thread
+    // https://www.sqlite.org/threadsafe.html
+
     /// <summary>
     /// This abstract class manages the basics of the interactions with a
     /// SQLite database and creates a new one if it doesn't exists.
@@ -11,7 +14,7 @@ namespace Sismio.io.sismio.database
     public abstract class DBController : IDisposable
     {
         private string _percorsoDatabase;
-        private SQLiteConnection _connection;
+        protected SQLiteConnection _connection;
 
         public DBController(string percorsoDatabase)
         {
@@ -19,11 +22,6 @@ namespace Sismio.io.sismio.database
 
             // Open the connection to the database
             this.ApriConnessioneDB();
-        }
-
-        ~DBController()
-        {
-            Dispose();
         }
 
         public void Dispose()

@@ -13,7 +13,7 @@
             _storicoController = storicoController;
         }
 
-        public void NotificaEvento(IEventoSismico evnt)
+        public void NotificaEvento(EventoSismico evnt)
         {
             // Send the event to every receiver, while making sure they are not null
             RicevitoriEventoSismico?.Invoke(evnt);
