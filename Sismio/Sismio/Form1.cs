@@ -25,7 +25,8 @@ namespace Sismio
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
-            materialSkinManager.ColorScheme = new SismioColorScheme();
+            materialSkinManager.ColorScheme = SismioColor.Scheme;
+            this.navbar.BackColor = SismioColor.Scheme.DarkPrimaryColor;
 
             //
             // Load Font

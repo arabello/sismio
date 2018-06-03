@@ -87,7 +87,7 @@ namespace Sismio
             // 
             // navbar
             // 
-            this.navbar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(101)))), ((int)(((byte)(192)))));
+            this.navbar.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.navbar.Controls.Add(this.navGestioneUtenti);
             this.navbar.Controls.Add(this.asvg);
             this.navbar.Controls.Add(this.navStorico);
