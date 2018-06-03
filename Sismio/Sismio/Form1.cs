@@ -44,6 +44,15 @@ namespace Sismio
             this.tabControl.SelectedTab = this.tabDashboard;
 
             /**
+             * Set up tabs common properties
+             * */
+             Color bgGray = Color.FromArgb(100, 245, 245, 245);
+            this.tabDashboard.BackColor = bgGray;
+            this.tabGestioneStazioni.BackColor = bgGray;
+            this.tabGestioneUtenti.BackColor = bgGray;
+            this.tabStorico.BackColor = bgGray;
+
+            /**
              * Set up titles
              **/
             this.titleDashboard.Font = robotoMonoBold;
@@ -58,6 +67,9 @@ namespace Sismio
             this.textCerca.Font = materialSkinManager.ROBOTO_REGULAR_11;
             this.textCerca.GotFocus += onTextCercaFocus;
             this.textCerca.LostFocus += onTextCercaBlur;
+            this.textCerca.Font = materialSkinManager.ROBOTO_REGULAR_11;
+            this.textCerca.ForeColor = Color.White;
+            this.bgTextCerca.BackColor = SismioColor.Scheme.DarkPrimaryColor;
             this.btnAggiungiNuovo.BackColor = Color.LightGreen;
             this.btnAggiungiNuovo.Font = materialSkinManager.ROBOTO_REGULAR_11;
         }

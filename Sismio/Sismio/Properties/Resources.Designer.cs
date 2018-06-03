@@ -113,6 +113,16 @@ namespace Sismio.Properties {
         /// <summary>
         ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap baseline_search_white_24dp {
+            get {
+                object obj = ResourceManager.GetObject("baseline_search_white_24dp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap baseline_settings_input_antenna_white_48dp {
             get {
                 object obj = ResourceManager.GetObject("baseline_settings_input_antenna_white_48dp", resourceCulture);
