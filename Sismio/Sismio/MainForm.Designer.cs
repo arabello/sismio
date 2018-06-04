@@ -40,11 +40,14 @@ namespace Sismio
             this.navGestioneStazioni = new System.Windows.Forms.PictureBox();
             this.navDashboard = new System.Windows.Forms.PictureBox();
             this.tabGestioneUtenti = new System.Windows.Forms.TabPage();
-            this.homeGestioneUtenti1 = new Sismio.io.sismio.ui.HomeGestioneUtenti();
             this.tabStorico = new System.Windows.Forms.TabPage();
             this.tabGestioneStazioni = new System.Windows.Forms.TabPage();
             this.tabDashboard = new System.Windows.Forms.TabPage();
             this.tabControl = new MaterialSkin.Controls.MaterialTabControl();
+            this.pictureLogo = new System.Windows.Forms.PictureBox();
+            this.storico1 = new Sismio.io.sismio.ui.Storico();
+            this.homeGestioneUtenti1 = new Sismio.io.sismio.ui.HomeGestioneUtenti();
+            this.homeDashboard1 = new Sismio.io.sismio.ui.HomeDashboard();
             this.navbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.navGestioneUtenti)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.asvg)).BeginInit();
@@ -52,12 +55,16 @@ namespace Sismio
             ((System.ComponentModel.ISupportInitialize)(this.navGestioneStazioni)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.navDashboard)).BeginInit();
             this.tabGestioneUtenti.SuspendLayout();
+            this.tabStorico.SuspendLayout();
+            this.tabDashboard.SuspendLayout();
             this.tabControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // navbar
             // 
             this.navbar.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.navbar.Controls.Add(this.pictureLogo);
             this.navbar.Controls.Add(this.navGestioneUtenti);
             this.navbar.Controls.Add(this.asvg);
             this.navbar.Controls.Add(this.navStorico);
@@ -91,11 +98,12 @@ namespace Sismio
             this.asvg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.asvg.TabIndex = 3;
             this.asvg.TabStop = false;
+            this.asvg.Click += new System.EventHandler(this.asvg_Click);
             // 
             // navStorico
             // 
             this.navStorico.Image = global::Sismio.Properties.Resources.baseline_history_white_48dp;
-            this.navStorico.Location = new System.Drawing.Point(0, 179);
+            this.navStorico.Location = new System.Drawing.Point(0, 210);
             this.navStorico.Margin = new System.Windows.Forms.Padding(0);
             this.navStorico.Name = "navStorico";
             this.navStorico.Size = new System.Drawing.Size(48, 32);
@@ -107,7 +115,7 @@ namespace Sismio
             // navGestioneStazioni
             // 
             this.navGestioneStazioni.Image = global::Sismio.Properties.Resources.baseline_settings_input_antenna_white_48dp;
-            this.navGestioneStazioni.Location = new System.Drawing.Point(0, 122);
+            this.navGestioneStazioni.Location = new System.Drawing.Point(0, 153);
             this.navGestioneStazioni.Margin = new System.Windows.Forms.Padding(0);
             this.navGestioneStazioni.Name = "navGestioneStazioni";
             this.navGestioneStazioni.Size = new System.Drawing.Size(48, 32);
@@ -119,7 +127,7 @@ namespace Sismio
             // navDashboard
             // 
             this.navDashboard.Image = global::Sismio.Properties.Resources.baseline_dashboard_white_48dp;
-            this.navDashboard.Location = new System.Drawing.Point(0, 68);
+            this.navDashboard.Location = new System.Drawing.Point(0, 99);
             this.navDashboard.Margin = new System.Windows.Forms.Padding(0);
             this.navDashboard.Name = "navDashboard";
             this.navDashboard.Size = new System.Drawing.Size(48, 32);
@@ -135,21 +143,14 @@ namespace Sismio
             this.tabGestioneUtenti.Location = new System.Drawing.Point(23, 4);
             this.tabGestioneUtenti.Name = "tabGestioneUtenti";
             this.tabGestioneUtenti.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGestioneUtenti.Size = new System.Drawing.Size(833, 518);
+            this.tabGestioneUtenti.Size = new System.Drawing.Size(828, 518);
             this.tabGestioneUtenti.TabIndex = 3;
             this.tabGestioneUtenti.Text = "tabGestioneUtenti";
-            // 
-            // homeGestioneUtenti1
-            // 
-            this.homeGestioneUtenti1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(245)))));
-            this.homeGestioneUtenti1.Location = new System.Drawing.Point(1, 2);
-            this.homeGestioneUtenti1.Name = "homeGestioneUtenti1";
-            this.homeGestioneUtenti1.Size = new System.Drawing.Size(848, 518);
-            this.homeGestioneUtenti1.TabIndex = 0;
             // 
             // tabStorico
             // 
             this.tabStorico.BackColor = System.Drawing.Color.Gainsboro;
+            this.tabStorico.Controls.Add(this.storico1);
             this.tabStorico.Location = new System.Drawing.Point(23, 4);
             this.tabStorico.Name = "tabStorico";
             this.tabStorico.Padding = new System.Windows.Forms.Padding(3);
@@ -163,17 +164,18 @@ namespace Sismio
             this.tabGestioneStazioni.Location = new System.Drawing.Point(23, 4);
             this.tabGestioneStazioni.Name = "tabGestioneStazioni";
             this.tabGestioneStazioni.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGestioneStazioni.Size = new System.Drawing.Size(833, 518);
+            this.tabGestioneStazioni.Size = new System.Drawing.Size(828, 518);
             this.tabGestioneStazioni.TabIndex = 1;
             this.tabGestioneStazioni.Text = "tabGestioneStazioni";
             // 
             // tabDashboard
             // 
             this.tabDashboard.BackColor = System.Drawing.Color.Gainsboro;
+            this.tabDashboard.Controls.Add(this.homeDashboard1);
             this.tabDashboard.Location = new System.Drawing.Point(23, 4);
             this.tabDashboard.Name = "tabDashboard";
             this.tabDashboard.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDashboard.Size = new System.Drawing.Size(848, 518);
+            this.tabDashboard.Size = new System.Drawing.Size(828, 518);
             this.tabDashboard.TabIndex = 0;
             this.tabDashboard.Text = "tabDashboard";
             // 
@@ -194,7 +196,40 @@ namespace Sismio
             this.tabControl.Size = new System.Drawing.Size(855, 526);
             this.tabControl.TabIndex = 0;
             // 
-            // Form1
+            // pictureLogo
+            // 
+            this.pictureLogo.Image = global::Sismio.Properties.Resources.logo;
+            this.pictureLogo.Location = new System.Drawing.Point(0, 24);
+            this.pictureLogo.Name = "pictureLogo";
+            this.pictureLogo.Size = new System.Drawing.Size(48, 53);
+            this.pictureLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureLogo.TabIndex = 5;
+            this.pictureLogo.TabStop = false;
+            // 
+            // storico1
+            // 
+            this.storico1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(215)))), ((int)(((byte)(215)))), ((int)(((byte)(215)))));
+            this.storico1.Location = new System.Drawing.Point(0, 0);
+            this.storico1.Name = "storico1";
+            this.storico1.Size = new System.Drawing.Size(848, 518);
+            this.storico1.TabIndex = 0;
+            // 
+            // homeGestioneUtenti1
+            // 
+            this.homeGestioneUtenti1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(245)))));
+            this.homeGestioneUtenti1.Location = new System.Drawing.Point(0, 0);
+            this.homeGestioneUtenti1.Name = "homeGestioneUtenti1";
+            this.homeGestioneUtenti1.Size = new System.Drawing.Size(848, 518);
+            this.homeGestioneUtenti1.TabIndex = 0;
+            // 
+            // homeDashboard1
+            // 
+            this.homeDashboard1.Location = new System.Drawing.Point(0, 4);
+            this.homeDashboard1.Name = "homeDashboard1";
+            this.homeDashboard1.Size = new System.Drawing.Size(848, 518);
+            this.homeDashboard1.TabIndex = 0;
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -204,8 +239,9 @@ namespace Sismio
             this.Controls.Add(this.tabControl);
             this.MaximumSize = new System.Drawing.Size(900, 550);
             this.MinimumSize = new System.Drawing.Size(900, 550);
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.navbar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.navGestioneUtenti)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.asvg)).EndInit();
@@ -213,7 +249,10 @@ namespace Sismio
             ((System.ComponentModel.ISupportInitialize)(this.navGestioneStazioni)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.navDashboard)).EndInit();
             this.tabGestioneUtenti.ResumeLayout(false);
+            this.tabStorico.ResumeLayout(false);
+            this.tabDashboard.ResumeLayout(false);
             this.tabControl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureLogo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -231,6 +270,9 @@ namespace Sismio
         private System.Windows.Forms.TabPage tabDashboard;
         private MaterialSkin.Controls.MaterialTabControl tabControl;
         private HomeGestioneUtenti homeGestioneUtenti1;
+        private HomeDashboard homeDashboard1;
+        private Storico storico1;
+        private System.Windows.Forms.PictureBox pictureLogo;
     }
 
 

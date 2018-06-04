@@ -53,6 +53,16 @@ namespace Sismio
         {
             changeTab(this.tabGestioneUtenti);
         }
+       
+        private void asvg_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+        }
 
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+           if(DialogResult != DialogResult.OK)
+                this.DialogResult = DialogResult.Abort;
+        }
     }
 }
