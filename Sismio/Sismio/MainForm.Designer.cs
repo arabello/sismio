@@ -45,6 +45,7 @@ namespace Sismio
             this.tabGestioneStazioni = new System.Windows.Forms.TabPage();
             this.tabDashboard = new System.Windows.Forms.TabPage();
             this.tabControl = new MaterialSkin.Controls.MaterialTabControl();
+            this.homeDashboard1 = new Sismio.io.sismio.ui.HomeDashboard();
             this.navbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.navGestioneUtenti)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.asvg)).BeginInit();
@@ -52,6 +53,7 @@ namespace Sismio
             ((System.ComponentModel.ISupportInitialize)(this.navGestioneStazioni)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.navDashboard)).BeginInit();
             this.tabGestioneUtenti.SuspendLayout();
+            this.tabDashboard.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -135,7 +137,7 @@ namespace Sismio
             this.tabGestioneUtenti.Location = new System.Drawing.Point(23, 4);
             this.tabGestioneUtenti.Name = "tabGestioneUtenti";
             this.tabGestioneUtenti.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGestioneUtenti.Size = new System.Drawing.Size(833, 518);
+            this.tabGestioneUtenti.Size = new System.Drawing.Size(828, 518);
             this.tabGestioneUtenti.TabIndex = 3;
             this.tabGestioneUtenti.Text = "tabGestioneUtenti";
             // 
@@ -163,17 +165,18 @@ namespace Sismio
             this.tabGestioneStazioni.Location = new System.Drawing.Point(23, 4);
             this.tabGestioneStazioni.Name = "tabGestioneStazioni";
             this.tabGestioneStazioni.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGestioneStazioni.Size = new System.Drawing.Size(833, 518);
+            this.tabGestioneStazioni.Size = new System.Drawing.Size(828, 518);
             this.tabGestioneStazioni.TabIndex = 1;
             this.tabGestioneStazioni.Text = "tabGestioneStazioni";
             // 
             // tabDashboard
             // 
             this.tabDashboard.BackColor = System.Drawing.Color.Gainsboro;
+            this.tabDashboard.Controls.Add(this.homeDashboard1);
             this.tabDashboard.Location = new System.Drawing.Point(23, 4);
             this.tabDashboard.Name = "tabDashboard";
             this.tabDashboard.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDashboard.Size = new System.Drawing.Size(848, 518);
+            this.tabDashboard.Size = new System.Drawing.Size(828, 518);
             this.tabDashboard.TabIndex = 0;
             this.tabDashboard.Text = "tabDashboard";
             // 
@@ -194,7 +197,14 @@ namespace Sismio
             this.tabControl.Size = new System.Drawing.Size(855, 526);
             this.tabControl.TabIndex = 0;
             // 
-            // Form1
+            // homeDashboard1
+            // 
+            this.homeDashboard1.Location = new System.Drawing.Point(0, 4);
+            this.homeDashboard1.Name = "homeDashboard1";
+            this.homeDashboard1.Size = new System.Drawing.Size(848, 518);
+            this.homeDashboard1.TabIndex = 0;
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -204,7 +214,7 @@ namespace Sismio
             this.Controls.Add(this.tabControl);
             this.MaximumSize = new System.Drawing.Size(900, 550);
             this.MinimumSize = new System.Drawing.Size(900, 550);
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "Form1";
             this.navbar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.navGestioneUtenti)).EndInit();
@@ -213,6 +223,7 @@ namespace Sismio
             ((System.ComponentModel.ISupportInitialize)(this.navGestioneStazioni)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.navDashboard)).EndInit();
             this.tabGestioneUtenti.ResumeLayout(false);
+            this.tabDashboard.ResumeLayout(false);
             this.tabControl.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -231,6 +242,7 @@ namespace Sismio
         private System.Windows.Forms.TabPage tabDashboard;
         private MaterialSkin.Controls.MaterialTabControl tabControl;
         private HomeGestioneUtenti homeGestioneUtenti1;
+        private HomeDashboard homeDashboard1;
     }
 
 
