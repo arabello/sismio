@@ -45,8 +45,11 @@ namespace SismioClient
             Thread threadSorgente = new Thread(() => sorgenteRemota.CicloPrincipale());
             threadSorgente.Start();
 
-            IAnalisi analisi = new AnalisiGrezza();
-            sorgenteRemota.AggiungiAnalisi(analisi);
+            //IAnalisi analisi = new AnalisiGrezza();
+            //sorgenteRemota.AggiungiAnalisi(analisi);
+
+            IAnalisi magnitudo = new AnalisiMagnitudine();
+            sorgenteRemota.AggiungiAnalisi(magnitudo);
 
             threadSorgente.Join();
         }
