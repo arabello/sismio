@@ -179,5 +179,15 @@ namespace Sismio.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Byte[].
+        /// </summary>
+        internal static byte[] RobotoMono_Light {
+            get {
+                object obj = ResourceManager.GetObject("RobotoMono_Light", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace Sismio.io.sismio.ui
             }
         }
 
-        public static Color BackColor { get => Color.FromArgb(100, 200, 200, 200); }
+        public static Color BackColor { get => Color.FromArgb(100, 215, 215, 215); }
 
     private SismioColor() : base(
                 Primary.LightBlue600, // primary

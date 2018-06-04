@@ -34,6 +34,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.WinForms, Version=0.9.7.1, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.WinForms.0.9.7.1\lib\net45\LiveCharts.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialSkin.Updated.0.2.2\lib\MaterialSkin.dll</HintPath>
     </Reference>
@@ -44,6 +53,7 @@
     <Reference Include="System.Data.SQLite, Version=1.0.108.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SQLite.Core.1.0.108.0\lib\net46\System.Data.SQLite.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -59,6 +69,19 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="io\sismio\ui\HomeDashboard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="io\sismio\ui\HomeDashboard.Designer.cs">
+      <DependentUpon>HomeDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="io\sismio\ui\MockAnalisi.cs" />
+    <Compile Include="io\sismio\ui\Storico.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="io\sismio\ui\Storico.Designer.cs">
+      <DependentUpon>Storico.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,6 +147,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="io\sismio\ui\HomeDashboard.resx">
+      <DependentUpon>HomeDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="io\sismio\ui\Storico.resx">
+      <DependentUpon>Storico.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -155,6 +184,7 @@
     </Compile>
     <EmbeddedResource Include="Resources\Roboto-Light.ttf" />
     <EmbeddedResource Include="Resources\RobotoMono-Bold.ttf" />
+    <None Include="Resources\RobotoMono-Light.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
