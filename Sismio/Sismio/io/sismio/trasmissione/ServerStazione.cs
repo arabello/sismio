@@ -1,69 +1,97 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net;
 using System.Net.Security;
 using System.Net.Sockets;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
+using Sismio.io.sismio.sensore;
+using Sismio.io.sismio.user;
+using Sismio.io.sismio.utente;
 
 namespace Sismio.io.sismio.trasmissione
 {
-    // TODO
+    // COSE CHE HO CAMBIATO
+    // prende in ingresso un gestioneUtentiController
+    // Prende in ingresso un sensore
     public class ServerStazione
     {
         public const int PortaServer = 8001;
 
+        private readonly ISensore _sensore;
+        private readonly IGestioneUtentiController _gestioneUtentiController = null;
         private readonly X509Certificate2 _certificato;
-        private readonly Thread _threadNetwork = null;
+        private Thread _threadNetwork = null;
 
-        public ServerStazione(string certFile, string password)
+        public ServerStazione(ISensore sensore, IGestioneUtentiController gestioneUtentiController, string certFile, string password)
         {
-            // Make sure the certificate exists
+            _sensore = sensore;
+            _gestioneUtentiController = gestioneUtentiController;
+
+            // Assicurati che il certificato esista
             if (!File.Exists(certFile))
             {
                 throw new CertificatoNonTrovatoEccezione("The specified certificate cannot be found.");
             }
 
-            // Load the certificate file
+            // Carica il certificato
             _certificato = new X509Certificate2(certFile, password, X509KeyStorageFlags.UserKeySet);
+        }
 
-            // Create the networking thread
-            _threadNetwork = new Thread(new ThreadStart(Run));
+        public ServerStazione(ISensore sensore, IGestioneUtentiController gestioneUtentiController, byte[] certBytes, string password)
+        {
+            _sensore = sensore;
+            _gestioneUtentiController = gestioneUtentiController;
+
+            // Carica il certificato
+            _certificato = new X509Certificate2(certBytes, password, X509KeyStorageFlags.UserKeySet);
         }
 
         public void Avvia()
         {
-            // Start the networking thread
+            // Crea il thread di networking
+            _threadNetwork = new Thread(() => Run());
+
+            // Avvia il thread di networking
             _threadNetwork.Start();
         }
 
         private void Run()
         {
-            // Get the local ip address
+            // Ottieni l'indirizzo locale
             IPAddress ipAddress = IPAddress.Parse("127.0.0.1");
 
-            // Initialize the tcp listener
+            // Avvia l'ascoltatore TCP
             TcpListener tcpListener = new TcpListener(ipAddress, PortaServer);
 
-            // Start listening to the specified port
+            // Inizia l'ascolto sulla porta specificata
             tcpListener.Start();
 
-            // Endless loop to serve each request
+            // Loop infinito per servire tutte le richieste
             while (true)
             {
-                // Accept a new connection
+                // Accetta una nuova connessione
                 TcpClient tcpClient = tcpListener.AcceptTcpClient();
 
-                // Create a secure connection using a SslStream
+                Console.WriteLine("Connessione ricevuta da :{0}", ((IPEndPoint) tcpClient.Client.RemoteEndPoint).Address.ToString());
+
+                // Crea una connessione sicura utilizzando un SslStream
                 SslStream sslStream = new SslStream(tcpClient.GetStream(), false);
                 sslStream.AuthenticateAsServer(_certificato, false, SslProtocols.Tls, true);
 
-                // Create a new DataTransmissionWorker to handle the connection
-                // TODO: inject the correct sensore
-                TrasmissioneDatiWorker worker = new TrasmissioneDatiWorker(null, sslStream);
-                
-                // Start the worker thread
-                worker.Start();
+                // Crea un nuovo Worker per gestire la trasmissione
+                try
+                {
+                    TrasmissioneDatiWorker worker = new TrasmissioneDatiWorker(_gestioneUtentiController, _sensore, sslStream);
+
+                    // Avvia il worker
+                    worker.Start();
+                }
+                catch (CredenzialiInvalideEccezione e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
             }
         }
     }

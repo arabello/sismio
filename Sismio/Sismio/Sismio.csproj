@@ -69,6 +69,8 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="io\sismio\sensore\MockSensore.cs" />
+    <Compile Include="io\sismio\trasmissione\RispostaInvalidaEccezione.cs" />
     <Compile Include="io\sismio\ui\HomeDashboard.cs">
       <SubType>UserControl</SubType>
     </Compile>

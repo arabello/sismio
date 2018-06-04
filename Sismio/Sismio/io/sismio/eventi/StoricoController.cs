@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
 using Sismio.io.sismio.database;
+using Sismio.io.sismio.stazione;
 
 namespace Sismio.io.sismio.eventi
 {
@@ -50,12 +51,13 @@ namespace Sismio.io.sismio.eventi
             using (SQLiteCommand cmd = new SQLiteCommand(_connection))
             {
                 // Preparo la query SQL
-                cmd.CommandText = "INSERT INTO eventi(tag, priorita, messaggio, timestamp) VALUES (@Tag, @Priorita, @Messaggio, @Timestamp)";
+                cmd.CommandText = "INSERT INTO eventi(tag, priorita, messaggio, timestamp, stazione) VALUES (@Tag, @Priorita, @Messaggio, @Timestamp, @Stazione)";
                 cmd.Prepare();
                 cmd.Parameters.AddWithValue("@Tag", evento.Tag);
                 cmd.Parameters.AddWithValue("@Priorita", evento.Priorita);
                 cmd.Parameters.AddWithValue("@Messaggio", evento.Messaggio);
                 cmd.Parameters.AddWithValue("@Timestamp", evento.Timestamp);
+                cmd.Parameters.AddWithValue("@Stazione", ((Stazione) evento.Stazione)?.Id);
                 try
                 {
                     risultato = cmd.ExecuteNonQuery();
@@ -80,7 +82,14 @@ namespace Sismio.io.sismio.eventi
             List<IEventoSismico> eventi = new List<IEventoSismico>();
             
             // Nella query effettuo una JOIN con la tabella stazioni per ottenere tutti i dati combinati
-            using (SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM eventi JOIN stazioni ON eventi.stazione = stazioni.id", _connection))
+            using (SQLiteCommand cmd = new SQLiteCommand("SELECT eventi.id AS eventi_id, eventi.tag AS eventi_tag, " +
+                                                         "eventi.priorita AS eventi_priorita, eventi.timestamp AS eventi_timestamp," +
+                                                         "eventi.messaggio AS eventi_messaggio, stazioni.id AS stazioni_id, " +
+                                                         "stazioni.nome AS stazioni_nome, " +
+                                                         "stazioni.locazione AS stazioni_locazione, " +
+                                                         "stazioni.indirizzoDiRete AS stazioni_indirizzoDiRete, " +
+                                                         "stazioni.porta AS stazioni_porta, stazioni.impronta AS stazioni_impronta " +
+                                                         "FROM eventi JOIN stazioni ON eventi.stazione = stazioni.id", _connection))
             {
                 using (SQLiteDataReader reader = cmd.ExecuteReader())
                 {
