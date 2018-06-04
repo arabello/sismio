@@ -135,12 +135,12 @@
             this.listView.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.listView.FullRowSelect = true;
             this.listView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.listView.Location = new System.Drawing.Point(30, 76);
+            this.listView.Location = new System.Drawing.Point(30, 70);
             this.listView.MouseLocation = new System.Drawing.Point(-1, -1);
             this.listView.MouseState = MaterialSkin.MouseState.OUT;
             this.listView.Name = "listView";
             this.listView.OwnerDraw = true;
-            this.listView.Size = new System.Drawing.Size(719, 442);
+            this.listView.Size = new System.Drawing.Size(719, 507);
             this.listView.TabIndex = 10;
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;

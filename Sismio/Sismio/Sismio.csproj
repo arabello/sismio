@@ -76,6 +76,12 @@
       <DependentUpon>HomeDashboard.cs</DependentUpon>
     </Compile>
     <Compile Include="io\sismio\ui\MockAnalisi.cs" />
+    <Compile Include="io\sismio\ui\Storico.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="io\sismio\ui\Storico.Designer.cs">
+      <DependentUpon>Storico.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +150,9 @@
     <EmbeddedResource Include="io\sismio\ui\HomeDashboard.resx">
       <DependentUpon>HomeDashboard.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="io\sismio\ui\Storico.resx">
+      <DependentUpon>Storico.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -175,6 +184,7 @@
     </Compile>
     <EmbeddedResource Include="Resources\Roboto-Light.ttf" />
     <EmbeddedResource Include="Resources\RobotoMono-Bold.ttf" />
+    <None Include="Resources\RobotoMono-Light.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

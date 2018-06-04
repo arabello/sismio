@@ -12,19 +12,18 @@ using MaterialSkin;
 
 namespace Sismio.io.sismio.ui
 {
-    public partial class HomeGestioneUtenti : UserControl
+    public partial class Storico : UserControl
     {
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]
         private static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont,
-          IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
+         IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
 
         private PrivateFontCollection fonts = new PrivateFontCollection();
-
-        Font robotoMonoBold;
-        public HomeGestioneUtenti()
+        Font robotoMonoBold16;
+        Font robotMonoLight8;
+        public Storico()
         {
             InitializeComponent();
-
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = SismioColor.Scheme;
@@ -40,9 +39,24 @@ namespace Sismio.io.sismio.ui
             AddFontMemResourceEx(fontPtr, (uint)Properties.Resources.RobotoMono_Bold.Length, IntPtr.Zero, ref dummy);
             System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr);
 
-            robotoMonoBold = new Font(fonts.Families[0], 16.0f);
+            robotoMonoBold16 = new Font(fonts.Families[0], 16.0f);
 
-            this.title.Font = robotoMonoBold;
+            fontData = Properties.Resources.RobotoMono_Light;
+            fontPtr = System.Runtime.InteropServices.Marshal.AllocCoTaskMem(fontData.Length);
+            System.Runtime.InteropServices.Marshal.Copy(fontData, 0, fontPtr, fontData.Length);
+            dummy = 0;
+            fonts.AddMemoryFont(fontPtr, Properties.Resources.RobotoMono_Light.Length);
+            AddFontMemResourceEx(fontPtr, (uint)Properties.Resources.RobotoMono_Light.Length, IntPtr.Zero, ref dummy);
+            System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr);
+
+            robotMonoLight8 = new Font(fonts.Families[0], 10.0f);
+
+            this.title.Font = robotoMonoBold16;
+            this.textCerca.Font = robotMonoLight8;
+            this.label1.Font = robotMonoLight8;
+            this.label2.Font = robotMonoLight8;
+            this.label3.Font = robotMonoLight8;
+            this.textFiltro.Font = robotMonoLight8;
 
             this.BackColor = SismioColor.BackColor;
 
@@ -50,33 +64,21 @@ namespace Sismio.io.sismio.ui
              * Set up buttom controls
              */
             this.textCerca.BackColor = SismioColor.Scheme.DarkPrimaryColor;
-            this.textCerca.Font = materialSkinManager.ROBOTO_REGULAR_11;
             this.textCerca.GotFocus += onTextCercaFocus;
             this.textCerca.LostFocus += onTextCercaBlur;
-            this.textCerca.Font = materialSkinManager.ROBOTO_REGULAR_11;
             this.textCerca.ForeColor = Color.White;
             this.bgTextCerca.BackColor = SismioColor.Scheme.DarkPrimaryColor;
-            this.btnAggiungiNuovo.BackColor = Color.LightGreen;
-            this.btnAggiungiNuovo.Font = materialSkinManager.ROBOTO_REGULAR_11;
 
             /**
              * Set up ListView
              **/
             seedListView();
-            this.btnDelete.Visible = false;
             this.listView.MultiSelect = false;
-            this.listView.SelectedIndexChanged += onUtenteSelect;
-        }
 
-        private void onUtenteSelect(object sender, EventArgs e)
-        {
-            if (this.btnDelete.Visible)
-            {
-                if (this.listView.SelectedIndices.Count == 0)
-                    this.btnDelete.Visible = false;
-            }
-            else
-                this.btnDelete.Visible = true;
+            /**
+             * Set up filtro
+             **/
+            this.panelFiltro.BackColor = SismioColor.Scheme.DarkPrimaryColor;
         }
 
         private void seedListView()
@@ -84,17 +86,18 @@ namespace Sismio.io.sismio.ui
             //Define
             var data = new[]
             {
-                new []{"Lollipop", "392", "0.2", "v"},
-                new []{"KitKat", "518", "26.0", "v"},
-                new []{"Ice cream sandwich", "237", "9.0", ""},
-                new []{"Jelly Bean", "375", "0.0", ""},
-                new []{"Honeycomb", "408", "3.2", "v"}
+                new []{"Lollipop", "392", "0.2", "Messagio informativo", "INFO"},
+                new []{"KitKat", "518", "26.0", "Messagio informativo", "ALERT"},
+                new []{"Ice cream sandwich", "237", "9.0", "Messagio informativo", "WARNING"},
+                new []{"Jelly Bean", "375", "0.0", "Messagio informativo", "CRTITICAL"},
+                new []{"Honeycomb", "408", "3.2", "Messagio informativo", "INFO"}
             };
 
             //Add
             foreach (string[] version in data)
             {
                 var item = new ListViewItem(version);
+                item.BackColor = Color.AliceBlue;
                 this.listView.Items.Add(item);
             }
         }
@@ -107,27 +110,6 @@ namespace Sismio.io.sismio.ui
         private void onTextCercaFocus(object sender, EventArgs e)
         {
             this.textCerca.Text = "";
-        }
-
-        private void btnAggiungiNuovo_Click(object sender, EventArgs e)
-        {
-            //TODO: Nuovo utente
-        }
-
-        private void btnDeleteUtente_Click(object sender, EventArgs e)
-        {
-            //TODO: Elimina utente
-            //this.gestioneUtentiLV.SelectedItems
-            //this.gestioneUtentiLV.SelectedItems
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            //TODO: Show dialog confirm
-            //TODO: Elimina utente
-           
-            //this.gestioneUtentiLV.SelectedItems
-            //this.gestioneUtentiLV.SelectedItems
         }
     }
 }
