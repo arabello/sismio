@@ -61,7 +61,12 @@ namespace Sismio.io.sismio.stazione
             string uppercaseQuery = query.ToUpper();
             List<IStazione> stazioni = new List<IStazione>();
             // Effettuo una ricerca CASE-INSENSITIVE sui campi
-            using (SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM stazioni WHERE UPPER(nome) LIKE '%' || @query || '%' " +
+            using (SQLiteCommand cmd = new SQLiteCommand("SELECT stazioni.id AS stazioni_id, " +
+                                                         "stazioni.nome AS stazioni_nome, " +
+                                                         "stazioni.locazione AS stazioni_locazione, " +
+                                                         "stazioni.indirizzoDiRete AS stazioni_indirizzoDiRete, " +
+                                                         "stazioni.porta AS stazioni_porta, stazioni.impronta AS stazioni_impronta " +
+                                                         "FROM stazioni WHERE UPPER(nome) LIKE '%' || @query || '%' " +
                                                          "OR UPPER(locazione) LIKE '%' || @query || '%' " +
                                                          "OR UPPER(indirizzoDiRete) LIKE '%' || @query || '%'"
                                                          , _connection))
@@ -91,7 +96,12 @@ namespace Sismio.io.sismio.stazione
         public IList<IStazione> ListaTutti()
         {
             List<IStazione> stazioni = new List<IStazione>();
-            using (SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM stazioni", _connection))
+            using (SQLiteCommand cmd = new SQLiteCommand("SELECT stazioni.id AS stazioni_id, " +
+                                                         "stazioni.nome AS stazioni_nome, " +
+                                                         "stazioni.locazione AS stazioni_locazione, " +
+                                                         "stazioni.indirizzoDiRete AS stazioni_indirizzoDiRete, " +
+                                                         "stazioni.porta AS stazioni_porta, stazioni.impronta AS stazioni_impronta " +
+                                                         "FROM stazioni", _connection))
             {
                 using (SQLiteDataReader reader = cmd.ExecuteReader())
                 {

@@ -18,51 +18,51 @@ namespace Sismio.io.sismio.trasmissione
 
         public ServerStazione(string certFile, string password)
         {
-            // Make sure the certificate exists
+            // Assicurati che il certificato esista
             if (!File.Exists(certFile))
             {
                 throw new CertificatoNonTrovatoEccezione("The specified certificate cannot be found.");
             }
 
-            // Load the certificate file
+            // Carica il certificato
             _certificato = new X509Certificate2(certFile, password, X509KeyStorageFlags.UserKeySet);
 
-            // Create the networking thread
+            // Crea il thread di networking
             _threadNetwork = new Thread(new ThreadStart(Run));
         }
 
         public void Avvia()
         {
-            // Start the networking thread
+            // Avvia il thread di networking
             _threadNetwork.Start();
         }
 
         private void Run()
         {
-            // Get the local ip address
+            // Ottieni l'indirizzo locale
             IPAddress ipAddress = IPAddress.Parse("127.0.0.1");
 
-            // Initialize the tcp listener
+            // Avvia l'ascoltatore TCP
             TcpListener tcpListener = new TcpListener(ipAddress, PortaServer);
 
-            // Start listening to the specified port
+            // Inizia l'ascolto sulla porta specificata
             tcpListener.Start();
 
-            // Endless loop to serve each request
+            // Loop infinito per servire tutte le richieste
             while (true)
             {
-                // Accept a new connection
+                // Accetta una nuova connessione
                 TcpClient tcpClient = tcpListener.AcceptTcpClient();
 
-                // Create a secure connection using a SslStream
+                // Crea una connessione sicura utilizzando un SslStream
                 SslStream sslStream = new SslStream(tcpClient.GetStream(), false);
                 sslStream.AuthenticateAsServer(_certificato, false, SslProtocols.Tls, true);
 
-                // Create a new DataTransmissionWorker to handle the connection
+                // Crea un nuovo Worker per gestire la trasmissione
                 // TODO: inject the correct sensore
                 TrasmissioneDatiWorker worker = new TrasmissioneDatiWorker(null, sslStream);
                 
-                // Start the worker thread
+                // Avvia il worker
                 worker.Start();
             }
         }

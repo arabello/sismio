@@ -76,5 +76,39 @@ namespace Sismio.io.sismio.utente
         public abstract bool PuoModificareUtenti();
         public abstract bool PuoModificareSorgenti();
         public abstract bool PuoModificareStazioni();
+
+        public override string ToString()
+        {
+            return $"{nameof(Nome)}: {Nome}, {nameof(Cognome)}: {Cognome}, {nameof(Email)}: {Email}, {nameof(Username)}: {Username}, {nameof(HashPass)}: {HashPass}, {nameof(SaltPass)}: {SaltPass}, {nameof(LoginRemoto)}: {LoginRemoto}, {nameof(Id)}: {Id}";
+        }
+
+        protected bool Equals(Utente other)
+        {
+            return string.Equals(Nome, other.Nome) && string.Equals(Cognome, other.Cognome) && string.Equals(Email, other.Email) && string.Equals(Username, other.Username) && string.Equals(HashPass, other.HashPass) && string.Equals(SaltPass, other.SaltPass) && LoginRemoto == other.LoginRemoto && Id == other.Id;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Utente) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Nome != null ? Nome.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Cognome != null ? Cognome.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Email != null ? Email.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Username != null ? Username.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (HashPass != null ? HashPass.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (SaltPass != null ? SaltPass.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ LoginRemoto.GetHashCode();
+                hashCode = (hashCode * 397) ^ Id.GetHashCode();
+                return hashCode;
+            }
+        }
     }
 }

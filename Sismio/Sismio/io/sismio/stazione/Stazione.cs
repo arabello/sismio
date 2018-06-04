@@ -27,11 +27,6 @@ namespace Sismio.io.sismio.stazione
             ImprontaChiavePubblica = improntaChiavePubblica;
         }
 
-        public override string ToString()
-        {
-            return $"{nameof(Nome)}: {Nome}, {nameof(Locazione)}: {Locazione}, {nameof(IndirizzoDiRete)}: {IndirizzoDiRete}, {nameof(Porta)}: {Porta}, {nameof(ImprontaChiavePubblica)}: {ImprontaChiavePubblica}, {nameof(Id)}: {Id}";
-        }
-
         /// <summary>
         /// Utilizzato per convertire una riga di una query sql in un oggetto Stazione
         /// </summary>
@@ -42,14 +37,46 @@ namespace Sismio.io.sismio.stazione
             Stazione stazione = new Stazione();
 
             // Popolo i campi della stazione
-            stazione.Id = Convert.ToInt64(reader["id"]);  // TODO considerare il caso della join con evento
-            stazione.Nome = reader["nome"].ToString();
-            stazione.Locazione = reader["locazione"].ToString();
-            stazione.IndirizzoDiRete = IPAddress.Parse(reader["indirizzoDiRete"].ToString());
-            stazione.Porta = Convert.ToInt32(reader["porta"]);
-            stazione.ImprontaChiavePubblica = reader["impronta"].ToString();
+            stazione.Id = Convert.ToInt64(reader["stazioni_id"]);
+            stazione.Nome = reader["stazioni_nome"].ToString();
+            stazione.Locazione = reader["stazioni_locazione"].ToString();
+            stazione.IndirizzoDiRete = IPAddress.Parse(reader["stazioni_indirizzoDiRete"].ToString());
+            stazione.Porta = Convert.ToInt32(reader["stazioni_porta"]);
+            stazione.ImprontaChiavePubblica = reader["stazioni_impronta"].ToString();
 
             return stazione;
+        }
+
+        public override string ToString()
+        {
+            return $"{nameof(Nome)}: {Nome}, {nameof(Locazione)}: {Locazione}, {nameof(IndirizzoDiRete)}: {IndirizzoDiRete}, {nameof(Porta)}: {Porta}, {nameof(ImprontaChiavePubblica)}: {ImprontaChiavePubblica}, {nameof(Id)}: {Id}";
+        }
+
+        protected bool Equals(Stazione other)
+        {
+            return string.Equals(Nome, other.Nome) && string.Equals(Locazione, other.Locazione) && Equals(IndirizzoDiRete, other.IndirizzoDiRete) && Porta == other.Porta && string.Equals(ImprontaChiavePubblica, other.ImprontaChiavePubblica) && Id == other.Id;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Stazione) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Nome != null ? Nome.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Locazione != null ? Locazione.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (IndirizzoDiRete != null ? IndirizzoDiRete.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ Porta;
+                hashCode = (hashCode * 397) ^ (ImprontaChiavePubblica != null ? ImprontaChiavePubblica.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ Id.GetHashCode();
+                return hashCode;
+            }
         }
     }
 }
