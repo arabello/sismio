@@ -59,6 +59,7 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="io\sismio\sensore\MockSensore.cs" />
     <Compile Include="io\sismio\trasmissione\RispostaInvalidaEccezione.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

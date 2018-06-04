@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
+using Sismio.io.sismio.sensore;
 using Sismio.io.sismio.user;
 using Sismio.io.sismio.utente;
 
@@ -13,16 +14,19 @@ namespace Sismio.io.sismio.trasmissione
 {
     // COSE CHE HO CAMBIATO
     // prende in ingresso un gestioneUtentiController
+    // Prende in ingresso un sensore
     public class ServerStazione
     {
         public const int PortaServer = 8001;
 
+        private readonly ISensore _sensore;
         private readonly IGestioneUtentiController _gestioneUtentiController = null;
         private readonly X509Certificate2 _certificato;
         private Thread _threadNetwork = null;
 
-        public ServerStazione(IGestioneUtentiController gestioneUtentiController, string certFile, string password)
+        public ServerStazione(ISensore sensore, IGestioneUtentiController gestioneUtentiController, string certFile, string password)
         {
+            _sensore = sensore;
             _gestioneUtentiController = gestioneUtentiController;
 
             // Assicurati che il certificato esista
@@ -35,8 +39,9 @@ namespace Sismio.io.sismio.trasmissione
             _certificato = new X509Certificate2(certFile, password, X509KeyStorageFlags.UserKeySet);
         }
 
-        public ServerStazione(IGestioneUtentiController gestioneUtentiController, byte[] certBytes, string password)
+        public ServerStazione(ISensore sensore, IGestioneUtentiController gestioneUtentiController, byte[] certBytes, string password)
         {
+            _sensore = sensore;
             _gestioneUtentiController = gestioneUtentiController;
 
             // Carica il certificato
@@ -76,10 +81,9 @@ namespace Sismio.io.sismio.trasmissione
                 sslStream.AuthenticateAsServer(_certificato, false, SslProtocols.Tls, true);
 
                 // Crea un nuovo Worker per gestire la trasmissione
-                // TODO: inject the correct sensore
                 try
                 {
-                    TrasmissioneDatiWorker worker = new TrasmissioneDatiWorker(_gestioneUtentiController, null, sslStream);
+                    TrasmissioneDatiWorker worker = new TrasmissioneDatiWorker(_gestioneUtentiController, _sensore, sslStream);
 
                     // Avvia il worker
                     worker.Start();

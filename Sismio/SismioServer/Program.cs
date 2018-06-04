@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using Sismio.io.sismio.sensore;
 using Sismio.io.sismio.trasmissione;
 using Sismio.io.sismio.utente;
 
@@ -13,6 +15,13 @@ namespace SismioServer
     {
         static void Main(string[] args)
         {
+            ISensore sensore = new MockSensore();
+            //sensore.RicevitoriDatiSensore += dati => Console.WriteLine(String.Join(",", dati)); 
+
+            // Creo il thread del sensore
+            Thread threadSensore = new Thread(() => sensore.CicloPrincipale());
+            threadSensore.Start();
+
             Utente utente = new UtenteNormale
             {
                 Nome = "tizio",
@@ -32,7 +41,7 @@ namespace SismioServer
             gestioneUtentiController.Registra(utente);
 
             // Avvio il server della stazione
-            ServerStazione server = new ServerStazione(gestioneUtentiController, SismioServer.CertificatoRisorsa.certificato, "passwordsismio");
+            ServerStazione server = new ServerStazione(sensore, gestioneUtentiController, SismioServer.CertificatoRisorsa.certificato, "passwordsismio");
             server.Avvia();
         }
     }

@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Security;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using Sismio.io.sismio.sensore;
 using Sismio.io.sismio.stazione;
 using Sismio.io.sismio.trasmissione;
 
@@ -14,6 +17,8 @@ namespace SismioClient
     {
         static void Main(string[] args)
         {
+            
+
             Stazione stazione = new Stazione
             {
                 Nome = "BolognaA1",
@@ -32,9 +37,15 @@ namespace SismioClient
             stazioni.Registra(stazione);
 
             CreatoreConnessioni creatore = new CreatoreConnessioni(stazioni);
-            creatore.CreaConnessione(stazione, "tizio", "password");
-            Console.ReadLine();
-
+            SslStream stream = creatore.CreaConnessione(stazione, "tizio", "password");
+            
+            // Leggo i valori del sensore
+            BinaryReader reader = new BinaryReader(stream);
+            while (true)
+            {
+                int corrente = reader.ReadInt32();
+                Console.WriteLine(corrente);
+            }
            
         }
     }
