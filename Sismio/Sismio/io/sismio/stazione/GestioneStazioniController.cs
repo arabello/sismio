@@ -54,13 +54,20 @@ namespace Sismio.io.sismio.stazione
         /// <summary>
         /// Metodo responsabile della ricerca in base ad una query prestabilita
         /// </summary>
-        /// <param name="query"> Stringa rappresentante la query da eseguire</param>
+        /// <param name="query">Stringa da ricercare</param>
         /// <returns></returns>
         public IList<IStazione> Cerca(string query)
         {
+            string uppercaseQuery = query.ToUpper();
             List<IStazione> stazioni = new List<IStazione>();
-            using (SQLiteCommand cmd = new SQLiteCommand(query, _connection))
+            // Effettuo una ricerca CASE-INSENSITIVE sui campi
+            using (SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM stazioni WHERE UPPER(nome) LIKE '%' || @query || '%' " +
+                                                         "OR UPPER(locazione) LIKE '%' || @query || '%' " +
+                                                         "OR UPPER(indirizzoDiRete) LIKE '%' || @query || '%'"
+                                                         , _connection))
             {
+                cmd.Prepare();
+                cmd.Parameters.AddWithValue("@query", uppercaseQuery);
                 using (SQLiteDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())

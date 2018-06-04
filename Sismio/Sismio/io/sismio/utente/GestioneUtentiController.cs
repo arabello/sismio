@@ -173,13 +173,21 @@ namespace Sismio.io.sismio.utente
         /// <summary>
         /// Metodo responsabile della ricerca in base ad una query prestabilita
         /// </summary>
-        /// <param name="query"> Stringa rappresentante la query da eseguire</param>
+        /// <param name="query">Stringa da cercare</param>
         /// <returns></returns>
         public IList<IUtente> Cerca(string query)
         {
+            string uppercaseQuery = query.ToUpper();
             List<IUtente> utenti = new List<IUtente>();
-            using (SQLiteCommand cmd = new SQLiteCommand(query, _connection))
+
+            // Effettuo una ricerca CASE-INSENSITIVE sui campi email, nome, cognome ed username
+            using (SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM utenti WHERE UPPER(email) LIKE '%' || @query || '%' " +
+                                                         "OR UPPER(nome) LIKE '%' || @query || '%' " +
+                                                         "OR UPPER(cognome) LIKE '%' || @query || '%' " +
+                                                         "OR UPPER(username) LIKE '%' || @query || '%' ", _connection))
             {
+                cmd.Prepare();
+                cmd.Parameters.AddWithValue("@query", uppercaseQuery);
                 using (SQLiteDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())

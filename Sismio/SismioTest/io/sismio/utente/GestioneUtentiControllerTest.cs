@@ -23,8 +23,6 @@ namespace SismioTest.io.sismio.utente
                 File.Delete(@"test_database.db");
             }
 
-            Console.WriteLine(Directory.GetCurrentDirectory());
-
             // Creo un nuovo controller
             gestioneUtentiController = new GestioneUtentiController("test_database.db");
         }
@@ -111,6 +109,31 @@ namespace SismioTest.io.sismio.utente
             IList<IUtente> utenti = gestioneUtentiController.ListaTutti();
             Assert.AreEqual(utenti[0].Username, "admin");
             Assert.AreEqual(utenti[1].Username, "tizio");
+        }
+
+        [Test]
+        public void TestCerca()
+        {
+            Utente utente = new UtenteNormale
+            {
+                Nome = "tizio",
+                Cognome = "caio",
+                Email = "tizio@caio.it",
+                LoginRemoto = true,
+                Username = "tizio"
+            };
+            utente.ImpostaPasswordDaOriginale("password");
+
+            // Lo registro, e verifico che adesso esiste
+            Assert.IsTrue(gestioneUtentiController.Registra(utente));
+
+            // Dovrebbe contenere Admin
+            IList<IUtente> utenti = gestioneUtentiController.Cerca("dMin");
+            Assert.AreEqual(utenti[0].Username, "admin");
+
+            // Dovrebbe contenere tizio
+            utenti = gestioneUtentiController.Cerca("@cAiO");
+            Assert.AreEqual(utenti[0].Username, "tizio");
         }
     }
 }

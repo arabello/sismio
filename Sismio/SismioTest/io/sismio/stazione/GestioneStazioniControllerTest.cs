@@ -19,13 +19,22 @@ namespace SismioTest.io.sismio.stazione
         public void SetUp()
         {
             // Se il database esiste, lo elimino
-            /*if (File.Exists(@"C:\\sqlite\\test_stazioni.db"))
+            if (File.Exists(@"test_stazioni.db"))
             {
-                File.Delete(@"C:\\sqlite\\test_stazioni.db");
-            }*/
+                File.Delete(@"test_stazioni.db");
+            }
 
             // Creo un nuovo controller
-            gestioneStazioniController = new GestioneStazioniController("C:\\sqlite\\test_stazioni.db");
+            gestioneStazioniController = new GestioneStazioniController("test_stazioni.db");
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            // Elimino il controller ed il database
+            gestioneStazioniController.Dispose();
+            gestioneStazioniController = null;
+            File.Delete(@"test_stazioni.db");
         }
 
         [Test]
@@ -41,10 +50,13 @@ namespace SismioTest.io.sismio.stazione
             };
 
             // Verifico che non esista
-            //Assert.IsNull(gestioneStazioniController.Cerca("SELECT * FROM stazioni WHERE id = 1"));
+            Assert.AreEqual(gestioneStazioniController.Cerca("bologna").Count, 0);
 
             // Lo registro, e verifico che adesso esiste
             Assert.IsTrue(gestioneStazioniController.Registra(stazione));
+
+            // Verifico che esista
+            Assert.AreEqual(gestioneStazioniController.Cerca("bologna").Count, 1);
         }
 
         [Test]
@@ -60,46 +72,82 @@ namespace SismioTest.io.sismio.stazione
             };
 
             // Lo registro, e verifico che adesso esiste
-            //Assert.IsTrue(gestioneStazioniController.Registra(stazione));
+            Assert.IsTrue(gestioneStazioniController.Registra(stazione));
+            Assert.AreEqual(gestioneStazioniController.Cerca("bolognaA1").Count, 1);
 
-            stazione.Nome = "BolognaA2";
-            stazione.IndirizzoDiRete = IPAddress.Parse("10.223.23.3");
+            Stazione stazione2 = new Stazione
+            {
+                Nome = "BolognaA2",
+                Locazione = "Bologna",
+                IndirizzoDiRete = IPAddress.Parse("10.223.23.3"),
+                Porta = 5555,
+                ImprontaChiavePubblica = "aksjdada8s7d8a6da78sdEEeewrR"
+            };
 
-            //Assert.IsTrue(gestioneStazioniController.Registra(stazione));
+            Assert.IsTrue(gestioneStazioniController.Registra(stazione2));
+            Assert.AreEqual(gestioneStazioniController.Cerca("bolognaA2").Count, 1);
 
             IList<IStazione> stazioni = gestioneStazioniController.ListaTutti();
 
-            foreach (var s in stazioni)
-            {
-                Console.WriteLine(s);
-            }
+            Assert.AreEqual(stazioni[0].Nome, "BolognaA1");
+            Assert.AreEqual(stazioni[1].Nome, "BolognaA2");
+        }
 
-            //Assert.AreEqual(stazioni[0].Nome, "BolognaA1");
-            //Assert.AreEqual(stazioni[1].Nome, "BolognaA2");
+        [Test]
+        public void TestCerca()
+        {
+            Stazione stazione = new Stazione
+            {
+                Nome = "BolognaA1",
+                Locazione = "Bologna",
+                IndirizzoDiRete = IPAddress.Parse("10.56.77.233"),
+                Porta = 5555,
+                ImprontaChiavePubblica = "aksjdada8s7d8a6da78sdEEeewrR"
+            };
+
+            // Lo registro, e verifico che adesso esiste
+            Assert.IsTrue(gestioneStazioniController.Registra(stazione));
+            Assert.AreEqual(gestioneStazioniController.Cerca("bolognaA1").Count, 1);
+
+            Stazione stazione2 = new Stazione
+            {
+                Nome = "BolognaA2",
+                Locazione = "Bologna",
+                IndirizzoDiRete = IPAddress.Parse("10.223.23.3"),
+                Porta = 5555,
+                ImprontaChiavePubblica = "aksjdada8s7d8a6da78sdEEeewrR"
+            };
+
+            Assert.IsTrue(gestioneStazioniController.Registra(stazione2));
+            Assert.AreEqual(gestioneStazioniController.Cerca("bolognaA2").Count, 1);
+
+            IList<IStazione> stazioni = gestioneStazioniController.Cerca("bolo");
+
+            Assert.AreEqual(stazioni[0].Nome, "BolognaA1");
+            Assert.AreEqual(stazioni[1].Nome, "BolognaA2");
         }
 
         [Test]
         public void TestEliminaStazione()
         {
-            // Ottengo la stazione
-            IList<IStazione> stazioni = gestioneStazioniController.Cerca("SELECT * FROM stazioni WHERE id = 6");
-            Assert.IsNotNull(stazioni);
+            Stazione stazione = new Stazione
+            {
+                Nome = "BolognaA1",
+                Locazione = "Bologna",
+                IndirizzoDiRete = IPAddress.Parse("10.56.77.233"),
+                Porta = 5555,
+                ImprontaChiavePubblica = "aksjdada8s7d8a6da78sdEEeewrR"
+            };
+
+            // Lo registro, e verifico che adesso esiste
+            Assert.IsTrue(gestioneStazioniController.Registra(stazione));
+            Assert.AreEqual(gestioneStazioniController.Cerca("bolognaA1").Count, 1);
 
             // Lo elimino
-            Assert.IsTrue(gestioneStazioniController.Elimina((Stazione)stazioni.ElementAt(0)));
+            Assert.IsTrue(gestioneStazioniController.Elimina(stazione));
 
             // Verifico che sia stata eliminato
-            //stazioni = gestioneStazioniController.Cerca("SELECT * FROM stazioni WHERE id = 1");
-            //Assert.IsNull(stazioni);
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            // Elimino il controller ed il database
-            gestioneStazioniController.Dispose();
-            gestioneStazioniController = null;
-            //File.Delete(@"C:\\sqlite\\test_stazioni.db");
+            Assert.AreEqual(gestioneStazioniController.Cerca("bolognaA1").Count, 0);
         }
     }
 }
