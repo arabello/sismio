@@ -1,4 +1,5 @@
 ﻿using MaterialSkin;
+using System.Drawing;
 
 namespace Sismio.io.sismio.ui
 {
@@ -18,7 +19,9 @@ namespace Sismio.io.sismio.ui
             }
         }
 
-        private SismioColor() : base(
+        public static Color BackColor { get => Color.FromArgb(100, 200, 200, 200); }
+
+    private SismioColor() : base(
                 Primary.LightBlue600, // primary
                 Primary.LightBlue900, // darkPrimary
                 Primary.LightBlue400, // lightPrimary

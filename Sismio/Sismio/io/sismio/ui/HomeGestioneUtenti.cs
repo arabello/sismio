@@ -1,32 +1,33 @@
-﻿using MaterialSkin;
-using MaterialSkin.Controls;
-using Sismio.io.sismio.ui;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Text;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing.Text;
+using MaterialSkin;
 
-namespace Sismio
+namespace Sismio.io.sismio.ui
 {
-    public partial class Form1 : MaterialForm
+    public partial class HomeGestioneUtenti : UserControl
     {
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]
         private static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont,
-           IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
+          IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
 
         private PrivateFontCollection fonts = new PrivateFontCollection();
 
         Font robotoMonoBold;
-
-        public Form1()
+        public HomeGestioneUtenti()
         {
             InitializeComponent();
 
             var materialSkinManager = MaterialSkinManager.Instance;
-            materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = SismioColor.Scheme;
-            this.navbar.BackColor = SismioColor.Scheme.DarkPrimaryColor;
 
             //
             // Load Font
@@ -39,26 +40,11 @@ namespace Sismio
             AddFontMemResourceEx(fontPtr, (uint)Properties.Resources.RobotoMono_Bold.Length, IntPtr.Zero, ref dummy);
             System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr);
 
-            robotoMonoBold = new Font(fonts.Families[0], 16.0F);
+            robotoMonoBold = new Font(fonts.Families[0], 16.0f);
 
-            this.tabControl.SelectedTab = this.tabDashboard;
+            this.title.Font = robotoMonoBold;
 
-            /**
-             * Set up tabs common properties
-             * */
-             Color bgGray = Color.FromArgb(100, 245, 245, 245);
-            this.tabDashboard.BackColor = bgGray;
-            this.tabGestioneStazioni.BackColor = bgGray;
-            this.tabGestioneUtenti.BackColor = bgGray;
-            this.tabStorico.BackColor = bgGray;
-
-            /**
-             * Set up titles
-             **/
-            this.titleDashboard.Font = robotoMonoBold;
-            this.titleGestioneStazioni.Font = robotoMonoBold;
-            this.titleGestioneUtenti.Font = robotoMonoBold;
-            this.titleStorico.Font = robotoMonoBold;
+            this.BackColor = SismioColor.BackColor;
 
             /**
              * Set up GestioneUtenti
@@ -77,20 +63,20 @@ namespace Sismio
              * SetUp GestioneUtenti ListView
              **/
             seedGestioneUtentiListView();
-            this.gestioneUtentiLV.Depth = 2;
-            this.btnDeleteUtente.Visible = false;
-            this.gestioneUtentiLV.MultiSelect = false;
-            this.gestioneUtentiLV.SelectedIndexChanged += onUtenteSelect;
+            this.btnDelete.Visible = false;
+            this.listView.MultiSelect = false;
+            this.listView.SelectedIndexChanged += onUtenteSelect;
         }
 
         private void onUtenteSelect(object sender, EventArgs e)
         {
-            if (this.btnDeleteUtente.Visible)
+            if (this.btnDelete.Visible)
             {
-                if (this.gestioneUtentiLV.SelectedIndices.Count == 0)
-                    this.btnDeleteUtente.Visible = false;
-            }else
-                 this.btnDeleteUtente.Visible = true;
+                if (this.listView.SelectedIndices.Count == 0)
+                    this.btnDelete.Visible = false;
+            }
+            else
+                this.btnDelete.Visible = true;
         }
 
         private void seedGestioneUtentiListView()
@@ -109,7 +95,7 @@ namespace Sismio
             foreach (string[] version in data)
             {
                 var item = new ListViewItem(version);
-                this.gestioneUtentiLV.Items.Add(item);
+                this.listView.Items.Add(item);
             }
         }
 
@@ -123,32 +109,6 @@ namespace Sismio
             this.textCerca.Text = "";
         }
 
-        private void changeTab(TabPage tabPage)
-        {
-            this.tabControl.SelectedTab = tabPage;
-            this.ActiveControl = this.tabControl; // clear focus
-        }
-
-        private void navDashboard_Click(object sender, EventArgs e)
-        {
-            changeTab(this.tabDashboard);
-        }
-
-        private void navGestioneStazioni_Click(object sender, EventArgs e)
-        {
-            changeTab(this.tabGestioneStazioni);
-        }
-
-        private void navStorico_Click(object sender, EventArgs e)
-        {
-            changeTab(this.tabStorico);
-        }
-
-        private void navGestioneUtenti_Click(object sender, EventArgs e)
-        {
-            changeTab(this.tabGestioneUtenti);
-        }
-
         private void btnAggiungiNuovo_Click(object sender, EventArgs e)
         {
             //TODO: Nuovo utente
@@ -157,6 +117,15 @@ namespace Sismio
         private void btnDeleteUtente_Click(object sender, EventArgs e)
         {
             //TODO: Elimina utente
+            //this.gestioneUtentiLV.SelectedItems
+            //this.gestioneUtentiLV.SelectedItems
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            //TODO: Show dialog confirm
+            //TODO: Elimina utente
+           
             //this.gestioneUtentiLV.SelectedItems
             //this.gestioneUtentiLV.SelectedItems
         }
