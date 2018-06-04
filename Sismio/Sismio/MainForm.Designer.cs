@@ -44,8 +44,8 @@ namespace Sismio
             this.tabStorico = new System.Windows.Forms.TabPage();
             this.tabGestioneStazioni = new System.Windows.Forms.TabPage();
             this.tabDashboard = new System.Windows.Forms.TabPage();
-            this.tabControl = new MaterialSkin.Controls.MaterialTabControl();
             this.homeDashboard1 = new Sismio.io.sismio.ui.HomeDashboard();
+            this.tabControl = new MaterialSkin.Controls.MaterialTabControl();
             this.navbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.navGestioneUtenti)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.asvg)).BeginInit();
@@ -93,6 +93,7 @@ namespace Sismio
             this.asvg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.asvg.TabIndex = 3;
             this.asvg.TabStop = false;
+            this.asvg.Click += new System.EventHandler(this.asvg_Click);
             // 
             // navStorico
             // 
@@ -180,6 +181,13 @@ namespace Sismio
             this.tabDashboard.TabIndex = 0;
             this.tabDashboard.Text = "tabDashboard";
             // 
+            // homeDashboard1
+            // 
+            this.homeDashboard1.Location = new System.Drawing.Point(0, 4);
+            this.homeDashboard1.Name = "homeDashboard1";
+            this.homeDashboard1.Size = new System.Drawing.Size(848, 518);
+            this.homeDashboard1.TabIndex = 0;
+            // 
             // tabControl
             // 
             this.tabControl.Alignment = System.Windows.Forms.TabAlignment.Left;
@@ -197,13 +205,6 @@ namespace Sismio
             this.tabControl.Size = new System.Drawing.Size(855, 526);
             this.tabControl.TabIndex = 0;
             // 
-            // homeDashboard1
-            // 
-            this.homeDashboard1.Location = new System.Drawing.Point(0, 4);
-            this.homeDashboard1.Name = "homeDashboard1";
-            this.homeDashboard1.Size = new System.Drawing.Size(848, 518);
-            this.homeDashboard1.TabIndex = 0;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -216,6 +217,7 @@ namespace Sismio
             this.MinimumSize = new System.Drawing.Size(900, 550);
             this.Name = "MainForm";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.navbar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.navGestioneUtenti)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.asvg)).EndInit();

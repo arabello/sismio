@@ -30,10 +30,10 @@
         {
             this.background = new System.Windows.Forms.Panel();
             this.title = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnAccedi = new MaterialSkin.Controls.MaterialRaisedButton();
             this.textUsername = new System.Windows.Forms.TextBox();
             this.textPassword = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.background.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -65,6 +65,18 @@
             this.title.TabIndex = 4;
             this.title.Text = "ismio";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox1.Image = global::Sismio.Properties.Resources.logo;
+            this.pictureBox1.Location = new System.Drawing.Point(235, 59);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(137, 144);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 5;
+            this.pictureBox1.TabStop = false;
+            // 
             // btnAccedi
             // 
             this.btnAccedi.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -84,6 +96,7 @@
             this.btnAccedi.TabIndex = 3;
             this.btnAccedi.Text = "accedi";
             this.btnAccedi.UseVisualStyleBackColor = false;
+            this.btnAccedi.Click += new System.EventHandler(this.btnAccedi_Click);
             // 
             // textUsername
             // 
@@ -105,18 +118,6 @@
             this.textPassword.PasswordChar = '*';
             this.textPassword.Size = new System.Drawing.Size(250, 32);
             this.textPassword.TabIndex = 0;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Image = global::Sismio.Properties.Resources.logo;
-            this.pictureBox1.Location = new System.Drawing.Point(235, 59);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(137, 144);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 5;
-            this.pictureBox1.TabStop = false;
             // 
             // Login
             // 

@@ -23,6 +23,7 @@ namespace Sismio
         private PrivateFontCollection fonts = new PrivateFontCollection();
 
         Font robotoMono;
+        Form mainForm;
 
         public Login()
         {
@@ -51,6 +52,31 @@ namespace Sismio
 
             // Focus at the startup
             this.ActiveControl = this.textUsername;
+
+            mainForm = new MainForm();
+        }
+
+        private bool verificaCredenziali(string user, string password)
+        {
+            // TODO: Correctly implement
+            return true;
+        }
+
+        private void btnAccedi_Click(object sender, EventArgs e)
+        {
+            if (verificaCredenziali(this.textUsername.Text, this.textPassword.Text))
+            {
+                this.Hide();
+                DialogResult res = mainForm.ShowDialog();               
+                if (res.Equals(DialogResult.Abort))
+                    this.Close();
+               else
+                    this.Show();
+            }
+            else
+            {
+                MessageBox.Show("Coppia utente e password non corretta. Impossibile accedere.", "Credenziali non valide", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

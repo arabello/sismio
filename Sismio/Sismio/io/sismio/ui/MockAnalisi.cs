@@ -13,6 +13,7 @@ namespace Sismio.io.sismio.ui
     {
         public event OnRisultatiAnalisi RicevitoriRisultati;
         private double[] _values;
+        private Thread _thread;
 
         public MockAnalisi()
         {
@@ -24,7 +25,7 @@ namespace Sismio.io.sismio.ui
 
         public void start(int updateRate)
         {
-            new Thread(() =>
+            _thread = new Thread(() =>
             {
                 Thread.Sleep(updateRate);
                 Thread.CurrentThread.IsBackground = true;
@@ -37,7 +38,15 @@ namespace Sismio.io.sismio.ui
                     RicevitoriRisultati(_values);
                     Thread.Sleep(updateRate);
                 }
-            }).Start();
+            });
+
+            _thread.Start();
+        }
+
+        public void stop()
+        {
+            _thread.Abort();
+            _thread = null;
         }
     }
 }

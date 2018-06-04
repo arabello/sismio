@@ -66,6 +66,7 @@ namespace Sismio.io.sismio.ui
             /**
              * Set up events
              **/
+             /*
             MockAnalisi analisiFrequenza = new MockAnalisi(); // TODO: Change mock to actual analisys
             analisiFrequenza.RicevitoriRisultati += updateChartFrequenza;
 
@@ -74,6 +75,7 @@ namespace Sismio.io.sismio.ui
 
             analisiMagnitudo.start(1000);
             analisiFrequenza.start(1000);
+            */
         }
 
         private void updateChartFrequenza(double[] values)
