@@ -59,15 +59,5 @@ namespace SismioTest {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Cerca una risorsa localizzata di tipo System.Byte[].
-        /// </summary>
-        internal static byte[] certificato {
-            get {
-                object obj = ResourceManager.GetObject("certificato", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
     }
 }

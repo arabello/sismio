@@ -89,6 +89,32 @@ namespace Sismio.io.sismio.stazione
 
             return stazioni;
         }
+
+        /// <summary>
+        /// Valida il certificato per vedere se è associato ad una stazione.
+        /// </summary>
+        /// <param name="impronta"></param>
+        /// <returns></returns>
+        public bool ValidaCertificato(string impronta)
+        {
+            bool trovata = false;
+            using (SQLiteCommand cmd = new SQLiteCommand("SELECT stazioni.impronta AS stazioni_impronta " +
+                                                         "FROM stazioni WHERE stazioni_impronta = @Impronta", _connection))
+            {
+                cmd.Prepare();
+                cmd.Parameters.AddWithValue("@Impronta", impronta);
+                using (SQLiteDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        trovata = true;
+                    }
+                }
+            }
+
+            return trovata;
+        }
+
         /// <summary>
         /// Metodo che si occupa di listare tutte le stazioni del database
         /// </summary>

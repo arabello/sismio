@@ -94,6 +94,26 @@ namespace SismioTest.io.sismio.stazione
         }
 
         [Test]
+        public void TestValidaCertificato()
+        {
+            Stazione stazione = new Stazione
+            {
+                Nome = "BolognaA1",
+                Locazione = "Bologna",
+                IndirizzoDiRete = IPAddress.Parse("10.56.77.233"),
+                Porta = 5555,
+                ImprontaChiavePubblica = "aksjdada8s7d8a6da78sdEEeewrR"
+            };
+
+            // Lo registro, e verifico che adesso esiste
+            Assert.IsTrue(gestioneStazioniController.Registra(stazione));
+            Assert.AreEqual(gestioneStazioniController.Cerca("bolognaA1").Count, 1);
+
+            Assert.IsFalse(gestioneStazioniController.ValidaCertificato("sbagliato"));
+            Assert.IsTrue(gestioneStazioniController.ValidaCertificato("aksjdada8s7d8a6da78sdEEeewrR"));
+        }
+
+        [Test]
         public void TestCerca()
         {
             Stazione stazione = new Stazione
