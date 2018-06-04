@@ -14,7 +14,7 @@ namespace Sismio.io.sismio.trasmissione
         public const int PortaServer = 8001;
 
         private readonly X509Certificate2 _certificato;
-        private readonly Thread _threadNetwork = null;
+        private Thread _threadNetwork = null;
 
         public ServerStazione(string certFile, string password)
         {
@@ -26,13 +26,19 @@ namespace Sismio.io.sismio.trasmissione
 
             // Carica il certificato
             _certificato = new X509Certificate2(certFile, password, X509KeyStorageFlags.UserKeySet);
+        }
 
-            // Crea il thread di networking
-            _threadNetwork = new Thread(new ThreadStart(Run));
+        public ServerStazione(byte[] certBytes, string password)
+        {
+            // Carica il certificato
+            _certificato = new X509Certificate2(certBytes, password, X509KeyStorageFlags.UserKeySet);
         }
 
         public void Avvia()
         {
+            // Crea il thread di networking
+            _threadNetwork = new Thread(() => Run());
+
             // Avvia il thread di networking
             _threadNetwork.Start();
         }
@@ -61,7 +67,7 @@ namespace Sismio.io.sismio.trasmissione
                 // Crea un nuovo Worker per gestire la trasmissione
                 // TODO: inject the correct sensore
                 TrasmissioneDatiWorker worker = new TrasmissioneDatiWorker(null, sslStream);
-                
+
                 // Avvia il worker
                 worker.Start();
             }

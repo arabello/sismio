@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sismio", "Sismio\Sismio.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SismioTest", "SismioTest\SismioTest.csproj", "{55F2CECC-432D-4833-AD46-7841AA8F42D2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SismioServer", "SismioServer\SismioServer.csproj", "{709F6C9D-C904-4E2B-9A49-5EF53861EC11}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{55F2CECC-432D-4833-AD46-7841AA8F42D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55F2CECC-432D-4833-AD46-7841AA8F42D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55F2CECC-432D-4833-AD46-7841AA8F42D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{709F6C9D-C904-4E2B-9A49-5EF53861EC11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{709F6C9D-C904-4E2B-9A49-5EF53861EC11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{709F6C9D-C904-4E2B-9A49-5EF53861EC11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{709F6C9D-C904-4E2B-9A49-5EF53861EC11}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
