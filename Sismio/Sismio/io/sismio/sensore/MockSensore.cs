@@ -18,6 +18,7 @@ namespace Sismio.io.sismio.sensore
 
         private bool _dovrebbeFermarsi = false;
         private Random _random = new Random();
+        private double _time = 0;
 
         public void CicloPrincipale()
         {
@@ -27,7 +28,8 @@ namespace Sismio.io.sismio.sensore
                 int[] buffer = new int[DIMENSIONE_BUFFER];
                 for (int i = 0; i < DIMENSIONE_BUFFER; i++)
                 {
-                    buffer[i] = _random.Next(1, 800);
+                    buffer[i] = (int) (Math.Cos(_time)*500+500) + _random.Next(1, 100);
+                    _time += 0.1;
                 }
 
                 // Invio i dati

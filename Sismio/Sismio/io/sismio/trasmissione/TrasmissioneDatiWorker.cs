@@ -10,7 +10,6 @@ using Sismio.io.sismio.utente;
 
 namespace Sismio.io.sismio.trasmissione
 {
-    // TODO
     public class TrasmissioneDatiWorker
     {
         // COSE CHE HO CAMBIATO

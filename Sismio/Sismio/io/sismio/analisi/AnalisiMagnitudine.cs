@@ -2,11 +2,13 @@
 {
     // TODO
     public class AnalisiMagnitudine: Analisi
-    {
+    { 
+        private int[] Soglie = new int[] {100, 200, 400, 600, 800};
+
         public override void Analizza(int[] buffer)
         {
-            //TODO: Implement
-            throw new System.NotImplementedException();
+            // Trova il massimo elemento e calcola la media dei valori
+
         }
     }
 }
