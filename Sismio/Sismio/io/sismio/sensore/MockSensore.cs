@@ -34,7 +34,7 @@ namespace Sismio.io.sismio.sensore
                 RicevitoriDatiSensore?.Invoke(buffer);
 
                 // Dormo un po
-                System.Threading.Thread.Sleep(100);
+                System.Threading.Thread.Sleep(10);
             }
         }
 

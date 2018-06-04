@@ -1,26 +1,39 @@
-﻿using Sismio.io.sismio.sensore;
+﻿using System.Net.Security;
+using Sismio.io.sismio.sensore;
 using Sismio.io.sismio.stazione;
+using Sismio.io.sismio.trasmissione;
 
 namespace Sismio.io.sismio.sorgente
 {
-    class SorgenteFactory
+    public class SorgenteFactory
     {
         // COSE CHE HO CAMBIATO
-        // * Messo i metodi come statici
         // * non è necessario specificare porta e baud rate perchè il sensore è
         //   unico all'interno del sistema e dovrebbe caricarlo automaticamente
-        public static ISorgente NuovaSorgenteLocale(ISensore sensore)
+        // * aggiunto user e password alla sorgente remota
+
+        private readonly CreatoreConnessioni creatoreConnessioni = null;
+
+        public SorgenteFactory(CreatoreConnessioni creatoreConnessioni)
+        {
+            this.creatoreConnessioni = creatoreConnessioni;
+        }
+
+        public ISorgente NuovaSorgenteLocale(ISensore sensore)
         {
             return new SensoreSorgenteAdapter(sensore);
         }
 
-        public static ISorgente NuovaSorgenteRemota(IStazione stazione)
+        public ISorgente NuovaSorgenteRemota(IStazione stazione, string user, string pass)
         {
-            //TODO: Implement
-            throw new System.NotImplementedException();
+            // Creo lo stream remoto
+            SslStream stream = creatoreConnessioni.CreaConnessione(stazione, user, pass);
+
+            // Creo la sorgente
+            return new SorgenteRemota(stream);
         }
 
-        public static ISorgente NuovaSorgenteFile(string percorsoFile)
+        public ISorgente NuovaSorgenteFile(string percorsoFile)
         {
             return new SorgenteFile(percorsoFile);
         }

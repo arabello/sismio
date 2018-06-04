@@ -8,6 +8,9 @@ namespace Sismio.io.sismio.sorgente
         // COSE CHE HO CAMBIATO
         // * ho rinominato la funzione NotificaDatiDisponibili perchè aveva
         //   lo stesso nome di una cosa completamente diversa
+        // * ho aggiunto la dimensione buffer
+
+        protected const int DimensioneBuffer = 20;
 
         public event OnDatiDisponibili RicevitoriDati;
 

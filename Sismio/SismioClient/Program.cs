@@ -7,7 +7,9 @@ using System.Net.Security;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Sismio.io.sismio.analisi;
 using Sismio.io.sismio.sensore;
+using Sismio.io.sismio.sorgente;
 using Sismio.io.sismio.stazione;
 using Sismio.io.sismio.trasmissione;
 
@@ -37,16 +39,16 @@ namespace SismioClient
             stazioni.Registra(stazione);
 
             CreatoreConnessioni creatore = new CreatoreConnessioni(stazioni);
-            SslStream stream = creatore.CreaConnessione(stazione, "tizio", "password");
-            
-            // Leggo i valori del sensore
-            BinaryReader reader = new BinaryReader(stream);
-            while (true)
-            {
-                int corrente = reader.ReadInt32();
-                Console.WriteLine(corrente);
-            }
-           
+            SorgenteFactory factory = new SorgenteFactory(creatore);
+            ISorgente sorgenteRemota = factory.NuovaSorgenteRemota(stazione, "tizio", "password");
+
+            Thread threadSorgente = new Thread(() => sorgenteRemota.CicloPrincipale());
+            threadSorgente.Start();
+
+            IAnalisi analisi = new AnalisiGrezza();
+            sorgenteRemota.AggiungiAnalisi(analisi);
+
+            threadSorgente.Join();
         }
     }
 }

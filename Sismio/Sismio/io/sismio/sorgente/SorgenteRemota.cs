@@ -1,4 +1,6 @@
-﻿using Sismio.io.sismio.stazione;
+﻿using System;
+using System.IO;
+using Sismio.io.sismio.stazione;
 using System.Net.Security;
 
 namespace Sismio.io.sismio.sorgente
@@ -9,23 +11,42 @@ namespace Sismio.io.sismio.sorgente
         public override IStazione Stazione { get; }
         private SslStream _connessione;
 
+        private bool _dovrebbeFermarsi = false;
+
         public SorgenteRemota(SslStream connessione)
         {
             _connessione = connessione;
-            //TODO: Implement
-            throw new System.NotImplementedException();
         }
 
         public override void CicloPrincipale()
         {
-            //TODO: Implement
-            throw new System.NotImplementedException();
+            // Leggo i valori del sensore
+            BinaryReader reader = new BinaryReader(_connessione);
+
+            // Creo il buffer che conterrà i valori
+            int[] buffer = new int[DimensioneBuffer];
+            int index = 0;
+
+            while (!_dovrebbeFermarsi)
+            {
+                int corrente = reader.ReadInt32();
+
+                // Inserisco il valore corrente nel buffer
+                buffer[index] = corrente;
+                index++;
+
+                // Quando il buffer è pieno, inoltro i valori
+                if (index >= DimensioneBuffer)
+                {
+                    NotificaDatiDisponibili(buffer);
+                    index = 0;
+                }
+            }
         }
 
         public override void Ferma()
         {
-            //TODO: Implement
-            throw new System.NotImplementedException();
+            _dovrebbeFermarsi = true;
         }
     }
 }

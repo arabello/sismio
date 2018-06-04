@@ -96,7 +96,7 @@ namespace Sismio.io.sismio.trasmissione
                 // il loop si sospende fino a quando non sono disponibili
                 // altri valori
                 int valoreCorrente = _dataQueue.Take();
-                Console.WriteLine(valoreCorrente);
+
                 // Invia i valori attraverso lo stream sicuro
                 _binaryWriter.Write(valoreCorrente);
             }
