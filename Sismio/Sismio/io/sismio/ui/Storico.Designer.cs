@@ -35,7 +35,6 @@
             this.Stazione = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Messaggio = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Priorita = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.bgTextCerca = new System.Windows.Forms.Panel();
             this.iconCerca = new System.Windows.Forms.PictureBox();
             this.textCerca = new System.Windows.Forms.TextBox();
             this.panelFiltro = new System.Windows.Forms.TableLayoutPanel();
@@ -47,14 +46,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.filtroPriorita = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.textFiltro = new System.Windows.Forms.Label();
-            this.bgTextCerca.SuspendLayout();
+            this.label3 = new System.Windows.Forms.Label();
+            this.bgTextCerca = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.iconCerca)).BeginInit();
             this.panelFiltro.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            this.bgTextCerca.SuspendLayout();
             this.SuspendLayout();
             // 
             // title
@@ -117,31 +117,24 @@
             this.Priorita.Text = "Priorità";
             this.Priorita.Width = 160;
             // 
-            // bgTextCerca
-            // 
-            this.bgTextCerca.Controls.Add(this.iconCerca);
-            this.bgTextCerca.Controls.Add(this.textCerca);
-            this.bgTextCerca.Location = new System.Drawing.Point(242, 15);
-            this.bgTextCerca.Name = "bgTextCerca";
-            this.bgTextCerca.Size = new System.Drawing.Size(163, 36);
-            this.bgTextCerca.TabIndex = 12;
-            // 
             // iconCerca
             // 
+            this.iconCerca.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.iconCerca.Image = global::Sismio.Properties.Resources.baseline_search_white_24dp;
-            this.iconCerca.Location = new System.Drawing.Point(132, 6);
+            this.iconCerca.Location = new System.Drawing.Point(139, 6);
             this.iconCerca.Name = "iconCerca";
-            this.iconCerca.Size = new System.Drawing.Size(24, 24);
+            this.iconCerca.Size = new System.Drawing.Size(23, 24);
             this.iconCerca.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.iconCerca.TabIndex = 4;
             this.iconCerca.TabStop = false;
             // 
             // textCerca
             // 
+            this.textCerca.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textCerca.BackColor = System.Drawing.SystemColors.HotTrack;
             this.textCerca.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textCerca.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textCerca.Location = new System.Drawing.Point(6, 6);
+            this.textCerca.Location = new System.Drawing.Point(6, 9);
             this.textCerca.Margin = new System.Windows.Forms.Padding(6, 3, 3, 3);
             this.textCerca.MaximumSize = new System.Drawing.Size(120, 26);
             this.textCerca.MinimumSize = new System.Drawing.Size(120, 26);
@@ -244,7 +237,7 @@
             this.panelFiltro.SetColumnSpan(this.tableLayoutPanel3, 2);
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.84746F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.15254F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 124F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 125F));
             this.tableLayoutPanel3.Controls.Add(this.filtroPriorita, 2, 0);
             this.tableLayoutPanel3.Controls.Add(this.textFiltro, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.label3, 1, 0);
@@ -271,17 +264,6 @@
             this.filtroPriorita.Size = new System.Drawing.Size(114, 21);
             this.filtroPriorita.TabIndex = 1;
             // 
-            // label3
-            // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(194, 5);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(39, 13);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Priorità";
-            // 
             // textFiltro
             // 
             this.textFiltro.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -295,18 +277,41 @@
             this.textFiltro.Text = "Filtro eventi sismici";
             this.textFiltro.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // label3
+            // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(194, 5);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(39, 13);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Priorità";
+            // 
+            // bgTextCerca
+            // 
+            this.bgTextCerca.ColumnCount = 2;
+            this.bgTextCerca.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 83F));
+            this.bgTextCerca.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17F));
+            this.bgTextCerca.Controls.Add(this.iconCerca, 1, 0);
+            this.bgTextCerca.Controls.Add(this.textCerca, 0, 0);
+            this.bgTextCerca.Location = new System.Drawing.Point(245, 14);
+            this.bgTextCerca.Name = "bgTextCerca";
+            this.bgTextCerca.RowCount = 1;
+            this.bgTextCerca.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.bgTextCerca.Size = new System.Drawing.Size(165, 36);
+            this.bgTextCerca.TabIndex = 14;
+            // 
             // Storico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.panelFiltro);
             this.Controls.Add(this.bgTextCerca);
+            this.Controls.Add(this.panelFiltro);
             this.Controls.Add(this.listView);
             this.Controls.Add(this.title);
             this.Name = "Storico";
             this.Size = new System.Drawing.Size(848, 518);
-            this.bgTextCerca.ResumeLayout(false);
-            this.bgTextCerca.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconCerca)).EndInit();
             this.panelFiltro.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -315,6 +320,8 @@
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
+            this.bgTextCerca.ResumeLayout(false);
+            this.bgTextCerca.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -328,7 +335,6 @@
         private System.Windows.Forms.ColumnHeader Stazione;
         private System.Windows.Forms.ColumnHeader Messaggio;
         private System.Windows.Forms.ColumnHeader Priorita;
-        private System.Windows.Forms.Panel bgTextCerca;
         private System.Windows.Forms.PictureBox iconCerca;
         private System.Windows.Forms.TextBox textCerca;
         private System.Windows.Forms.TableLayoutPanel panelFiltro;
@@ -342,5 +348,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TableLayoutPanel bgTextCerca;
     }
 }
