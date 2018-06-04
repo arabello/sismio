@@ -1,17 +1,48 @@
 ﻿using System;
+using System.Drawing;
+using System.Drawing.Text;
 using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Threading;
 using LiveCharts;
 using LiveCharts.Wpf;
+using MaterialSkin;
 
 namespace Sismio.io.sismio.ui
 {
     public partial class HomeDashboard : UserControl
     {
+        [System.Runtime.InteropServices.DllImport("gdi32.dll")]
+        private static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont,
+          IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
+
+        private PrivateFontCollection fonts = new PrivateFontCollection();
+
+        Font robotoMonoBold;
         public HomeDashboard()
         {
             InitializeComponent();
+
+            var materialSkinManager = MaterialSkinManager.Instance;
+            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+            materialSkinManager.ColorScheme = SismioColor.Scheme;
+
+            //
+            // Load Font
+            // 
+            byte[] fontData = Properties.Resources.RobotoMono_Bold;
+            IntPtr fontPtr = System.Runtime.InteropServices.Marshal.AllocCoTaskMem(fontData.Length);
+            System.Runtime.InteropServices.Marshal.Copy(fontData, 0, fontPtr, fontData.Length);
+            uint dummy = 0;
+            fonts.AddMemoryFont(fontPtr, Properties.Resources.RobotoMono_Bold.Length);
+            AddFontMemResourceEx(fontPtr, (uint)Properties.Resources.RobotoMono_Bold.Length, IntPtr.Zero, ref dummy);
+            System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr);
+
+            robotoMonoBold = new Font(fonts.Families[0], 16.0f);
+
+            this.title.Font = robotoMonoBold;
+
+            this.BackColor = SismioColor.BackColor;
 
             /**
              * Set up chart Frequenza
@@ -32,8 +63,8 @@ namespace Sismio.io.sismio.ui
                 new LineSeries
                 {
                     Title = "Frequenza",
-                    Stroke = Brushes.CornflowerBlue,
-                    Fill = Brushes.Transparent,
+                    Stroke = System.Windows.Media.Brushes.CornflowerBlue,
+                    Fill = System.Windows.Media.Brushes.Transparent,
                     PointGeometry = null
                 }
             };
@@ -57,8 +88,8 @@ namespace Sismio.io.sismio.ui
                 new LineSeries
                 {
                     Title = "Magnitudo",
-                    Stroke = Brushes.PaleVioletRed,
-                    Fill = Brushes.Transparent,
+                    Stroke = System.Windows.Media.Brushes.PaleVioletRed,
+                    Fill = System.Windows.Media.Brushes.Transparent,
                     PointGeometry = null
                 }
             };

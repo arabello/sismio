@@ -20,7 +20,7 @@ namespace Sismio.io.sismio.ui
 
         private PrivateFontCollection fonts = new PrivateFontCollection();
         Font robotoMonoBold16;
-        Font robotMonoLight8;
+        Font robotMonoLight10;
         public Storico()
         {
             InitializeComponent();
@@ -49,14 +49,14 @@ namespace Sismio.io.sismio.ui
             AddFontMemResourceEx(fontPtr, (uint)Properties.Resources.RobotoMono_Light.Length, IntPtr.Zero, ref dummy);
             System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr);
 
-            robotMonoLight8 = new Font(fonts.Families[0], 10.0f);
+            robotMonoLight10 = new Font(fonts.Families[0], 10.0f);
 
             this.title.Font = robotoMonoBold16;
-            this.textCerca.Font = robotMonoLight8;
-            this.label1.Font = robotMonoLight8;
-            this.label2.Font = robotMonoLight8;
-            this.label3.Font = robotMonoLight8;
-            this.textFiltro.Font = robotMonoLight8;
+            this.textCerca.Font = robotMonoLight10;
+            this.label1.Font = robotMonoLight10;
+            this.label2.Font = robotMonoLight10;
+            this.label3.Font = robotMonoLight10;
+            this.textFiltro.Font = robotMonoLight10;
 
             this.BackColor = SismioColor.BackColor;
 

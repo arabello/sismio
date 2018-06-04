@@ -20,7 +20,8 @@ namespace Sismio.io.sismio.ui
 
         private PrivateFontCollection fonts = new PrivateFontCollection();
 
-        Font robotoMonoBold;
+        Font robotoMonoBold16;
+        Font robotMonoLight10;
         public HomeGestioneUtenti()
         {
             InitializeComponent();
@@ -40,9 +41,19 @@ namespace Sismio.io.sismio.ui
             AddFontMemResourceEx(fontPtr, (uint)Properties.Resources.RobotoMono_Bold.Length, IntPtr.Zero, ref dummy);
             System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr);
 
-            robotoMonoBold = new Font(fonts.Families[0], 16.0f);
+            robotoMonoBold16 = new Font(fonts.Families[0], 16.0f);
 
-            this.title.Font = robotoMonoBold;
+            fontData = Properties.Resources.RobotoMono_Light;
+            fontPtr = System.Runtime.InteropServices.Marshal.AllocCoTaskMem(fontData.Length);
+            System.Runtime.InteropServices.Marshal.Copy(fontData, 0, fontPtr, fontData.Length);
+            dummy = 0;
+            fonts.AddMemoryFont(fontPtr, Properties.Resources.RobotoMono_Light.Length);
+            AddFontMemResourceEx(fontPtr, (uint)Properties.Resources.RobotoMono_Light.Length, IntPtr.Zero, ref dummy);
+            System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr);
+
+            robotMonoLight10 = new Font(fonts.Families[0], 10.0f);
+
+            this.title.Font = robotoMonoBold16;
 
             this.BackColor = SismioColor.BackColor;
 
@@ -50,7 +61,7 @@ namespace Sismio.io.sismio.ui
              * Set up buttom controls
              */
             this.textCerca.BackColor = SismioColor.Scheme.DarkPrimaryColor;
-            this.textCerca.Font = materialSkinManager.ROBOTO_REGULAR_11;
+            this.textCerca.Font = robotMonoLight10;
             this.textCerca.GotFocus += onTextCercaFocus;
             this.textCerca.LostFocus += onTextCercaBlur;
             this.textCerca.Font = materialSkinManager.ROBOTO_REGULAR_11;
