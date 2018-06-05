@@ -19,6 +19,7 @@ namespace Sismio
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = SismioColor.Scheme;
             this.navbar.BackColor = SismioColor.Scheme.DarkPrimaryColor;
+            this.BackColor = SismioColor.BackColor;
             
             this.tabControl.SelectedTab = this.tabDashboard;
 

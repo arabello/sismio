@@ -25,9 +25,10 @@ namespace Sismio
         Font robotoMono;
         Form mainForm;
 
-        public Login()
+        public Login(Form mainForm)
         {
             InitializeComponent();
+            this.mainForm = mainForm;
 
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
@@ -67,7 +68,7 @@ namespace Sismio
             if (verificaCredenziali(this.textUsername.Text, this.textPassword.Text))
             {
                 this.Hide();
-                DialogResult res = mainForm.ShowDialog();               
+                DialogResult res = this.mainForm.ShowDialog();               
                 if (res.Equals(DialogResult.Abort))
                     this.Close();
                else

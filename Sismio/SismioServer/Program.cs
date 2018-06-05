@@ -15,8 +15,8 @@ namespace SismioServer
     {
         static void Main(string[] args)
         {
-            //ISensore sensore = new MockSensore();
-            ISensore sensore = new SensoreSeriale("COM10", 74880);
+            ISensore sensore = new MockSensore();
+            //ISensore sensore = new SensoreSeriale("COM10", 74880);
             sensore.RicevitoriDatiSensore += dati => Console.WriteLine(String.Join(",", dati)); 
 
             // Creo il thread del sensore

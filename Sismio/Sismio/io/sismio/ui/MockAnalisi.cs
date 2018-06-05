@@ -7,20 +7,15 @@ using System.Threading.Tasks;
 
 namespace Sismio.io.sismio.ui
 {
-    public delegate void OnRisultatiAnalisi(double[] risultati);
+    public delegate void OnRisultatiAnalisi(double newValue);
 
     class MockAnalisi
     {
         public event OnRisultatiAnalisi RicevitoriRisultati;
-        private double[] _values;
         private Thread _thread;
 
         public MockAnalisi()
         {
-            _values = new double[100];
-            Random r = new Random();
-            for (int i = 0; i < _values.Length; i++)
-                _values[i] = r.NextDouble();
         }
 
         public void start(int updateRate)
@@ -32,10 +27,7 @@ namespace Sismio.io.sismio.ui
                 Random r = new Random();
                 while (true)
                 {
-                    var oldArray = _values;
-                    Array.Copy(oldArray, 1, _values, 0, oldArray.Length - 1);
-                    _values[_values.Length - 1] = r.NextDouble() * 10 * r.NextDouble();
-                    RicevitoriRisultati(_values);
+                    RicevitoriRisultati(r.NextDouble() * r.NextDouble() * 100);
                     Thread.Sleep(updateRate);
                 }
             });

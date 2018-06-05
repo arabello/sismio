@@ -2,8 +2,6 @@
 using System.Drawing;
 using System.Drawing.Text;
 using System.Windows.Forms;
-using System.Windows.Media;
-using System.Windows.Threading;
 using LiveCharts;
 using LiveCharts.Wpf;
 using MaterialSkin;
@@ -44,6 +42,9 @@ namespace Sismio.io.sismio.ui
 
             this.BackColor = SismioColor.BackColor;
 
+            // Default values for init cahrts
+            double[] _values = new double[100];
+
             /**
              * Set up chart Frequenza
              **/
@@ -65,7 +66,8 @@ namespace Sismio.io.sismio.ui
                     Title = "Frequenza",
                     Stroke = System.Windows.Media.Brushes.CornflowerBlue,
                     Fill = System.Windows.Media.Brushes.Transparent,
-                    PointGeometry = null
+                    PointGeometry = null,
+                     Values = new ChartValues<double>(_values)
                 }
             };
 
@@ -90,14 +92,15 @@ namespace Sismio.io.sismio.ui
                     Title = "Magnitudo",
                     Stroke = System.Windows.Media.Brushes.PaleVioletRed,
                     Fill = System.Windows.Media.Brushes.Transparent,
-                    PointGeometry = null
+                    PointGeometry = null,
+                    Values = new ChartValues<double>(_values)
                 }
             };
-
+           
             /**
              * Set up events
              **/
-             /*
+
             MockAnalisi analisiFrequenza = new MockAnalisi(); // TODO: Change mock to actual analisys
             analisiFrequenza.RicevitoriRisultati += updateChartFrequenza;
 
@@ -106,22 +109,23 @@ namespace Sismio.io.sismio.ui
 
             analisiMagnitudo.start(1000);
             analisiFrequenza.start(1000);
-            */
         }
 
-        private void updateChartFrequenza(double[] values)
+        private void updateChartFrequenza(double value)
         {
             this.chartFrequenza.Invoke((MethodInvoker)delegate {
                 // Running on the UI thread
-                this.chartFrequenza.Series[0].Values = new ChartValues<double>(values);
+                this.chartFrequenza.Series[0].Values.Add(value);
+                this.chartFrequenza.Series[0].Values.RemoveAt(0);
             });
         }
 
-        private void updateChartMagnitudo(double[] values)
+        private void updateChartMagnitudo(double value)
         {
             this.chartMagnitudo.Invoke((MethodInvoker)delegate {
                 // Running on the UI thread
-                this.chartMagnitudo.Series[0].Values = new ChartValues<double>(values);
+                this.chartMagnitudo.Series[0].Values.Add(value);
+                this.chartMagnitudo.Series[0].Values.RemoveAt(0);
             });
             
         }
