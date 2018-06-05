@@ -5,7 +5,9 @@ namespace Sismio.io.sismio.analisi
 {
     // TODO
     public class AnalisiMagnitudine: Analisi
-    { 
+    {
+        public override event OnRisultatoAnalisi RicevitoriRisultato;
+
         private int[] Soglie = new int[] {550, 600, 650, 700, 800};
 
         public override void Analizza(int[] buffer)
@@ -37,6 +39,9 @@ namespace Sismio.io.sismio.analisi
                 Console.WriteLine(priorita);
                 // TODO
             }
+
+            // Notifica il risultato
+            RicevitoriRisultato?.Invoke(max);
         }
     }
 }

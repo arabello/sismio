@@ -2,11 +2,11 @@
 
 namespace Sismio.io.sismio.analisi
 {
-    public delegate void OnRisultatiAnalisi(Dictionary<string, double[]> risultati); 
+    public delegate void OnRisultatoAnalisi(double valore); 
 
     public interface IAnalisi
     {
-        event OnRisultatiAnalisi RicevitoriRisultati;
+        event OnRisultatoAnalisi RicevitoriRisultato;
         void OnDatiDisponibili(int[] data);
     }
 }

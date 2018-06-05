@@ -3,6 +3,8 @@
     // TODO
     public class AnalisiFrequenza: Analisi
     {
+        public override event OnRisultatoAnalisi RicevitoriRisultato;
+
         public override void Analizza(int[] buffer)
         {
             //TODO: Implement
