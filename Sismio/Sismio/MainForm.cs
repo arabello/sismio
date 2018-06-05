@@ -18,12 +18,11 @@ namespace Sismio
         public MainForm(IGestioneUtentiController gestioneUtentiController,
             IGestioneStazioniController gestioneStazioniController,
             IStoricoController storico,
-            SorgenteFactory factory, ISensore sensore)
+            SorgenteFactory factory)
         {
             InitializeComponent();
 
-            this.homeDashboard1._factory = factory;
-            this.homeDashboard1._sensore = sensore;
+            this.homeDashboard1.Factory = factory;
 
             this.storico1.StoricoController = storico;
             this.homeGestioneUtenti1.UtentiController = gestioneUtentiController;
@@ -77,7 +76,7 @@ namespace Sismio
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-           if(DialogResult != DialogResult.OK)
+            if (DialogResult != DialogResult.OK)
                 this.DialogResult = DialogResult.Abort;
         }
 

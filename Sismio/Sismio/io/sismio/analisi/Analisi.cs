@@ -12,7 +12,6 @@ namespace Sismio.io.sismio.analisi
 
         public void OnDatiDisponibili(int[] data)
         {
-            // TODO: da sistemare per ottenere indietro il risultato
             Analizza(data);
         }
 

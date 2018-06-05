@@ -11,6 +11,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Sismio.io.sismio.eventi;
+using Sismio.io.sismio.sorgente;
+using Sismio.io.sismio.stazione;
 using Sismio.io.sismio.user;
 using Sismio.io.sismio.utente;
 
@@ -26,13 +29,19 @@ namespace Sismio
 
         Font robotoMono;
         private readonly AutenticazioneController _controller;
-        Form mainForm;
+        private readonly IGestioneUtentiController _gestioneUtentiController;
+        private readonly IGestioneStazioniController _stazioniController;
+        private readonly IStoricoController _storicoController;
+        private readonly SorgenteFactory _factory;
 
-        public Login(AutenticazioneController controller, Form mainForm)
+        public Login(AutenticazioneController controller, IGestioneUtentiController gestioneUtentiController, IGestioneStazioniController stazioniController, IStoricoController storicoController, SorgenteFactory factory)
         {
             InitializeComponent();
             _controller = controller;
-            this.mainForm = mainForm;
+            _gestioneUtentiController = gestioneUtentiController;
+            _stazioniController = stazioniController;
+            _storicoController = storicoController;
+            _factory = factory;
 
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
@@ -64,7 +73,8 @@ namespace Sismio
             if (_controller.Autentica(this.textUsername.Text, this.textPassword.Text) || true)  // TODO: levare true
             {
                 this.Hide();
-                DialogResult res = this.mainForm.ShowDialog();               
+                Form mainForm = new MainForm(_gestioneUtentiController, _stazioniController,_storicoController, _factory);
+                DialogResult res = mainForm.ShowDialog();               
                 if (res.Equals(DialogResult.Abort))
                     this.Close();
                else

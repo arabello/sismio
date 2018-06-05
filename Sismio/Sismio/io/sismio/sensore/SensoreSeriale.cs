@@ -96,7 +96,7 @@ namespace Sismio.io.sismio.sensore
                 }
                 catch (Exception e)
                 {
-                    
+                    Console.WriteLine(e.ToString());
                 }
             }
             _serialPort.Close();

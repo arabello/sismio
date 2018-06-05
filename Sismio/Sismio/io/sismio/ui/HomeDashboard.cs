@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Text;
 using System.Threading;
@@ -14,8 +15,7 @@ namespace Sismio.io.sismio.ui
 {
     public partial class HomeDashboard : UserControl
     {
-        public ISensore _sensore { get; set; }
-        public SorgenteFactory _factory { get; set; }
+        public SorgenteFactory Factory { get; set; }
 
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]
         private static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont,
@@ -123,32 +123,41 @@ namespace Sismio.io.sismio.ui
             frequenza.RicevitoriRisultato -= updateChartFrequenza;
             this.magnitudo = null;
             this.frequenza = null;
+            this.sorgente = null;
+            
         }
 
         private void updateChartFrequenza(double value)
         {
-            this.chartFrequenza.Invoke((MethodInvoker)delegate {
-                // Running on the UI thread
-                this.chartFrequenza.Series[0].Values.Add(value);
-                this.chartFrequenza.Series[0].Values.RemoveAt(0);
-            });
+            if (this.chartFrequenza.Visible)
+            {
+                this.chartFrequenza.Invoke((MethodInvoker)delegate
+                {
+                    // Running on the UI thread
+                    this.chartFrequenza.Series[0].Values.Add(value);
+                    this.chartFrequenza.Series[0].Values.RemoveAt(0);
+                });
+            }
         }
 
         private void updateChartMagnitudo(double value)
         {
-            this.chartMagnitudo.Invoke((MethodInvoker)delegate {
-                // Running on the UI thread
-                this.chartMagnitudo.Series[0].Values.Add(value);
-                this.chartMagnitudo.Series[0].Values.RemoveAt(0);
-            });
-            
+            if (this.chartMagnitudo.Visible)
+            {
+                this.chartMagnitudo.Invoke((MethodInvoker) delegate
+                {
+                    // Running on the UI thread
+                    this.chartMagnitudo.Series[0].Values.Add(value);
+                    this.chartMagnitudo.Series[0].Values.RemoveAt(0);
+                });
+            }
         }
 
         private void HomeDashboard_Load(object sender, EventArgs e)
         {
             // Inizializzo sorgente
             //ISorgente sorgente = factory.NuovaSorgenteRemota(stazione, "tizio", "password");
-            sorgente = _factory.NuovaSorgenteLocale(_sensore);
+            sorgente = Factory.NuovaSorgenteLocale();
 
             threadSorgente = new Thread(() => sorgente.CicloPrincipale());
             threadSorgente.Start();

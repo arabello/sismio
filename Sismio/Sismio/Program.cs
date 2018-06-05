@@ -28,10 +28,11 @@ namespace Sismio
             // Inizializzo il sensore
             ISensore sensore = new MockSensore();
             //ISensore sensore = new SensoreSeriale("COM10", 74880);
-            sensore.RicevitoriDatiSensore += dati => Console.WriteLine(String.Join(",", dati));
+            //sensore.RicevitoriDatiSensore += dati => Console.WriteLine(String.Join(",", dati));
 
             // Creo il thread del sensore e lo avvio
             Thread threadSensore = new Thread(() => sensore.CicloPrincipale());
+            threadSensore.Name = "Thread Sensore";
             threadSensore.Start();
 
 
@@ -67,13 +68,12 @@ namespace Sismio
             storicoController.RegistraEvento(evento);
 
             CreatoreConnessioni creatore = new CreatoreConnessioni(stazioniController);
-            SorgenteFactory factory = new SorgenteFactory(creatore);
+            SorgenteFactory factory = new SorgenteFactory(creatore, sensore);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Form mainForm = new MainForm(gestioneUtentiController, stazioniController, storicoController, factory, sensore);
-            Form loginForm = new Login(autenticazioneController, mainForm);
+            Form loginForm = new Login(autenticazioneController, gestioneUtentiController, stazioniController, storicoController, factory);
             Application.Run(loginForm);
         }
     }

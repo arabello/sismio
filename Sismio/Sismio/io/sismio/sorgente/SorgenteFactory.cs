@@ -11,17 +11,20 @@ namespace Sismio.io.sismio.sorgente
         // * non è necessario specificare porta e baud rate perchè il sensore è
         //   unico all'interno del sistema e dovrebbe caricarlo automaticamente
         // * aggiunto user e password alla sorgente remota
+        // * aggiunto parametro sensore al costruttore
 
         private readonly CreatoreConnessioni creatoreConnessioni = null;
+        private readonly ISensore _sensore;
 
-        public SorgenteFactory(CreatoreConnessioni creatoreConnessioni)
+        public SorgenteFactory(CreatoreConnessioni creatoreConnessioni, ISensore sensore)
         {
             this.creatoreConnessioni = creatoreConnessioni;
+            _sensore = sensore;
         }
 
-        public ISorgente NuovaSorgenteLocale(ISensore sensore)
+        public ISorgente NuovaSorgenteLocale()
         {
-            return new SensoreSorgenteAdapter(sensore);
+            return new SensoreSorgenteAdapter(_sensore);
         }
 
         public ISorgente NuovaSorgenteRemota(IStazione stazione, string user, string pass)

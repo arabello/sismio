@@ -36,7 +36,7 @@ namespace Sismio.io.sismio.analisi
             if (indiceSoglia >= 0)
             {
                 Priorita priorita = (Priorita) indiceSoglia;
-                Console.WriteLine(priorita);
+                //Console.WriteLine(priorita);
                 // TODO
             }
 

@@ -12,7 +12,7 @@ namespace Sismio.io.sismio.sensore
     /// </summary>
     public class MockSensore : ISensore
     {
-        private const int DIMENSIONE_BUFFER = 1;
+        private const int DIMENSIONE_BUFFER = 3;
 
         public event OnRisultatiGrezziDisponibili RicevitoriDatiSensore;
 
@@ -28,7 +28,7 @@ namespace Sismio.io.sismio.sensore
                 int[] buffer = new int[DIMENSIONE_BUFFER];
                 for (int i = 0; i < DIMENSIONE_BUFFER; i++)
                 {
-                    buffer[i] = (int) (Math.Cos(_time)*500+500) + _random.Next(1, 100);
+                    buffer[i] = (int)(Math.Cos(_time) * 500 + 500) + _random.Next(1, 100);
                     _time += 0.1;
                 }
 
