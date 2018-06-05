@@ -1,6 +1,9 @@
 ﻿using MaterialSkin;
 using MaterialSkin.Controls;
+using Sismio.io.sismio.eventi;
+using Sismio.io.sismio.stazione;
 using Sismio.io.sismio.ui;
+using Sismio.io.sismio.utente;
 using System;
 using System.Drawing;
 using System.Drawing.Text;
@@ -10,9 +13,11 @@ namespace Sismio
 {
     public partial class MainForm : MaterialForm
     {
-        public MainForm()
+        public MainForm(IGestioneUtentiController gestioneUtentiController,
+            IGestioneStazioniController gestioneStazioniController,
+            IStoricoController storico)
         {
-            InitializeComponent();
+            InitializeComponent(gestioneUtentiController, gestioneStazioniController, storico);
 
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
