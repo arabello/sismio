@@ -98,7 +98,7 @@
             this.Tipo,
             this.LoginRemoto});
             this.listView.Depth = 0;
-            this.listView.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.listView.Font = new System.Drawing.Font("Roboto", 32F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World);
             this.listView.FullRowSelect = true;
             this.listView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listView.Location = new System.Drawing.Point(30, 70);
@@ -170,6 +170,7 @@
             this.textCerca.Size = new System.Drawing.Size(120, 26);
             this.textCerca.TabIndex = 3;
             this.textCerca.Text = "Cerca qui";
+            this.textCerca.TextChanged += new System.EventHandler(this.textCerca_TextChanged);
             // 
             // HomeGestioneUtenti
             // 
@@ -182,6 +183,7 @@
             this.Controls.Add(this.listView);
             this.Name = "HomeGestioneUtenti";
             this.Size = new System.Drawing.Size(848, 518);
+            this.Load += new System.EventHandler(this.HomeGestioneUtenti_Load);
             ((System.ComponentModel.ISupportInitialize)(this.btnDelete)).EndInit();
             this.bgTextCerca.ResumeLayout(false);
             this.bgTextCerca.PerformLayout();

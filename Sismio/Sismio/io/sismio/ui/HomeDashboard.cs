@@ -1,20 +1,32 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Text;
+using System.Threading;
 using System.Windows.Forms;
 using LiveCharts;
 using LiveCharts.Wpf;
 using MaterialSkin;
+using Sismio.io.sismio.analisi;
+using Sismio.io.sismio.sensore;
+using Sismio.io.sismio.sorgente;
 
 namespace Sismio.io.sismio.ui
 {
     public partial class HomeDashboard : UserControl
     {
+        public ISensore _sensore { get; set; }
+        public SorgenteFactory _factory { get; set; }
+
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]
         private static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont,
           IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
 
         private PrivateFontCollection fonts = new PrivateFontCollection();
+
+        private ISorgente sorgente;
+        private IAnalisi magnitudo;
+        private IAnalisi frequenza;
+        private Thread threadSorgente;
 
         Font robotoMonoBold;
         public HomeDashboard()
@@ -96,19 +108,21 @@ namespace Sismio.io.sismio.ui
                     Values = new ChartValues<double>(_values)
                 }
             };
-           
+
             /**
-             * Set up events
+             * Set up events analisi
              **/
+        }
 
-            MockAnalisi analisiFrequenza = new MockAnalisi(); // TODO: Change mock to actual analisys
-            analisiFrequenza.RicevitoriRisultati += updateChartFrequenza;
-
-            MockAnalisi analisiMagnitudo = new MockAnalisi(); // TODO: Change mock to actual analisys
-            analisiMagnitudo.RicevitoriRisultati += updateChartMagnitudo;
-
-            analisiMagnitudo.start(1000);
-            analisiFrequenza.start(1000);
+        public void OnLogout()
+        {
+            this.sorgente?.Ferma();
+            this.sorgente.RimuoviAnalisi(magnitudo);
+            this.sorgente.RimuoviAnalisi(frequenza);
+            magnitudo.RicevitoriRisultato -= updateChartMagnitudo;
+            frequenza.RicevitoriRisultato -= updateChartFrequenza;
+            this.magnitudo = null;
+            this.frequenza = null;
         }
 
         private void updateChartFrequenza(double value)
@@ -128,6 +142,26 @@ namespace Sismio.io.sismio.ui
                 this.chartMagnitudo.Series[0].Values.RemoveAt(0);
             });
             
+        }
+
+        private void HomeDashboard_Load(object sender, EventArgs e)
+        {
+            // Inizializzo sorgente
+            //ISorgente sorgente = factory.NuovaSorgenteRemota(stazione, "tizio", "password");
+            sorgente = _factory.NuovaSorgenteLocale(_sensore);
+
+            threadSorgente = new Thread(() => sorgente.CicloPrincipale());
+            threadSorgente.Start();
+
+            magnitudo = new AnalisiMagnitudine();
+            sorgente.AggiungiAnalisi(magnitudo);
+
+            magnitudo.RicevitoriRisultato += updateChartMagnitudo;
+
+            frequenza = new AnalisiFrequenza();
+            sorgente.AggiungiAnalisi(frequenza);
+
+            frequenza.RicevitoriRisultato += updateChartFrequenza;
         }
     }
 }

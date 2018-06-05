@@ -52,6 +52,7 @@
             this.background.Name = "background";
             this.background.Size = new System.Drawing.Size(900, 524);
             this.background.TabIndex = 0;
+            this.background.Paint += new System.Windows.Forms.PaintEventHandler(this.background_Paint);
             // 
             // title
             // 

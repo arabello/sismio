@@ -10,13 +10,14 @@ using Sismio.io.sismio.sensore;
 using Sismio.io.sismio.sorgente;
 using Sismio.io.sismio.stazione;
 using Sismio.io.sismio.trasmissione;
+using Sismio.io.sismio.user;
 using Sismio.io.sismio.utente;
 
 namespace Sismio
 {
     static class Program
     {
-        private const string PERCORSO_DATABASE = @"C:\sismio_database.db";
+        private const string PERCORSO_DATABASE = @"D:\sismio_database.db";
 
         /// <summary>
         /// Punto di ingresso principale dell'applicazione.
@@ -46,29 +47,34 @@ namespace Sismio
 
             // Inizializzo il gestore delle stazioni
 
-            GestioneStazioniController stazioni = new GestioneStazioniController(PERCORSO_DATABASE);
-            stazioni.Registra(stazione);
+            IGestioneStazioniController stazioniController = new GestioneStazioniController(PERCORSO_DATABASE);
+            stazioniController.Registra(stazione);
 
             // Inizializzo il gestore utenti
 
             IGestioneUtentiController gestioneUtentiController = new GestioneUtentiController(PERCORSO_DATABASE);
+            AutenticazioneController autenticazioneController = new AutenticazioneController(gestioneUtentiController);
 
-            IStoricoController storicoController = new 
+            EventoSismico evento = new EventoSismico
+            {
+                Messaggio = "Frequenza",
+                Priorita = Priorita.Fatal,
+                Stazione = stazione,
+                Tag = "Frequenza",
+                Timestamp = 1234
+            };
+            IStoricoController storicoController = new StoricoController(PERCORSO_DATABASE);
+            storicoController.RegistraEvento(evento);
 
-            CreatoreConnessioni creatore = new CreatoreConnessioni(stazioni);
+            CreatoreConnessioni creatore = new CreatoreConnessioni(stazioniController);
             SorgenteFactory factory = new SorgenteFactory(creatore);
-            //ISorgente sorgenteRemota = factory.NuovaSorgenteRemota(stazione, "tizio", "password");
-            ISorgente sorgenteRemota = factory.NuovaSorgenteLocale(sensore);
-
-            Thread threadSorgente = new Thread(() => sorgenteRemota.CicloPrincipale());
-            threadSorgente.Start();
-
-            IAnalisi magnitudo = new AnalisiMagnitudine();
-            sorgenteRemota.AggiungiAnalisi(magnitudo);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Login(new MainForm()));
+
+            Form mainForm = new MainForm(gestioneUtentiController, stazioniController, storicoController, factory, sensore);
+            Form loginForm = new Login(autenticazioneController, mainForm);
+            Application.Run(loginForm);
         }
     }
 }

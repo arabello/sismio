@@ -8,6 +8,8 @@ using System;
 using System.Drawing;
 using System.Drawing.Text;
 using System.Windows.Forms;
+using Sismio.io.sismio.sensore;
+using Sismio.io.sismio.sorgente;
 
 namespace Sismio
 {
@@ -15,16 +17,23 @@ namespace Sismio
     {
         public MainForm(IGestioneUtentiController gestioneUtentiController,
             IGestioneStazioniController gestioneStazioniController,
-            IStoricoController storico)
+            IStoricoController storico,
+            SorgenteFactory factory, ISensore sensore)
         {
-            InitializeComponent(gestioneUtentiController, gestioneStazioniController, storico);
+            InitializeComponent();
+
+            this.homeDashboard1._factory = factory;
+            this.homeDashboard1._sensore = sensore;
+
+            this.storico1.StoricoController = storico;
+            this.homeGestioneUtenti1.UtentiController = gestioneUtentiController;
 
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = SismioColor.Scheme;
             this.navbar.BackColor = SismioColor.Scheme.DarkPrimaryColor;
-            this.BackColor = SismioColor.BackColor;
+            //this.BackColor = SismioColor.BackColor;
             
             this.tabControl.SelectedTab = this.tabDashboard;
 
@@ -62,6 +71,7 @@ namespace Sismio
        
         private void asvg_Click(object sender, EventArgs e)
         {
+            this.homeDashboard1.OnLogout();
             this.DialogResult = DialogResult.OK;
         }
 
@@ -69,6 +79,11 @@ namespace Sismio
         {
            if(DialogResult != DialogResult.OK)
                 this.DialogResult = DialogResult.Abort;
+        }
+
+        private void tabGestioneStazioni_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

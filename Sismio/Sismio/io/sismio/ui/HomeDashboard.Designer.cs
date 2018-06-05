@@ -72,6 +72,7 @@
             this.Controls.Add(this.title);
             this.Name = "HomeDashboard";
             this.Size = new System.Drawing.Size(848, 518);
+            this.Load += new System.EventHandler(this.HomeDashboard_Load);
             this.ResumeLayout(false);
 
         }

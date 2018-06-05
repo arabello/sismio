@@ -9,7 +9,10 @@ namespace Sismio.io.sismio.analisi
 
         public override void Analizza(int[] buffer)
         {
-            Console.WriteLine(string.Join(",", buffer));
+            foreach (var i in buffer)
+            {
+                RicevitoriRisultato?.Invoke(i);
+            }
         }
     }
 }

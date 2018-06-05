@@ -63,33 +63,40 @@ namespace Sismio.io.sismio.sensore
                 try
                 {
                     // Leggi la riga
-                    string line = _serialPort.ReadLine().Trim();
-
-                    // Controllo della validità
-                    if (line.StartsWith("START ") && line.EndsWith(" END"))
+                    string line = _serialPort.ReadLine();
+                    if (line != null)
                     {
-                        // Parsa il valore
-                        int value = int.Parse(line.Split(' ')[1]);
-
-                        // Riempi il buffer e, quando è pieno, notifica i ricevitori
-                        if (indiceCorrente < DIMENSIONE_BUFFER)
+                        line = line.Trim();
+                        // Controllo della validità
+                        if (line.StartsWith("START ") && line.EndsWith(" END"))
                         {
-                            buffer[indiceCorrente] = value;
-                            indiceCorrente++;
-                        }
-                        else
-                        {
-                            // Invio i dati
-                            RicevitoriDatiSensore?.Invoke(buffer);
+                            // Parsa il valore
+                            int value = int.Parse(line.Split(' ')[1]);
 
-                            // Resetto il buffer
-                            indiceCorrente = 0;
+                            // Riempi il buffer e, quando è pieno, notifica i ricevitori
+                            if (indiceCorrente < DIMENSIONE_BUFFER)
+                            {
+                                buffer[indiceCorrente] = value;
+                                indiceCorrente++;
+                            }
+                            else
+                            {
+                                // Invio i dati
+                                RicevitoriDatiSensore?.Invoke(buffer);
+
+                                // Resetto il buffer
+                                indiceCorrente = 0;
+                            }
                         }
                     }
                 }
                 catch (TimeoutException e)
                 {
                     Console.WriteLine(e.ToString());
+                }
+                catch (Exception e)
+                {
+                    
                 }
             }
             _serialPort.Close();

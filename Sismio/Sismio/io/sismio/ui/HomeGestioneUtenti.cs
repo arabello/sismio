@@ -9,11 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Text;
 using MaterialSkin;
+using Sismio.io.sismio.utente;
 
 namespace Sismio.io.sismio.ui
 {
     public partial class HomeGestioneUtenti : UserControl
     {
+        public IGestioneUtentiController UtentiController { get; set; }
+
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]
         private static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont,
           IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
@@ -22,6 +25,9 @@ namespace Sismio.io.sismio.ui
 
         Font robotoMonoBold16;
         Font robotMonoLight10;
+
+        private IList<IUtente> utenti = null;
+
         public HomeGestioneUtenti()
         {
             InitializeComponent();
@@ -73,7 +79,7 @@ namespace Sismio.io.sismio.ui
             /**
              * Set up ListView
              **/
-            seedListView();
+           
             this.btnDelete.Visible = false;
             this.listView.MultiSelect = false;
             this.listView.SelectedIndexChanged += onUtenteSelect;
@@ -90,22 +96,29 @@ namespace Sismio.io.sismio.ui
                 this.btnDelete.Visible = true;
         }
 
-        private void seedListView()
+        private void seedListView(String query)
         {
-            //Define
-            var data = new[]
+            this.listView.Items.Clear();
+
+            if (query == null)
             {
-                new []{"Lollipop", "392", "0.2", "v"},
-                new []{"KitKat", "518", "26.0", "v"},
-                new []{"Ice cream sandwich", "237", "9.0", ""},
-                new []{"Jelly Bean", "375", "0.0", ""},
-                new []{"Honeycomb", "408", "3.2", "v"}
-            };
+                utenti = UtentiController.ListaTutti();
+            }
+            else
+            {
+                utenti = UtentiController.Cerca(query);
+            }
+                
 
             //Add
-            foreach (string[] version in data)
+            foreach (IUtente utente in utenti)
             {
+                var version = new string[]
+                {
+                    utente.Email, utente.Username, utente.GetType().Name, utente.LoginRemoto.ToString()
+                };
                 var item = new ListViewItem(version);
+                item.BackColor = Color.AliceBlue;
                 this.listView.Items.Add(item);
             }
         }
@@ -134,11 +147,23 @@ namespace Sismio.io.sismio.ui
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            //TODO: Show dialog confirm
-            //TODO: Elimina utente
-           
-            //this.gestioneUtentiLV.SelectedItems
-            //this.gestioneUtentiLV.SelectedItems
+            int index = this.listView.SelectedIndices[0];
+            UtentiController.Elimina((Utente) utenti[index]);
+            seedListView(null);
+            this.btnDelete.Visible = false;
+        }
+
+        private void HomeGestioneUtenti_Load(object sender, EventArgs e)
+        {
+            seedListView(null);
+        }
+
+        private void textCerca_TextChanged(object sender, EventArgs e)
+        {
+            if (this.textCerca.Text != "Cerca qui")
+            {
+                seedListView(this.textCerca.Text);
+            }
         }
     }
 }

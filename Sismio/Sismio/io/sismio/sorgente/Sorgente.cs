@@ -19,6 +19,11 @@ namespace Sismio.io.sismio.sorgente
             RicevitoriDati += analisi.OnDatiDisponibili;
         }
 
+        public void RimuoviAnalisi(IAnalisi analisi)
+        {
+            RicevitoriDati -= analisi.OnDatiDisponibili;
+        }
+
         protected void NotificaDatiDisponibili(int[] data)
         {
             // Notifica i dati disponibili a tutte le analisi

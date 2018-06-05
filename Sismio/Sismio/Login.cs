@@ -11,6 +11,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Sismio.io.sismio.user;
+using Sismio.io.sismio.utente;
 
 namespace Sismio
 {
@@ -23,11 +25,13 @@ namespace Sismio
         private PrivateFontCollection fonts = new PrivateFontCollection();
 
         Font robotoMono;
+        private readonly AutenticazioneController _controller;
         Form mainForm;
 
-        public Login(Form mainForm)
+        public Login(AutenticazioneController controller, Form mainForm)
         {
             InitializeComponent();
+            _controller = controller;
             this.mainForm = mainForm;
 
             var materialSkinManager = MaterialSkinManager.Instance;
@@ -53,19 +57,11 @@ namespace Sismio
 
             // Focus at the startup
             this.ActiveControl = this.textUsername;
-
-            mainForm = new MainForm();
-        }
-
-        private bool verificaCredenziali(string user, string password)
-        {
-            // TODO: Correctly implement
-            return true;
         }
 
         private void btnAccedi_Click(object sender, EventArgs e)
         {
-            if (verificaCredenziali(this.textUsername.Text, this.textPassword.Text))
+            if (_controller.Autentica(this.textUsername.Text, this.textPassword.Text) || true)  // TODO: levare true
             {
                 this.Hide();
                 DialogResult res = this.mainForm.ShowDialog();               
@@ -78,6 +74,11 @@ namespace Sismio
             {
                 MessageBox.Show("Coppia utente e password non corretta. Impossibile accedere.", "Credenziali non valide", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void background_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

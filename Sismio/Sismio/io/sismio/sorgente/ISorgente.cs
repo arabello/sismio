@@ -7,11 +7,14 @@ namespace Sismio.io.sismio.sorgente
 
     public interface ISorgente
     {
+        // Aggiunto rimuovi analisi
+
         /**
          * null for local stazione, otherwise a remote stazione
          */
         IStazione Stazione { get; }
         void AggiungiAnalisi(IAnalisi analisi);
+        void RimuoviAnalisi(IAnalisi analisi);
         void CicloPrincipale();
         void Ferma();
     }

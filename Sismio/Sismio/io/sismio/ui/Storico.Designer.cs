@@ -78,7 +78,7 @@
             this.Messaggio,
             this.Priorita});
             this.listView.Depth = 0;
-            this.listView.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.listView.Font = new System.Drawing.Font("Roboto", 32F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World);
             this.listView.FullRowSelect = true;
             this.listView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listView.HoverSelection = true;
@@ -142,6 +142,7 @@
             this.textCerca.Size = new System.Drawing.Size(120, 26);
             this.textCerca.TabIndex = 3;
             this.textCerca.Text = "Cerca qui";
+            this.textCerca.TextChanged += new System.EventHandler(this.textCerca_TextChanged);
             // 
             // panelFiltro
             // 
@@ -237,7 +238,7 @@
             this.panelFiltro.SetColumnSpan(this.tableLayoutPanel3, 2);
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.84746F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.15254F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 127F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 128F));
             this.tableLayoutPanel3.Controls.Add(this.filtroPriorita, 2, 0);
             this.tableLayoutPanel3.Controls.Add(this.textFiltro, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.label3, 1, 0);
@@ -312,6 +313,7 @@
             this.Controls.Add(this.title);
             this.Name = "Storico";
             this.Size = new System.Drawing.Size(848, 518);
+            this.Load += new System.EventHandler(this.Storico_Load);
             ((System.ComponentModel.ISupportInitialize)(this.iconCerca)).EndInit();
             this.panelFiltro.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);

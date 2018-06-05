@@ -8,7 +8,18 @@
         public override void Analizza(int[] buffer)
         {
             //TODO: Implement
-            throw new System.NotImplementedException();
+            // Trova il massimo elemento
+            int max = -1;
+            for (int i = 0; i < buffer.Length; i++)
+            {
+                if (buffer[i] > max)
+                {
+                    max = buffer[i];
+                }
+            }
+
+            // Notifica il risultato
+            RicevitoriRisultato?.Invoke(max);
         }
     }
 }

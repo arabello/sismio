@@ -22,7 +22,7 @@ namespace Sismio.io.sismio.sorgente
         public override void CicloPrincipale()
         {
             // Passo il segnale al sensore sottostante
-            _sensore.CicloPrincipale();
+            //_sensore.CicloPrincipale();
         }
 
         public void OnRisultatiGrezziDisponibili(int[] dati)
@@ -33,8 +33,8 @@ namespace Sismio.io.sismio.sorgente
 
         public override void Ferma()
         {
-            // Passo il segnale al sensore sottostante
-            _sensore.Ferma();
+            // Rimuovo l'adapter ai ricevitori del sensore
+            _sensore.RicevitoriDatiSensore -= OnRisultatiGrezziDisponibili;
         }
     }
 }

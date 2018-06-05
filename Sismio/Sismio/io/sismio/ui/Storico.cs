@@ -9,11 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Text;
 using MaterialSkin;
+using Sismio.io.sismio.eventi;
 
 namespace Sismio.io.sismio.ui
 {
     public partial class Storico : UserControl
     {
+        public IStoricoController StoricoController { get; set; }
+
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]
         private static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont,
          IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
@@ -72,7 +75,7 @@ namespace Sismio.io.sismio.ui
             /**
              * Set up ListView
              **/
-            seedListView();
+            
             this.listView.MultiSelect = false;
 
             /**
@@ -81,25 +84,33 @@ namespace Sismio.io.sismio.ui
             this.panelFiltro.BackColor = SismioColor.Scheme.DarkPrimaryColor;
         }
 
-        private void seedListView()
+        private void seedListView(IList<IFiltroEvento> filtri)
         {
+            this.listView.Items.Clear();
+
             //Define
-            var data = new[]
-            {
-                new []{"Lollipop", "392", "0.2", "Messagio informativo", "INFO"},
-                new []{"KitKat", "518", "26.0", "Messagio informativo", "ALERT"},
-                new []{"Ice cream sandwich", "237", "9.0", "Messagio informativo", "WARNING"},
-                new []{"Jelly Bean", "375", "0.0", "Messagio informativo", "CRTITICAL"},
-                new []{"Honeycomb", "408", "3.2", "Messagio informativo", "INFO"}
-            };
+            IList<IEventoSismico> eventi = StoricoController.ListaEventi(filtri);
 
             //Add
-            foreach (string[] version in data)
+            foreach (IEventoSismico evento in eventi)
             {
+                DateTime date = UnixTimeStampToDateTime(evento.Timestamp);
+                var version = new string[]
+                {
+                    date.Date.ToString(), evento.Tag, evento.Stazione.Nome, evento.Messaggio, evento.Priorita.ToString()
+                };
                 var item = new ListViewItem(version);
                 item.BackColor = Color.AliceBlue;
                 this.listView.Items.Add(item);
             }
+        }
+
+        public static DateTime UnixTimeStampToDateTime(double unixTimeStamp)
+        {
+            // Unix timestamp is seconds past epoch
+            System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+            dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
+            return dtDateTime;
         }
 
         private void onTextCercaBlur(object sender, EventArgs e)
@@ -110,6 +121,19 @@ namespace Sismio.io.sismio.ui
         private void onTextCercaFocus(object sender, EventArgs e)
         {
             this.textCerca.Text = "";
+        }
+
+        private void Storico_Load(object sender, EventArgs e)
+        {
+            seedListView(new List<IFiltroEvento>());
+        }
+
+        private void textCerca_TextChanged(object sender, EventArgs e)
+        {
+            if (this.textCerca.Text != "Cerca qui")
+            {
+                seedListView(new List<IFiltroEvento> { new FiltroCerca(this.textCerca.Text) });
+            }
         }
     }
 }
