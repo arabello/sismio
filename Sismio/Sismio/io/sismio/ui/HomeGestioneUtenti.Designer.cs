@@ -98,7 +98,7 @@
             this.Tipo,
             this.LoginRemoto});
             this.listView.Depth = 0;
-            this.listView.Font = new System.Drawing.Font("Roboto", 32F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World);
+            this.listView.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.listView.FullRowSelect = true;
             this.listView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listView.Location = new System.Drawing.Point(30, 70);

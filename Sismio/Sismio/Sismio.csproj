@@ -83,6 +83,12 @@
       <DependentUpon>HomeDashboard.cs</DependentUpon>
     </Compile>
     <Compile Include="io\sismio\ui\MockAnalisi.cs" />
+    <Compile Include="io\sismio\ui\RegistraUtente.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="io\sismio\ui\RegistraUtente.Designer.cs">
+      <DependentUpon>RegistraUtente.cs</DependentUpon>
+    </Compile>
     <Compile Include="io\sismio\ui\Storico.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -154,12 +160,21 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegistraUtenteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegistraUtenteForm.Designer.cs">
+      <DependentUpon>RegistraUtenteForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="CertificatoResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CertificatoResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="io\sismio\ui\HomeDashboard.resx">
       <DependentUpon>HomeDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="io\sismio\ui\RegistraUtente.resx">
+      <DependentUpon>RegistraUtente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="io\sismio\ui\Storico.resx">
       <DependentUpon>Storico.cs</DependentUpon>
@@ -193,6 +208,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="RegistraUtenteForm.resx">
+      <DependentUpon>RegistraUtenteForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Roboto-Light.ttf" />
     <EmbeddedResource Include="Resources\RobotoMono-Bold.ttf" />
     <None Include="Resources\certificato.pfx" />
