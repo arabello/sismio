@@ -52,6 +52,7 @@
             this.MinimumSize = new System.Drawing.Size(600, 460);
             this.Name = "RegistraUtenteForm";
             this.Text = "Aggiungi nuovo utente";
+            this.Load += new System.EventHandler(this.RegistraUtenteForm_Load);
             this.ResumeLayout(false);
 
         }

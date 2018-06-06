@@ -24,6 +24,12 @@ namespace Sismio
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = SismioColor.Scheme;
+
+            this.registraUtente1.Controller = gestioneUtentiController;
+        }
+
+        private void RegistraUtenteForm_Load(object sender, EventArgs e)
+        {
         }
     }
 }
