@@ -139,15 +139,9 @@ namespace Sismio.io.sismio.ui
         {
            RegistraUtenteForm f = new RegistraUtenteForm(UtentiController);
             f.ShowDialog();
+            seedListView(null);
         }
-
-        private void btnDeleteUtente_Click(object sender, EventArgs e)
-        {
-            //TODO: Elimina utente
-            //this.gestioneUtentiLV.SelectedItems
-            //this.gestioneUtentiLV.SelectedItems
-        }
-
+        
         private void btnDelete_Click(object sender, EventArgs e)
         {
             int index = this.listView.SelectedIndices[0];
