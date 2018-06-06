@@ -8,8 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Text;
+using System.Net;
 using MaterialSkin;
 using Sismio.io.sismio.eventi;
+using Sismio.io.sismio.stazione;
 
 namespace Sismio.io.sismio.ui
 {
@@ -22,6 +24,9 @@ namespace Sismio.io.sismio.ui
          IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
 
         private PrivateFontCollection fonts = new PrivateFontCollection();
+
+        private IDictionary<string, IFiltroEvento> _filtroEventi;
+
         Font robotoMonoBold16;
         Font robotMonoLight10;
         public Storico()
@@ -82,6 +87,8 @@ namespace Sismio.io.sismio.ui
              * Set up filtro
              **/
             this.panelFiltro.BackColor = SismioColor.Scheme.DarkPrimaryColor;
+            
+            _filtroEventi = new Dictionary<string, IFiltroEvento>();
         }
 
         private void seedListView(IList<IFiltroEvento> filtri)
@@ -90,7 +97,7 @@ namespace Sismio.io.sismio.ui
 
             //Define
             IList<IEventoSismico> eventi = StoricoController.ListaEventi(filtri);
-
+            
             //Add
             foreach (IEventoSismico evento in eventi)
             {
@@ -108,32 +115,95 @@ namespace Sismio.io.sismio.ui
         public static DateTime UnixTimeStampToDateTime(double unixTimeStamp)
         {
             // Unix timestamp is seconds past epoch
-            System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+            DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
             dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
             return dtDateTime;
         }
 
         private void onTextCercaBlur(object sender, EventArgs e)
         {
-            this.textCerca.Text = "Cerca qui";
+            if (this.textCerca.Text == "")
+                this.textCerca.Text = "Cerca qui";
         }
 
         private void onTextCercaFocus(object sender, EventArgs e)
         {
-            this.textCerca.Text = "";
-        }
-
-        private void Storico_Load(object sender, EventArgs e)
-        {
-            seedListView(new List<IFiltroEvento>());
+            if (this.textCerca.Text == "Cerca qui")
+                this.textCerca.Text = "";
         }
 
         private void textCerca_TextChanged(object sender, EventArgs e)
         {
             if (this.textCerca.Text != "Cerca qui")
+                _filtroEventi["cerca"] = new FiltroCerca(this.textCerca.Text);
+            else
+                _filtroEventi.Remove("cerca");
+            
+            seedListView(_filtroEventi.Values.ToList());
+        }
+
+        private void filtroPriorita_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (this.filtroPriorita.Text)
             {
-                seedListView(new List<IFiltroEvento> { new FiltroCerca(this.textCerca.Text) });
+                 case "INFO":
+                     _filtroEventi["priorita"] = new FiltroPriorita(eventi.Priorita.Info); 
+                     break;
+                 case "WARNING":
+                     _filtroEventi["priorita"] = new FiltroPriorita(eventi.Priorita.Warning); 
+                     break;
+                 case "ALERT": 
+                     _filtroEventi["priorita"] =  new FiltroPriorita(eventi.Priorita.Alert); 
+                     break;
+                 case "CRITICAL": 
+                     _filtroEventi["priorita"] = new FiltroPriorita(eventi.Priorita.Critical); 
+                     break;
+                 case "FATAL": 
+                     _filtroEventi["priorita"] = new FiltroPriorita(eventi.Priorita.Fatal); 
+                     break;
+                 default: 
+                     _filtroEventi.Remove("priorita"); 
+                     break;
             }
+
+            seedListView(_filtroEventi.Values.ToList());
+        }
+
+        private void Storico_Load(object sender, EventArgs e)
+        {
+            /**
+             * Set up filtro date time
+             **/
+            this.filtroDateTimeInizio.Value = System.DateTime.Now.Subtract(TimeSpan.FromDays(7));
+            this.filtroDateTimeFine.Value = System.DateTime.Now.Add(TimeSpan.FromDays(1));
+
+            filtroIntervalloDiTempo(this.filtroDateTimeInizio.Value, this.filtroDateTimeFine.Value);
+        }
+        
+        private void filtroIntervalloDiTempo(DateTime inizio, DateTime fine)
+        {
+            if (inizio > fine)
+            {
+                MessageBox.Show("La data e ora di fine non può precedere quella di inizio", "Inserimento dati non valido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            _filtroEventi["datetime"] = new FiltroIntervalloDiTempo(
+                new DateTimeOffset(inizio).ToUnixTimeSeconds(), 
+                new DateTimeOffset(fine).ToUnixTimeSeconds()
+            );
+
+            seedListView(_filtroEventi.Values.ToList());
+        }
+
+        private void filtroDateTimeInizio_CloseUp(object sender, EventArgs e)
+        {
+            filtroIntervalloDiTempo(this.filtroDateTimeInizio.Value, this.filtroDateTimeFine.Value);
+        }
+
+        private void filtroDateTimeFine_CloseUp(object sender, EventArgs e)
+        {
+            filtroIntervalloDiTempo(this.filtroDateTimeInizio.Value, this.filtroDateTimeFine.Value);
         }
     }
 }
