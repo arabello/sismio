@@ -87,17 +87,24 @@ namespace Sismio.io.sismio.trasmissione
         
         private void Run()
         {
-            // Ciclo che legge la coda ed invia i valori quando disponibili
-            while (true)
+            try
             {
-                // Legge e rimuove un elemento dalla coda.
-                // La chiamata è BLOCCANTE, quindi se la coda è vuota
-                // il loop si sospende fino a quando non sono disponibili
-                // altri valori
-                int valoreCorrente = _dataQueue.Take();
+                // Ciclo che legge la coda ed invia i valori quando disponibili
+                while (true)
+                {
+                    // Legge e rimuove un elemento dalla coda.
+                    // La chiamata è BLOCCANTE, quindi se la coda è vuota
+                    // il loop si sospende fino a quando non sono disponibili
+                    // altri valori
+                    int valoreCorrente = _dataQueue.Take();
 
-                // Invia i valori attraverso lo stream sicuro
-                _binaryWriter.Write(valoreCorrente);
+                    // Invia i valori attraverso lo stream sicuro
+                    _binaryWriter.Write(valoreCorrente);
+                }
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine(e.ToString());
             }
         }
     }

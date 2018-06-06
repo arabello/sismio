@@ -69,6 +69,11 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CertificatoResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CertificatoResource.resx</DependentUpon>
+    </Compile>
     <Compile Include="io\sismio\sensore\MockSensore.cs" />
     <Compile Include="io\sismio\trasmissione\RispostaInvalidaEccezione.cs" />
     <Compile Include="io\sismio\ui\HomeDashboard.cs">
@@ -149,6 +154,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CertificatoResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CertificatoResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="io\sismio\ui\HomeDashboard.resx">
       <DependentUpon>HomeDashboard.cs</DependentUpon>
     </EmbeddedResource>
@@ -186,6 +195,7 @@
     </Compile>
     <EmbeddedResource Include="Resources\Roboto-Light.ttf" />
     <EmbeddedResource Include="Resources\RobotoMono-Bold.ttf" />
+    <None Include="Resources\certificato.pfx" />
     <None Include="Resources\RobotoMono-Light.ttf" />
   </ItemGroup>
   <ItemGroup>

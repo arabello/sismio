@@ -8,7 +8,7 @@ namespace Sismio.io.sismio.analisi
     {
         public override event OnRisultatoAnalisi RicevitoriRisultato;
 
-        private int[] Soglie = new int[] {550, 600, 650, 700, 800};
+        private int[] Soglie = new int[] {2,3,5,7,8};
 
         public override void Analizza(int[] buffer)
         {
@@ -22,11 +22,14 @@ namespace Sismio.io.sismio.analisi
                 }
             }
 
+            // Converto in magnitudo
+            double valoreMagnitudine = Math.Abs(max - 500) / 50f;
+
             // Verifico se il massimo supera una soglia
             int indiceSoglia = -1;
             for (int i = 0; i < Soglie.Length; i++)
             {
-                if (max > Soglie[i])
+                if (valoreMagnitudine> Soglie[i])
                 {
                     indiceSoglia = i;
                 }
@@ -41,7 +44,7 @@ namespace Sismio.io.sismio.analisi
             }
 
             // Notifica il risultato
-            RicevitoriRisultato?.Invoke(max);
+            RicevitoriRisultato?.Invoke(valoreMagnitudine);
         }
     }
 }

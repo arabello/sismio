@@ -17,7 +17,7 @@ namespace Sismio
 {
     static class Program
     {
-        private const string PERCORSO_DATABASE = @"D:\sismio_database.db";
+        private const string PERCORSO_DATABASE = @"sismio_database.db";
 
         /// <summary>
         /// Punto di ingresso principale dell'applicazione.
@@ -56,6 +56,21 @@ namespace Sismio
             IGestioneUtentiController gestioneUtentiController = new GestioneUtentiController(PERCORSO_DATABASE);
             AutenticazioneController autenticazioneController = new AutenticazioneController(gestioneUtentiController);
 
+            // Aggiungo l'utente tizio
+            Utente utente = new UtenteNormale
+            {
+                Nome = "tizio",
+                Cognome = "caio",
+                Email = "tizio@caio.it",
+                LoginRemoto = true,
+                Username = "tizio"
+            };
+            utente.ImpostaPasswordDaOriginale("password");
+            if (gestioneUtentiController.ValidaCredenziali("tizio", "password") == null)
+            {
+                gestioneUtentiController.Registra(utente);
+            }
+
             EventoSismico evento = new EventoSismico
             {
                 Messaggio = "Frequenza",
@@ -67,6 +82,10 @@ namespace Sismio
             IStoricoController storicoController = new StoricoController(PERCORSO_DATABASE);
             storicoController.RegistraEvento(evento);
 
+            // Avvio il server della stazione
+            ServerStazione server = new ServerStazione(sensore, gestioneUtentiController, Sismio.CertificatoResource.certificato, "passwordsismio");
+            server.Avvia();
+
             CreatoreConnessioni creatore = new CreatoreConnessioni(stazioniController);
             SorgenteFactory factory = new SorgenteFactory(creatore, sensore);
 
@@ -76,5 +95,9 @@ namespace Sismio
             Form loginForm = new Login(autenticazioneController, gestioneUtentiController, stazioniController, storicoController, factory);
             Application.Run(loginForm);
         }
+    }
+
+    internal class SismioServer
+    {
     }
 }

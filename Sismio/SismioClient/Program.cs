@@ -39,7 +39,7 @@ namespace SismioClient
             stazioni.Registra(stazione);
 
             CreatoreConnessioni creatore = new CreatoreConnessioni(stazioni);
-            SorgenteFactory factory = new SorgenteFactory(creatore);
+            SorgenteFactory factory = new SorgenteFactory(creatore, null);
             ISorgente sorgenteRemota = factory.NuovaSorgenteRemota(stazione, "tizio", "password");
 
             Thread threadSorgente = new Thread(() => sorgenteRemota.CicloPrincipale());
@@ -50,6 +50,8 @@ namespace SismioClient
 
             IAnalisi magnitudo = new AnalisiMagnitudine();
             sorgenteRemota.AggiungiAnalisi(magnitudo);
+
+            magnitudo.RicevitoriRisultato += valore => Console.WriteLine(valore);
 
             threadSorgente.Join();
         }
