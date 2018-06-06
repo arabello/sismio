@@ -70,14 +70,16 @@ namespace Sismio
        
         private void asvg_Click(object sender, EventArgs e)
         {
-            this.homeDashboard1.OnLogout();
+            
             this.DialogResult = DialogResult.OK;
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (DialogResult != DialogResult.OK)
-                this.DialogResult = DialogResult.Abort;
+            this.homeDashboard1.OnLogout();
+            this.DialogResult = DialogResult.OK;
+            //if (DialogResult != DialogResult.OK)
+            //    this.DialogResult = DialogResult.Abort;
         }
 
         private void tabGestioneStazioni_Click(object sender, EventArgs e)

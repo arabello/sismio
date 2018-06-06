@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Text;
@@ -17,6 +18,9 @@ namespace Sismio.io.sismio.ui
     {
         public SorgenteFactory Factory { get; set; }
 
+        private BlockingCollection<double> codaMagnitudo = new BlockingCollection<double>();
+        private BlockingCollection<double> codaFrequenza = new BlockingCollection<double>();
+
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]
         private static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont,
           IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
@@ -27,6 +31,10 @@ namespace Sismio.io.sismio.ui
         private IAnalisi magnitudo;
         private IAnalisi frequenza;
         private Thread threadSorgente;
+        private bool staFacendoLogout = false;
+
+        private Thread magnitudoCodaThread;
+        private Thread frequenzaCodaThread;
 
         Font robotoMonoBold;
         public HomeDashboard()
@@ -116,41 +124,48 @@ namespace Sismio.io.sismio.ui
 
         public void OnLogout()
         {
+            staFacendoLogout = true;
+            magnitudoCodaThread.Abort();
+            frequenzaCodaThread.Abort();
             this.sorgente?.Ferma();
-            this.sorgente.RimuoviAnalisi(magnitudo);
-            this.sorgente.RimuoviAnalisi(frequenza);
-            magnitudo.RicevitoriRisultato -= updateChartMagnitudo;
-            frequenza.RicevitoriRisultato -= updateChartFrequenza;
+            this.sorgente?.RimuoviAnalisi(magnitudo);
+            this.sorgente?.RimuoviAnalisi(frequenza);
+            magnitudo.RicevitoriRisultato -= SegnalaMagnitudo;
+            frequenza.RicevitoriRisultato -= SegnalaFrequenza;
             this.magnitudo = null;
             this.frequenza = null;
             this.sorgente = null;
             
         }
 
+        private void SegnalaMagnitudo(double value)
+        {
+            codaMagnitudo.Add(value);
+        }
+
+        private void SegnalaFrequenza(double value)
+        {
+            codaFrequenza.Add(value);
+        }
+
         private void updateChartFrequenza(double value)
         {
-            if (this.chartFrequenza.Visible)
+            this.chartFrequenza.Invoke((MethodInvoker)delegate
             {
-                this.chartFrequenza.Invoke((MethodInvoker)delegate
-                {
-                    // Running on the UI thread
-                    this.chartFrequenza.Series[0].Values.Add(value);
-                    this.chartFrequenza.Series[0].Values.RemoveAt(0);
-                });
-            }
+                // Running on the UI thread
+                this.chartFrequenza.Series[0].Values.Add(value);
+                this.chartFrequenza.Series[0].Values.RemoveAt(0);
+            });
         }
 
         private void updateChartMagnitudo(double value)
         {
-            if (this.chartMagnitudo.Visible)
+            this.chartMagnitudo.Invoke((MethodInvoker)delegate
             {
-                this.chartMagnitudo.Invoke((MethodInvoker) delegate
-                {
-                    // Running on the UI thread
-                    this.chartMagnitudo.Series[0].Values.Add(value);
-                    this.chartMagnitudo.Series[0].Values.RemoveAt(0);
-                });
-            }
+                // Running on the UI thread
+                this.chartMagnitudo.Series[0].Values.Add(value);
+                this.chartMagnitudo.Series[0].Values.RemoveAt(0);
+            });
         }
 
         private void HomeDashboard_Load(object sender, EventArgs e)
@@ -165,12 +180,34 @@ namespace Sismio.io.sismio.ui
             magnitudo = new AnalisiMagnitudine();
             sorgente.AggiungiAnalisi(magnitudo);
 
-            magnitudo.RicevitoriRisultato += updateChartMagnitudo;
+            magnitudo.RicevitoriRisultato += SegnalaMagnitudo;
 
             frequenza = new AnalisiFrequenza();
             sorgente.AggiungiAnalisi(frequenza);
 
-            frequenza.RicevitoriRisultato += updateChartFrequenza;
+            frequenza.RicevitoriRisultato += SegnalaFrequenza;
+
+            
+            magnitudoCodaThread = new Thread(() =>
+            {
+                while (!staFacendoLogout)
+                {
+                    double corrente = codaMagnitudo.Take();
+                    updateChartMagnitudo(corrente);
+                }
+            });
+            magnitudoCodaThread.Start();
+
+            
+            frequenzaCodaThread = new Thread(() =>
+            {
+                while (!staFacendoLogout)
+                {
+                    double corrente = codaFrequenza.Take();
+                    updateChartFrequenza(corrente);
+                }
+            });
+            frequenzaCodaThread.Start();
         }
     }
 }
