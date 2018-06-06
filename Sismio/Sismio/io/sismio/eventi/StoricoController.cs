@@ -89,7 +89,7 @@ namespace Sismio.io.sismio.eventi
                                                          "stazioni.locazione AS stazioni_locazione, " +
                                                          "stazioni.indirizzoDiRete AS stazioni_indirizzoDiRete, " +
                                                          "stazioni.porta AS stazioni_porta, stazioni.impronta AS stazioni_impronta " +
-                                                         "FROM eventi JOIN stazioni ON eventi.stazione = stazioni.id", _connection))
+                                                         "FROM eventi LEFT OUTER JOIN stazioni ON eventi.stazione = stazioni.id", _connection))
             {
                 using (SQLiteDataReader reader = cmd.ExecuteReader())
                 {

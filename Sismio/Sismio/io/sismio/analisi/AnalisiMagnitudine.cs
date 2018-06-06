@@ -38,9 +38,15 @@ namespace Sismio.io.sismio.analisi
             // Se la supera, creo un evento
             if (indiceSoglia >= 0)
             {
-                Priorita priorita = (Priorita) indiceSoglia;
-                //Console.WriteLine(priorita);
-                // TODO
+                EventoSismico evento = new EventoSismico
+                {
+                    Messaggio = "Magnitudo ha superato: "+valoreMagnitudine,
+                    Priorita = (Priorita) indiceSoglia,
+                    Stazione = Stazione,
+                    Tag = "Magnitudo",
+                    Timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds()
+                };
+                GestoreEventi.NotificaEvento(evento);
             }
 
             // Notifica il risultato

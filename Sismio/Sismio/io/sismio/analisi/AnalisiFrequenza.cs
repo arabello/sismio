@@ -6,7 +6,7 @@ namespace Sismio.io.sismio.analisi
     // TODO
     public class AnalisiFrequenza: Analisi
     {
-
+        private int[] Soglie = new int[] { 2, 5, 10, 20, 30 };
 
         private const int SogliaPicco = 800;
         private const int TempoDistanzaMinimo = 500;
@@ -45,10 +45,20 @@ namespace Sismio.io.sismio.analisi
                 codaPicchi.Dequeue();
             }
 
-            int risultato = codaPicchi.Count;
+            int valoreFrequenza = codaPicchi.Count;
+
+            // Verifico se il massimo supera una soglia
+            int indiceSoglia = -1;
+            for (int i = 0; i < Soglie.Length; i++)
+            {
+                if (valoreFrequenza > Soglie[i])
+                {
+                    indiceSoglia = i;
+                }
+            }
 
             // Notifica il risultato
-            RicevitoriRisultato?.Invoke(risultato);
+            RicevitoriRisultato?.Invoke(valoreFrequenza);
         }
     }
 }

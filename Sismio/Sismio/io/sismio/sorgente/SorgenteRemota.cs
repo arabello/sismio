@@ -2,6 +2,7 @@
 using System.IO;
 using Sismio.io.sismio.stazione;
 using System.Net.Security;
+using Sismio.io.sismio.eventi;
 
 namespace Sismio.io.sismio.sorgente
 {
@@ -13,9 +14,11 @@ namespace Sismio.io.sismio.sorgente
 
         private bool _dovrebbeFermarsi = false;
 
-        public SorgenteRemota(SslStream connessione)
+        public SorgenteRemota(SslStream connessione, IStazione stazione, GestoreEventi gestoreEventi)
         {
             _connessione = connessione;
+            this._gestoreEventi = gestoreEventi;
+            Stazione = stazione;
         }
 
         public override void CicloPrincipale()

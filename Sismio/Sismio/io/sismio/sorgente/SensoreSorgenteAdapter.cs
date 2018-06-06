@@ -1,4 +1,5 @@
 ﻿using System;
+using Sismio.io.sismio.eventi;
 using Sismio.io.sismio.sensore;
 using Sismio.io.sismio.stazione;
 
@@ -10,9 +11,10 @@ namespace Sismio.io.sismio.sorgente
         private ISensore _sensore;
         public override IStazione Stazione { get; } = null;
     
-        public SensoreSorgenteAdapter(ISensore sensore)
+        public SensoreSorgenteAdapter(ISensore sensore, GestoreEventi gestoreEventi)
         {
             _sensore = sensore;
+            this._gestoreEventi = gestoreEventi;
 
             // Aggiungo l'adapter ai ricevitori del sensore
             sensore.RicevitoriDatiSensore += OnRisultatiGrezziDisponibili;

@@ -36,6 +36,11 @@ namespace Sismio.io.sismio.stazione
         {
             Stazione stazione = new Stazione();
 
+            if (reader["stazioni_id"] is DBNull)
+            {
+                return null;
+            }
+
             // Popolo i campi della stazione
             stazione.Id = Convert.ToInt64(reader["stazioni_id"]);
             stazione.Nome = reader["stazioni_nome"].ToString();

@@ -82,12 +82,15 @@ namespace Sismio
             IStoricoController storicoController = new StoricoController(PERCORSO_DATABASE);
             storicoController.RegistraEvento(evento);
 
+            GestoreEventi gestoreEventi = new GestoreEventi(storicoController);
+            gestoreEventi.RicevitoriEventoSismico += sismico => Console.WriteLine(sismico);
+
             // Avvio il server della stazione
             ServerStazione server = new ServerStazione(sensore, gestioneUtentiController, Sismio.CertificatoResource.certificato, "passwordsismio");
             server.Avvia();
 
             CreatoreConnessioni creatore = new CreatoreConnessioni(stazioniController);
-            SorgenteFactory factory = new SorgenteFactory(creatore, sensore);
+            SorgenteFactory factory = new SorgenteFactory(creatore, sensore, gestoreEventi);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

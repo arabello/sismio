@@ -1,4 +1,5 @@
 ﻿using Sismio.io.sismio.analisi;
+using Sismio.io.sismio.eventi;
 using Sismio.io.sismio.stazione;
 
 namespace Sismio.io.sismio.sorgente
@@ -9,13 +10,18 @@ namespace Sismio.io.sismio.sorgente
         // * ho rinominato la funzione NotificaDatiDisponibili perchè aveva
         //   lo stesso nome di una cosa completamente diversa
         // * ho aggiunto la dimensione buffer
+        // * aggiunto gestore eventi
 
         protected const int DimensioneBuffer = 20;
+
+        protected GestoreEventi _gestoreEventi;
 
         public event OnDatiDisponibili RicevitoriDati;
 
         public void AggiungiAnalisi(IAnalisi analisi)
         {
+            analisi.Stazione = Stazione;
+            analisi.GestoreEventi = _gestoreEventi;
             RicevitoriDati += analisi.OnDatiDisponibili;
         }
 

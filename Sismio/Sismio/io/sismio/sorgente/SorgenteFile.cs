@@ -1,6 +1,7 @@
 ﻿using Sismio.io.sismio.stazione;
 using System;
 using System.IO;
+using Sismio.io.sismio.eventi;
 
 namespace Sismio.io.sismio.sorgente
 {
@@ -20,9 +21,10 @@ namespace Sismio.io.sismio.sorgente
         private bool _dovrebbeFermarsi = false;
         private readonly string _percorsoFile;
 
-        public SorgenteFile(string percorsoFile)
+        public SorgenteFile(string percorsoFile, GestoreEventi gestoreEventi)
         {
             _percorsoFile = percorsoFile;
+            _gestoreEventi = gestoreEventi;
 
             // Verifico che il file esista
             if (!File.Exists(percorsoFile))
