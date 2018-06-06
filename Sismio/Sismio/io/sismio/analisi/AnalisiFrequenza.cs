@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Sismio.io.sismio.eventi;
 
 namespace Sismio.io.sismio.analisi
 {
@@ -55,6 +56,20 @@ namespace Sismio.io.sismio.analisi
                 {
                     indiceSoglia = i;
                 }
+            }
+
+            // Se la supera, creo un evento
+            if (indiceSoglia >= 0)
+            {
+                EventoSismico evento = new EventoSismico
+                {
+                    Messaggio = "Frequenza ha superato: " + valoreFrequenza,
+                    Priorita = (Priorita)indiceSoglia,
+                    Stazione = Stazione,
+                    Tag = "Frequenta",
+                    Timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds()
+                };
+                GestoreEventi.NotificaEvento(evento);
             }
 
             // Notifica il risultato
