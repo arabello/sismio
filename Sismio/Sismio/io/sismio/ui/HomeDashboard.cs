@@ -4,13 +4,16 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using LiveCharts;
 using LiveCharts.Wpf;
 using MaterialSkin;
 using Sismio.io.sismio.analisi;
+using Sismio.io.sismio.eventi;
 using Sismio.io.sismio.sensore;
 using Sismio.io.sismio.sorgente;
+using Sismio.io.sismio.stazione;
 
 namespace Sismio.io.sismio.ui
 {
@@ -37,6 +40,9 @@ namespace Sismio.io.sismio.ui
         private Thread frequenzaCodaThread;
 
         Font robotoMonoBold;
+
+        private int ALLERTA_TIME_MULTIPLIER = 3;
+
         public HomeDashboard()
         {
             InitializeComponent();
@@ -118,8 +124,10 @@ namespace Sismio.io.sismio.ui
             };
 
             /**
-             * Set up events analisi
-             **/
+             * Labels allerta evento
+            **/
+            this.labelPrioritaEvento.Font = new Font(fonts.Families[0], 22.0F);
+            this.labelMessaggioEvento.Font = new Font(fonts.Families[0], 16.0f);
         }
 
         public void OnLogout()
@@ -208,6 +216,33 @@ namespace Sismio.io.sismio.ui
                 }
             });
             frequenzaCodaThread.Start();
+
+            // MOCK DA ELIMINARE
+            IEventoSismico evento = new EventoSismico("MAGNITUDO", Priorita.Critical, "messaggio", DateTime.Now.Ticks, sorgente.Stazione);
+            allertaEventoAsync(evento);
+        }
+
+        public async System.Threading.Tasks.Task allertaEventoAsync(IEventoSismico evento)
+        {
+            this.panelAllertaEvento.Visible = true;
+            this.panelAllertaEvento.BackColor = SismioColor.Priorita(evento.Priorita);
+            this.labelPrioritaEvento.Text = evento.Priorita.ToString().ToUpper();
+            this.labelMessaggioEvento.Text = evento.Messaggio.ToString();
+
+            if (evento.Priorita == Priorita.Fatal)
+            {
+                this.labelPrioritaEvento.ForeColor = Color.White;
+                this.labelMessaggioEvento.ForeColor = Color.White;
+            }
+            else
+            {
+                this.labelPrioritaEvento.ForeColor = Color.Black;
+                this.labelMessaggioEvento.ForeColor = Color.Black;
+            }
+
+            int criticita = (int)evento.Priorita + 1;
+            await Task.Delay(TimeSpan.FromSeconds(criticita * ALLERTA_TIME_MULTIPLIER));
+            this.panelAllertaEvento.Visible = false;
         }
     }
 }
