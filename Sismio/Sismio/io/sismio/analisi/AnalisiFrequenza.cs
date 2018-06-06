@@ -7,7 +7,7 @@ namespace Sismio.io.sismio.analisi
     // TODO
     public class AnalisiFrequenza: Analisi
     {
-        private int[] Soglie = new int[] { 2, 5, 10, 20, 30 };
+        private int[] Soglie = new int[] { 10, 20, 30, 40, 50 };
 
         private const int SogliaPicco = 800;
         private const int TempoDistanzaMinimo = 500;
