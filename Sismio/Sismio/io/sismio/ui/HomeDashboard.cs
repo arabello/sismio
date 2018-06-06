@@ -109,7 +109,9 @@ namespace Sismio.io.sismio.ui
 
             this.chartMagnitudo.AxisY.Add(new Axis
             {
-                Title = "Intensità"
+                Title = "Intensità",
+                MinValue = 0,
+                MaxValue = 10,
             });
             this.chartMagnitudo.Series = new SeriesCollection
             {
