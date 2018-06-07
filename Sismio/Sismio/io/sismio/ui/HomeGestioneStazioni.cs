@@ -134,12 +134,9 @@ namespace Sismio.io.sismio.ui
 
         private void btnAggiungiNuovo_Click(object sender, EventArgs e)
         {
-            //TODO: Nuova stazione
-        }
-
-        private void btnDeleteStazione_Click(object sender, EventArgs e)
-        {
-            //TODO: Elimina stazione
+            //RegistraStazioneForm f = new RegistraStazioneForm(StazioniController);
+            //f.ShowDialog();
+            seedListView(null);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
