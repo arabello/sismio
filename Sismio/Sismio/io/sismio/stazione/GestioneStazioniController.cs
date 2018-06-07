@@ -32,7 +32,7 @@ namespace Sismio.io.sismio.stazione
             // Creo la tabella stazioni se non esiste già
             using (SQLiteCommand cmd = new SQLiteCommand("CREATE TABLE IF NOT EXISTS stazioni (" +
                                                          "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                                                         "nome VARCHAR(20) NOT NULL," + // TODO UNIQUE: Nome unico?
+                                                         "nome VARCHAR(20) NOT NULL UNIQUE," +
                                                          "locazione VARCHAR(100) NOT NULL," +
                                                          "indirizzoDiRete VARCHAR(20) NOT NULL," + // TODO UNIQUE: Indirizzo pubblico unico?
                                                          "porta INTEGER NOT NULL," +

@@ -19,10 +19,13 @@ using Sismio.Properties;
 
 namespace Sismio.io.sismio.ui
 {
+    public delegate void OnCambioSorgente(string nome);
+
     public partial class HomeDashboard : UserControl
     {
-        public SorgenteFactory Factory { get; set; }
         public GestoreEventi GestoreEventi { get; set; }
+        public ISorgente Sorgente { get; set; }
+        public IGestioneStazioniController GestioneStazioniController { get; set; }
 
         private BlockingCollection<double> codaMagnitudo = new BlockingCollection<double>();
         private BlockingCollection<double> codaFrequenza = new BlockingCollection<double>();
@@ -33,7 +36,6 @@ namespace Sismio.io.sismio.ui
 
         private PrivateFontCollection fonts = new PrivateFontCollection();
 
-        private ISorgente sorgente;
         private IAnalisi magnitudo;
         private IAnalisi frequenza;
         private Thread threadSorgente;
@@ -146,15 +148,15 @@ namespace Sismio.io.sismio.ui
             staFacendoLogout = true;
             magnitudoCodaThread.Abort();
             frequenzaCodaThread.Abort();
-            this.sorgente?.Ferma();
-            this.sorgente?.RimuoviAnalisi(magnitudo);
-            this.sorgente?.RimuoviAnalisi(frequenza);
+            Sorgente?.Ferma();
+            Sorgente?.RimuoviAnalisi(magnitudo);
+            Sorgente?.RimuoviAnalisi(frequenza);
             magnitudo.RicevitoriRisultato -= SegnalaMagnitudo;
             frequenza.RicevitoriRisultato -= SegnalaFrequenza;
             GestoreEventi.RicevitoriEventoSismico -= RiceviEvento;
             this.magnitudo = null;
             this.frequenza = null;
-            this.sorgente = null;
+            Sorgente = null;
             
         }
 
@@ -192,20 +194,16 @@ namespace Sismio.io.sismio.ui
         {
             this.panelAllertaEvento.Visible = false;
 
-            // Inizializzo sorgente
-            //ISorgente sorgente = factory.NuovaSorgenteRemota(stazione, "tizio", "password");
-            sorgente = Factory.NuovaSorgenteLocale();
-
-            threadSorgente = new Thread(() => sorgente.CicloPrincipale());
+            threadSorgente = new Thread(() => Sorgente.CicloPrincipale());
             threadSorgente.Start();
 
             magnitudo = new AnalisiMagnitudine();
-            sorgente.AggiungiAnalisi(magnitudo);
+            Sorgente.AggiungiAnalisi(magnitudo);
 
             magnitudo.RicevitoriRisultato += SegnalaMagnitudo;
 
             frequenza = new AnalisiFrequenza();
-            sorgente.AggiungiAnalisi(frequenza);
+            Sorgente.AggiungiAnalisi(frequenza);
 
             frequenza.RicevitoriRisultato += SegnalaFrequenza;
 

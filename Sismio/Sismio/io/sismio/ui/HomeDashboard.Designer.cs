@@ -72,7 +72,7 @@
             this.panelAllertaEvento.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.panelAllertaEvento.ColumnCount = 2;
             this.panelAllertaEvento.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.panelAllertaEvento.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 513F));
+            this.panelAllertaEvento.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 515F));
             this.panelAllertaEvento.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.panelAllertaEvento.Controls.Add(this.labelPrioritaEvento, 0, 0);
             this.panelAllertaEvento.Controls.Add(this.labelMessaggioEvento, 1, 0);
@@ -93,7 +93,7 @@
             this.labelPrioritaEvento.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelPrioritaEvento.Location = new System.Drawing.Point(4, 1);
             this.labelPrioritaEvento.Name = "labelPrioritaEvento";
-            this.labelPrioritaEvento.Size = new System.Drawing.Size(263, 124);
+            this.labelPrioritaEvento.Size = new System.Drawing.Size(261, 124);
             this.labelPrioritaEvento.TabIndex = 0;
             this.labelPrioritaEvento.Text = "label1";
             this.labelPrioritaEvento.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -106,9 +106,9 @@
             this.labelMessaggioEvento.AutoSize = true;
             this.labelMessaggioEvento.BackColor = System.Drawing.Color.Transparent;
             this.labelMessaggioEvento.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelMessaggioEvento.Location = new System.Drawing.Point(274, 1);
+            this.labelMessaggioEvento.Location = new System.Drawing.Point(272, 1);
             this.labelMessaggioEvento.Name = "labelMessaggioEvento";
-            this.labelMessaggioEvento.Size = new System.Drawing.Size(507, 124);
+            this.labelMessaggioEvento.Size = new System.Drawing.Size(509, 124);
             this.labelMessaggioEvento.TabIndex = 1;
             this.labelMessaggioEvento.Text = "label2";
             this.labelMessaggioEvento.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

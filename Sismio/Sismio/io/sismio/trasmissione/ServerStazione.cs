@@ -17,7 +17,7 @@ namespace Sismio.io.sismio.trasmissione
     // Prende in ingresso un sensore
     public class ServerStazione
     {
-        public const int PortaServer = 8001;
+        public int PortaServer { get; set; } = 8001;
 
         private readonly ISensore _sensore;
         private readonly IGestioneUtentiController _gestioneUtentiController = null;

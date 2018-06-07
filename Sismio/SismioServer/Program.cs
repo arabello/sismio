@@ -15,9 +15,9 @@ namespace SismioServer
     {
         static void Main(string[] args)
         {
-            ISensore sensore = new MockSensore();
-            //ISensore sensore = new SensoreSeriale("COM10", 74880);
-            sensore.RicevitoriDatiSensore += dati => Console.WriteLine(String.Join(",", dati)); 
+            //ISensore sensore = new MockSensore();
+            ISensore sensore = new SensoreSeriale("COM10", 74880);
+            //sensore.RicevitoriDatiSensore += dati => Console.WriteLine(String.Join(",", dati)); 
 
             // Creo il thread del sensore
             Thread threadSensore = new Thread(() => sensore.CicloPrincipale());
@@ -43,6 +43,7 @@ namespace SismioServer
 
             // Avvio il server della stazione
             ServerStazione server = new ServerStazione(sensore, gestioneUtentiController, SismioServer.CertificatoRisorsa.certificato, "passwordsismio");
+            server.PortaServer = 8002;
             server.Avvia();
         }
     }

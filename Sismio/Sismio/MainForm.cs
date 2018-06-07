@@ -19,13 +19,14 @@ namespace Sismio
         public MainForm(IGestioneUtentiController gestioneUtentiController,
             IGestioneStazioniController gestioneStazioniController,
             IStoricoController storico,
-            SorgenteFactory factory, GestoreEventi gestoreEventi,
+            ISorgente sorgente, GestoreEventi gestoreEventi,
             AutenticazioneController autenticazioneController)
         {
             InitializeComponent();
 
-            this.homeDashboard1.Factory = factory;
+            this.homeDashboard1.Sorgente = sorgente;
             this.homeDashboard1.GestoreEventi = gestoreEventi;
+            this.homeDashboard1.GestioneStazioniController = gestioneStazioniController;
 
             this.storico1.StoricoController = storico;
             this.homeGestioneUtenti1.UtentiController = gestioneUtentiController;
@@ -47,8 +48,18 @@ namespace Sismio
 
             // Nascondo i pulsanti in base ai permessi
             IUtente utenteCorrente = autenticazioneController.UtenteAttivo;
-            this.navGestioneStazioni.Visible = utenteCorrente.PuoModificareStazioni();
-            this.navGestioneUtenti.Visible = utenteCorrente.PuoModificareUtenti();
+
+            if (utenteCorrente == null)
+            {
+                this.navGestioneStazioni.Visible = false;
+                this.navGestioneUtenti.Visible = false;
+            }
+            else
+            {
+                this.navGestioneStazioni.Visible = utenteCorrente.PuoModificareStazioni();
+                this.navGestioneUtenti.Visible = utenteCorrente.PuoModificareUtenti();
+            }
+            
         }
 
         private void changeTab(TabPage tabPage)

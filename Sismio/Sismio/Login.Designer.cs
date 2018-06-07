@@ -34,6 +34,7 @@
             this.btnAccedi = new MaterialSkin.Controls.MaterialRaisedButton();
             this.textUsername = new System.Windows.Forms.TextBox();
             this.textPassword = new System.Windows.Forms.TextBox();
+            this.comboBoxSorgente = new System.Windows.Forms.ComboBox();
             this.background.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -43,6 +44,7 @@
             this.background.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.background.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(75)))), ((int)(((byte)(160)))));
+            this.background.Controls.Add(this.comboBoxSorgente);
             this.background.Controls.Add(this.title);
             this.background.Controls.Add(this.pictureBox1);
             this.background.Controls.Add(this.btnAccedi);
@@ -104,22 +106,30 @@
             // 
             this.textUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textUsername.Location = new System.Drawing.Point(312, 271);
+            this.textUsername.Location = new System.Drawing.Point(312, 243);
             this.textUsername.Margin = new System.Windows.Forms.Padding(16);
             this.textUsername.Name = "textUsername";
             this.textUsername.Size = new System.Drawing.Size(250, 32);
-            this.textUsername.TabIndex = 1;
+            this.textUsername.TabIndex = 0;
             // 
             // textPassword
             // 
             this.textPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textPassword.Location = new System.Drawing.Point(312, 312);
+            this.textPassword.Location = new System.Drawing.Point(312, 284);
             this.textPassword.Margin = new System.Windows.Forms.Padding(16);
             this.textPassword.Name = "textPassword";
             this.textPassword.PasswordChar = '*';
             this.textPassword.Size = new System.Drawing.Size(250, 32);
-            this.textPassword.TabIndex = 0;
+            this.textPassword.TabIndex = 1;
+            // 
+            // comboBoxSorgente
+            // 
+            this.comboBoxSorgente.FormattingEnabled = true;
+            this.comboBoxSorgente.Location = new System.Drawing.Point(312, 325);
+            this.comboBoxSorgente.Name = "comboBoxSorgente";
+            this.comboBoxSorgente.Size = new System.Drawing.Size(250, 21);
+            this.comboBoxSorgente.TabIndex = 2;
             // 
             // Login
             // 
@@ -147,5 +157,6 @@
         private MaterialSkin.Controls.MaterialRaisedButton btnAccedi;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label title;
+        private System.Windows.Forms.ComboBox comboBoxSorgente;
     }
 }

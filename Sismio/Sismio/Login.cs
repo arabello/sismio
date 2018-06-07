@@ -14,6 +14,7 @@ using System.Windows.Forms;
 using Sismio.io.sismio.eventi;
 using Sismio.io.sismio.sorgente;
 using Sismio.io.sismio.stazione;
+using Sismio.io.sismio.trasmissione;
 using Sismio.io.sismio.user;
 using Sismio.io.sismio.utente;
 
@@ -74,23 +75,69 @@ namespace Sismio
             // Precompilo il form
             this.textUsername.Text = "admin";
             this.textPassword.Text = "admin";
+
+            // Carico la combo box
+            CaricaSorgenti();
+        }
+
+        private void CaricaSorgenti()
+        {
+            this.comboBoxSorgente.Items.Clear();
+            this.comboBoxSorgente.Items.Add("Locale");
+            foreach (var stazione in _stazioniController.ListaTutti())
+            {
+                this.comboBoxSorgente.Items.Add(stazione.Nome);
+            }
+
+            this.comboBoxSorgente.SelectedIndex = 0;
         }
 
         private void btnAccedi_Click(object sender, EventArgs e)
         {
-            if (_controller.Autentica(this.textUsername.Text, this.textPassword.Text))  // TODO: levare true
+            string nomeSorgente = (string) comboBoxSorgente.SelectedItem;
+            ISorgente sorgente = null;
+
+            if (nomeSorgente == "Locale")
             {
-                this.Hide();
-                Form mainForm = new MainForm(_gestioneUtentiController, _stazioniController,_storicoController, _factory, _gestoreEventi, _controller);
-                DialogResult res = mainForm.ShowDialog();               
-                if (res.Equals(DialogResult.Abort))
-                    this.Close();
-               else
-                    this.Show();
+                if (_controller.Autentica(this.textUsername.Text, this.textPassword.Text))
+                {
+                    sorgente = _factory.NuovaSorgenteLocale();
+                }
+                else
+                {
+                    MessageBox.Show("Coppia utente e password non corretta. Impossibile accedere.", "Credenziali non valide", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {
-                MessageBox.Show("Coppia utente e password non corretta. Impossibile accedere.", "Credenziali non valide", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                IStazione stazione = _stazioniController.Cerca(nomeSorgente)[0];
+                try
+                {
+                    sorgente = _factory.NuovaSorgenteRemota(stazione, this.textUsername.Text, this.textPassword.Text);
+                }
+                catch (CredenzialiInvalideEccezione e1)
+                {
+                    MessageBox.Show("Coppia utente e password non corretta. Il server ha rifiutato la connessione.", "Credenziali non valide", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (NonFidatoEccezione e2)
+                {
+                    MessageBox.Show("Il certificato della stazione remota non è valido.", "Errore certificato", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (RispostaInvalidaEccezione e3)
+                {
+                    MessageBox.Show("Il server non ha restituito una risposta valida", "Risposta invalida", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
+            }
+
+
+            if (sorgente != null)
+            {
+                this.Hide();
+                Form mainForm = new MainForm(_gestioneUtentiController, _stazioniController, _storicoController, sorgente, _gestoreEventi, _controller);
+                DialogResult res = mainForm.ShowDialog();
+                CaricaSorgenti();
+                this.Show();
             }
         }
 
