@@ -89,6 +89,12 @@
       <DependentUpon>HomeGestioneStazioni.cs</DependentUpon>
     </Compile>
     <Compile Include="io\sismio\ui\MockAnalisi.cs" />
+    <Compile Include="io\sismio\ui\RegistraStazione.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="io\sismio\ui\RegistraStazione.Designer.cs">
+      <DependentUpon>RegistraStazione.cs</DependentUpon>
+    </Compile>
     <Compile Include="io\sismio\ui\RegistraUtente.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -181,6 +187,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="io\sismio\ui\HomeGestioneStazioni.resx">
       <DependentUpon>HomeGestioneStazioni.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="io\sismio\ui\RegistraStazione.resx">
+      <DependentUpon>RegistraStazione.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="io\sismio\ui\RegistraUtente.resx">
       <DependentUpon>RegistraUtente.cs</DependentUpon>
