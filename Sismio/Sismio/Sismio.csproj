@@ -82,6 +82,12 @@
     <Compile Include="io\sismio\ui\HomeDashboard.Designer.cs">
       <DependentUpon>HomeDashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="io\sismio\ui\HomeGestioneStazioni.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="io\sismio\ui\HomeGestioneStazioni.Designer.cs">
+      <DependentUpon>HomeGestioneStazioni.cs</DependentUpon>
+    </Compile>
     <Compile Include="io\sismio\ui\MockAnalisi.cs" />
     <Compile Include="io\sismio\ui\Storico.cs">
       <SubType>UserControl</SubType>
@@ -160,6 +166,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="io\sismio\ui\HomeDashboard.resx">
       <DependentUpon>HomeDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="io\sismio\ui\HomeGestioneStazioni.resx">
+      <DependentUpon>HomeGestioneStazioni.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="io\sismio\ui\Storico.resx">
       <DependentUpon>Storico.cs</DependentUpon>
