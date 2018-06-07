@@ -28,7 +28,12 @@ namespace Sismio.io.sismio.sensore
                 int[] buffer = new int[DIMENSIONE_BUFFER];
                 for (int i = 0; i < DIMENSIONE_BUFFER; i++)
                 {
-                    buffer[i] = (int)(Math.Cos(_time) * 40 + 500) + _random.Next(1, 80);
+                    int picco = 0;
+                    if (_random.Next(1, 1000) > 997)
+                    {
+                        picco = 300;
+                    }
+                    buffer[i] = (int)(Math.Cos(_time) * 20 + 500) + picco+ _random.Next(1,50);
                     _time += 0.1;
                 }
 

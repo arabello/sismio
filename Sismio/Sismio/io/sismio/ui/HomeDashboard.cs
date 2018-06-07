@@ -20,6 +20,7 @@ namespace Sismio.io.sismio.ui
     public partial class HomeDashboard : UserControl
     {
         public SorgenteFactory Factory { get; set; }
+        public GestoreEventi GestoreEventi { get; set; }
 
         private BlockingCollection<double> codaMagnitudo = new BlockingCollection<double>();
         private BlockingCollection<double> codaFrequenza = new BlockingCollection<double>();
@@ -75,6 +76,8 @@ namespace Sismio.io.sismio.ui
              * Set up chart Frequenza
              **/
             this.chartFrequenza.DisableAnimations = true;
+            this.chartFrequenza.DataTooltip = null;
+            this.chartFrequenza.Hoverable = false;
             this.chartFrequenza.AxisX.Add(new Axis
             {
                 Title = "Orario",
@@ -101,6 +104,8 @@ namespace Sismio.io.sismio.ui
              * Set up chart Magnitudo
              **/
             this.chartMagnitudo.DisableAnimations = true;
+            this.chartMagnitudo.DataTooltip = null;
+            this.chartMagnitudo.Hoverable = false;
             this.chartMagnitudo.AxisX.Add(new Axis
             {
                 Title = "Orario",
@@ -130,6 +135,8 @@ namespace Sismio.io.sismio.ui
             **/
             this.labelPrioritaEvento.Font = new Font(fonts.Families[0], 22.0F);
             this.labelMessaggioEvento.Font = new Font(fonts.Families[0], 16.0f);
+
+  
         }
 
         public void OnLogout()
@@ -142,6 +149,7 @@ namespace Sismio.io.sismio.ui
             this.sorgente?.RimuoviAnalisi(frequenza);
             magnitudo.RicevitoriRisultato -= SegnalaMagnitudo;
             frequenza.RicevitoriRisultato -= SegnalaFrequenza;
+            GestoreEventi.RicevitoriEventoSismico -= RiceviEvento;
             this.magnitudo = null;
             this.frequenza = null;
             this.sorgente = null;
@@ -180,6 +188,8 @@ namespace Sismio.io.sismio.ui
 
         private void HomeDashboard_Load(object sender, EventArgs e)
         {
+            this.panelAllertaEvento.Visible = false;
+
             // Inizializzo sorgente
             //ISorgente sorgente = factory.NuovaSorgenteRemota(stazione, "tizio", "password");
             sorgente = Factory.NuovaSorgenteLocale();
@@ -219,9 +229,17 @@ namespace Sismio.io.sismio.ui
             });
             frequenzaCodaThread.Start();
 
-            // MOCK DA ELIMINARE
-            IEventoSismico evento = new EventoSismico("MAGNITUDO", Priorita.Critical, "messaggio", DateTime.Now.Ticks, sorgente.Stazione);
-            allertaEventoAsync(evento);
+            // Registro il gestore di eventi
+            GestoreEventi.RicevitoriEventoSismico += RiceviEvento;
+        }
+
+        private void RiceviEvento(IEventoSismico evento)
+        {
+            this.Invoke((MethodInvoker)delegate
+            {
+                // Running on the UI thread
+                allertaEventoAsync(evento);
+            });
         }
 
         public async System.Threading.Tasks.Task allertaEventoAsync(IEventoSismico evento)

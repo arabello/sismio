@@ -95,7 +95,7 @@ namespace Sismio
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Form loginForm = new Login(autenticazioneController, gestioneUtentiController, stazioniController, storicoController, factory);
+            Form loginForm = new Login(autenticazioneController, gestioneUtentiController, stazioniController, storicoController, factory, gestoreEventi);
             Application.Run(loginForm);
         }
     }

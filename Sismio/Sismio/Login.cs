@@ -33,8 +33,11 @@ namespace Sismio
         private readonly IGestioneStazioniController _stazioniController;
         private readonly IStoricoController _storicoController;
         private readonly SorgenteFactory _factory;
+        private readonly GestoreEventi _gestoreEventi;
 
-        public Login(AutenticazioneController controller, IGestioneUtentiController gestioneUtentiController, IGestioneStazioniController stazioniController, IStoricoController storicoController, SorgenteFactory factory)
+        public Login(AutenticazioneController controller, IGestioneUtentiController gestioneUtentiController,
+            IGestioneStazioniController stazioniController, IStoricoController storicoController,
+            SorgenteFactory factory, GestoreEventi gestoreEventi)
         {
             InitializeComponent();
             _controller = controller;
@@ -42,6 +45,7 @@ namespace Sismio
             _stazioniController = stazioniController;
             _storicoController = storicoController;
             _factory = factory;
+            _gestoreEventi = gestoreEventi;
 
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
@@ -73,7 +77,7 @@ namespace Sismio
             if (_controller.Autentica(this.textUsername.Text, this.textPassword.Text) || true)  // TODO: levare true
             {
                 this.Hide();
-                Form mainForm = new MainForm(_gestioneUtentiController, _stazioniController,_storicoController, _factory);
+                Form mainForm = new MainForm(_gestioneUtentiController, _stazioniController,_storicoController, _factory, _gestoreEventi);
                 DialogResult res = mainForm.ShowDialog();               
                 if (res.Equals(DialogResult.Abort))
                     this.Close();
