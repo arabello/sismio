@@ -49,7 +49,7 @@
             this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.title.Location = new System.Drawing.Point(23, 14);
             this.title.Name = "title";
-            this.title.Size = new System.Drawing.Size(232, 37);
+            this.title.Size = new System.Drawing.Size(269, 37);
             this.title.TabIndex = 7;
             this.title.Text = "Gestione Stazioni";
             // 
@@ -71,6 +71,7 @@
             this.btnAggiungiNuovo.TabIndex = 8;
             this.btnAggiungiNuovo.Text = "Associa Nuova";
             this.btnAggiungiNuovo.UseVisualStyleBackColor = false;
+            this.btnAggiungiNuovo.Click += new System.EventHandler(this.btnAggiungiNuovo_Click);
             // 
             // btnDelete
             // 
@@ -83,6 +84,7 @@
             this.btnDelete.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.btnDelete.TabIndex = 9;
             this.btnDelete.TabStop = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // listView
             // 
@@ -105,6 +107,7 @@
             this.listView.TabIndex = 10;
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
+            this.listView.SelectedIndexChanged += new System.EventHandler(this.listView_SelectedIndexChanged);
             // 
             // Nome
             // 
@@ -114,17 +117,17 @@
             // Stazione
             // 
             this.Stazione.Text = "Stazione origine";
-            this.Stazione.Width = 250;
+            this.Stazione.Width = 130;
             // 
             // Indirizzo
             // 
             this.Indirizzo.Text = "IP:Porta";
-            this.Indirizzo.Width = 130;
+            this.Indirizzo.Width = 140;
             // 
             // Chiave
             // 
             this.Chiave.Text = "Chiave pubblica";
-            this.Chiave.Width = 250;
+            this.Chiave.Width = 390;
             // 
             // bgTextCerca
             // 
@@ -147,7 +150,7 @@
             this.textCerca.BackColor = System.Drawing.SystemColors.HotTrack;
             this.textCerca.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textCerca.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.textCerca.Location = new System.Drawing.Point(6, 5);
+            this.textCerca.Location = new System.Drawing.Point(6, 9);
             this.textCerca.Margin = new System.Windows.Forms.Padding(6, 3, 3, 3);
             this.textCerca.MaximumSize = new System.Drawing.Size(120, 26);
             this.textCerca.MinimumSize = new System.Drawing.Size(120, 26);
@@ -178,6 +181,7 @@
             this.Controls.Add(this.title);
             this.Name = "HomeGestioneStazioni";
             this.Size = new System.Drawing.Size(848, 518);
+            this.Load += new System.EventHandler(this.HomeGestioneStazioni_Load);
             ((System.ComponentModel.ISupportInitialize)(this.btnDelete)).EndInit();
             this.bgTextCerca.ResumeLayout(false);
             this.bgTextCerca.PerformLayout();

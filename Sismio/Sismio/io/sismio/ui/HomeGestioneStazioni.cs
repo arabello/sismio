@@ -112,10 +112,9 @@ namespace Sismio.io.sismio.ui
             //Add
             foreach (IStazione stazione in stazioni)
             {
-                // TODO porta
                 var version = new string[]
                 {
-                    stazione.Nome, stazione.Locazione, stazione.IndirizzoDiRete.ToString(), stazione.ImprontaChiavePubblica
+                    stazione.Nome, stazione.Locazione, stazione.IndirizzoDiRete.ToString()+":"+stazione.Porta.ToString(), stazione.ImprontaChiavePubblica
                 };
                 var item = new ListViewItem(version);
                 item.BackColor = Color.AliceBlue;
@@ -162,6 +161,11 @@ namespace Sismio.io.sismio.ui
             {
                 seedListView(this.textCerca.Text);
             }
+        }
+
+        private void listView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

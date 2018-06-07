@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Net;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using Sismio.io.sismio.analisi;
@@ -51,6 +52,13 @@ namespace Sismio
             IGestioneStazioniController stazioniController = new GestioneStazioniController(PERCORSO_DATABASE);
             stazioniController.Registra(stazione);
 
+            stazione.Nome = "ReggioEmiliaA1";
+            stazione.Locazione = "Reggio Emilia";
+            stazione.IndirizzoDiRete = IPAddress.Parse("10.1.45.230");
+            stazione.Porta = 5555;
+
+            stazioniController.Registra(stazione);
+
             // Inizializzo il gestore utenti
 
             IGestioneUtentiController gestioneUtentiController = new GestioneUtentiController(PERCORSO_DATABASE);
@@ -65,6 +73,7 @@ namespace Sismio
                 LoginRemoto = true,
                 Username = "tizio"
             };
+            
             utente.ImpostaPasswordDaOriginale("password");
             if (gestioneUtentiController.ValidaCredenziali("tizio", "password") == null)
             {
