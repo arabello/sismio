@@ -112,7 +112,7 @@
             // Nome
             // 
             this.Nome.Text = "Nome";
-            this.Nome.Width = 100;
+            this.Nome.Width = 160;
             // 
             // Stazione
             // 
@@ -122,7 +122,7 @@
             // Indirizzo
             // 
             this.Indirizzo.Text = "IP:Porta";
-            this.Indirizzo.Width = 140;
+            this.Indirizzo.Width = 150;
             // 
             // Chiave
             // 
