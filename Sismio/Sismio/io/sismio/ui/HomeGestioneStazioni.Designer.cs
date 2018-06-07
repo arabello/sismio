@@ -113,8 +113,8 @@
             // 
             // Stazione
             // 
-            this.Stazione.Text = "Stazione d\'origine";
-            this.Stazione.Width = 270;
+            this.Stazione.Text = "Stazione origine";
+            this.Stazione.Width = 250;
             // 
             // Indirizzo
             // 
