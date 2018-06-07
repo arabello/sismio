@@ -114,22 +114,22 @@
             // Email
             // 
             this.Email.Text = "Email";
-            this.Email.Width = 145;
+            this.Email.Width = 235;
             // 
             // Username
             // 
             this.Username.Text = "Username";
-            this.Username.Width = 170;
+            this.Username.Width = 160;
             // 
             // Tipo
             // 
             this.Tipo.Text = "Tipo";
-            this.Tipo.Width = 187;
+            this.Tipo.Width = 177;
             // 
             // LoginRemoto
             // 
             this.LoginRemoto.Text = "Login Remoto";
-            this.LoginRemoto.Width = 216;
+            this.LoginRemoto.Width = 146;
             // 
             // bgTextCerca
             // 

@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Text;
+using System.Windows;
+using System.Windows.Forms.VisualStyles;
 using MaterialSkin;
 using Sismio.io.sismio.utente;
 
@@ -135,16 +137,11 @@ namespace Sismio.io.sismio.ui
 
         private void btnAggiungiNuovo_Click(object sender, EventArgs e)
         {
-            //TODO: Nuovo utente
+           RegistraUtenteForm f = new RegistraUtenteForm(UtentiController);
+            f.ShowDialog();
+            seedListView(null);
         }
-
-        private void btnDeleteUtente_Click(object sender, EventArgs e)
-        {
-            //TODO: Elimina utente
-            //this.gestioneUtentiLV.SelectedItems
-            //this.gestioneUtentiLV.SelectedItems
-        }
-
+        
         private void btnDelete_Click(object sender, EventArgs e)
         {
             int index = this.listView.SelectedIndices[0];

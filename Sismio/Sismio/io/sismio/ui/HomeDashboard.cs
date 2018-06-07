@@ -4,19 +4,23 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using LiveCharts;
 using LiveCharts.Wpf;
 using MaterialSkin;
 using Sismio.io.sismio.analisi;
+using Sismio.io.sismio.eventi;
 using Sismio.io.sismio.sensore;
 using Sismio.io.sismio.sorgente;
+using Sismio.io.sismio.stazione;
 
 namespace Sismio.io.sismio.ui
 {
     public partial class HomeDashboard : UserControl
     {
         public SorgenteFactory Factory { get; set; }
+        public GestoreEventi GestoreEventi { get; set; }
 
         private BlockingCollection<double> codaMagnitudo = new BlockingCollection<double>();
         private BlockingCollection<double> codaFrequenza = new BlockingCollection<double>();
@@ -37,6 +41,9 @@ namespace Sismio.io.sismio.ui
         private Thread frequenzaCodaThread;
 
         Font robotoMonoBold;
+
+        private int ALLERTA_TIME_MULTIPLIER = 3;
+
         public HomeDashboard()
         {
             InitializeComponent();
@@ -69,6 +76,8 @@ namespace Sismio.io.sismio.ui
              * Set up chart Frequenza
              **/
             this.chartFrequenza.DisableAnimations = true;
+            this.chartFrequenza.DataTooltip = null;
+            this.chartFrequenza.Hoverable = false;
             this.chartFrequenza.AxisX.Add(new Axis
             {
                 Title = "Orario",
@@ -95,6 +104,8 @@ namespace Sismio.io.sismio.ui
              * Set up chart Magnitudo
              **/
             this.chartMagnitudo.DisableAnimations = true;
+            this.chartMagnitudo.DataTooltip = null;
+            this.chartMagnitudo.Hoverable = false;
             this.chartMagnitudo.AxisX.Add(new Axis
             {
                 Title = "Orario",
@@ -103,7 +114,9 @@ namespace Sismio.io.sismio.ui
 
             this.chartMagnitudo.AxisY.Add(new Axis
             {
-                Title = "Intensità"
+                Title = "Intensità",
+                MinValue = 0,
+                MaxValue = 10,
             });
             this.chartMagnitudo.Series = new SeriesCollection
             {
@@ -118,8 +131,12 @@ namespace Sismio.io.sismio.ui
             };
 
             /**
-             * Set up events analisi
-             **/
+             * Labels allerta evento
+            **/
+            this.labelPrioritaEvento.Font = new Font(fonts.Families[0], 22.0F);
+            this.labelMessaggioEvento.Font = new Font(fonts.Families[0], 16.0f);
+
+  
         }
 
         public void OnLogout()
@@ -132,6 +149,7 @@ namespace Sismio.io.sismio.ui
             this.sorgente?.RimuoviAnalisi(frequenza);
             magnitudo.RicevitoriRisultato -= SegnalaMagnitudo;
             frequenza.RicevitoriRisultato -= SegnalaFrequenza;
+            GestoreEventi.RicevitoriEventoSismico -= RiceviEvento;
             this.magnitudo = null;
             this.frequenza = null;
             this.sorgente = null;
@@ -170,6 +188,8 @@ namespace Sismio.io.sismio.ui
 
         private void HomeDashboard_Load(object sender, EventArgs e)
         {
+            this.panelAllertaEvento.Visible = false;
+
             // Inizializzo sorgente
             //ISorgente sorgente = factory.NuovaSorgenteRemota(stazione, "tizio", "password");
             sorgente = Factory.NuovaSorgenteLocale();
@@ -208,6 +228,41 @@ namespace Sismio.io.sismio.ui
                 }
             });
             frequenzaCodaThread.Start();
+
+            // Registro il gestore di eventi
+            GestoreEventi.RicevitoriEventoSismico += RiceviEvento;
+        }
+
+        private void RiceviEvento(IEventoSismico evento)
+        {
+            this.Invoke((MethodInvoker)delegate
+            {
+                // Running on the UI thread
+                allertaEventoAsync(evento);
+            });
+        }
+
+        public async System.Threading.Tasks.Task allertaEventoAsync(IEventoSismico evento)
+        {
+            this.panelAllertaEvento.Visible = true;
+            this.panelAllertaEvento.BackColor = SismioColor.Priorita(evento.Priorita);
+            this.labelPrioritaEvento.Text = evento.Priorita.ToString().ToUpper();
+            this.labelMessaggioEvento.Text = evento.Messaggio.ToString();
+
+            if (evento.Priorita == Priorita.Fatal)
+            {
+                this.labelPrioritaEvento.ForeColor = Color.White;
+                this.labelMessaggioEvento.ForeColor = Color.White;
+            }
+            else
+            {
+                this.labelPrioritaEvento.ForeColor = Color.Black;
+                this.labelMessaggioEvento.ForeColor = Color.Black;
+            }
+
+            int criticita = (int)evento.Priorita + 1;
+            await Task.Delay(TimeSpan.FromSeconds(criticita * ALLERTA_TIME_MULTIPLIER));
+            this.panelAllertaEvento.Visible = false;
         }
     }
 }

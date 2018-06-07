@@ -184,6 +184,7 @@
             this.filtroDateTimeFine.Name = "filtroDateTimeFine";
             this.filtroDateTimeFine.Size = new System.Drawing.Size(113, 20);
             this.filtroDateTimeFine.TabIndex = 3;
+            this.filtroDateTimeFine.CloseUp += new System.EventHandler(this.filtroDateTimeFine_CloseUp);
             // 
             // label2
             // 
@@ -219,6 +220,7 @@
             this.filtroDateTimeInizio.Name = "filtroDateTimeInizio";
             this.filtroDateTimeInizio.Size = new System.Drawing.Size(109, 20);
             this.filtroDateTimeInizio.TabIndex = 2;
+            this.filtroDateTimeInizio.CloseUp += new System.EventHandler(this.filtroDateTimeInizio_CloseUp);
             // 
             // label1
             // 
@@ -238,7 +240,7 @@
             this.panelFiltro.SetColumnSpan(this.tableLayoutPanel3, 2);
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.84746F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.15254F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 130F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 133F));
             this.tableLayoutPanel3.Controls.Add(this.filtroPriorita, 2, 0);
             this.tableLayoutPanel3.Controls.Add(this.textFiltro, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.label3, 1, 0);
@@ -264,6 +266,7 @@
             this.filtroPriorita.Name = "filtroPriorita";
             this.filtroPriorita.Size = new System.Drawing.Size(114, 21);
             this.filtroPriorita.TabIndex = 1;
+            this.filtroPriorita.SelectedIndexChanged += new System.EventHandler(this.filtroPriorita_SelectedIndexChanged);
             // 
             // textFiltro
             // 
@@ -283,7 +286,7 @@
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(190, 5);
+            this.label3.Location = new System.Drawing.Point(188, 5);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(39, 13);
             this.label3.TabIndex = 0;

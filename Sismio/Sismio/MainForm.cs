@@ -18,11 +18,12 @@ namespace Sismio
         public MainForm(IGestioneUtentiController gestioneUtentiController,
             IGestioneStazioniController gestioneStazioniController,
             IStoricoController storico,
-            SorgenteFactory factory)
+            SorgenteFactory factory, GestoreEventi gestoreEventi)
         {
             InitializeComponent();
 
             this.homeDashboard1.Factory = factory;
+            this.homeDashboard1.GestoreEventi = gestoreEventi;
 
             this.storico1.StoricoController = storico;
             this.homeGestioneUtenti1.UtentiController = gestioneUtentiController;
