@@ -19,7 +19,8 @@ namespace Sismio.io.sismio.ui
 {
     public partial class HomeDashboard : UserControl
     {
-        public SorgenteFactory Factory { get; set; }
+        public ISorgente Sorgente { get; set; }
+        public IGestioneStazioniController GestioneStazioniController { get; set; }
 
         private BlockingCollection<double> codaMagnitudo = new BlockingCollection<double>();
         private BlockingCollection<double> codaFrequenza = new BlockingCollection<double>();
@@ -180,20 +181,23 @@ namespace Sismio.io.sismio.ui
 
         private void HomeDashboard_Load(object sender, EventArgs e)
         {
-            // Inizializzo sorgente
-            //ISorgente sorgente = factory.NuovaSorgenteRemota(stazione, "tizio", "password");
-            sorgente = Factory.NuovaSorgenteLocale();
+            this.comboBoxSorgente.Items.Clear();
+            foreach (var stazione in GestioneStazioniController.ListaTutti())
+            {
+                this.comboBoxSorgente.Items.Add(stazione.Nome);
+            }
+            this.comboBoxSorgente.Items.Add("Locale");
 
-            threadSorgente = new Thread(() => sorgente.CicloPrincipale());
+            threadSorgente = new Thread(() => Sorgente.CicloPrincipale());
             threadSorgente.Start();
 
             magnitudo = new AnalisiMagnitudine();
-            sorgente.AggiungiAnalisi(magnitudo);
+            Sorgente.AggiungiAnalisi(magnitudo);
 
             magnitudo.RicevitoriRisultato += SegnalaMagnitudo;
 
             frequenza = new AnalisiFrequenza();
-            sorgente.AggiungiAnalisi(frequenza);
+            Sorgente.AggiungiAnalisi(frequenza);
 
             frequenza.RicevitoriRisultato += SegnalaFrequenza;
 
@@ -220,8 +224,8 @@ namespace Sismio.io.sismio.ui
             frequenzaCodaThread.Start();
 
             // MOCK DA ELIMINARE
-            IEventoSismico evento = new EventoSismico("MAGNITUDO", Priorita.Critical, "messaggio", DateTime.Now.Ticks, sorgente.Stazione);
-            allertaEventoAsync(evento);
+            //IEventoSismico evento = new EventoSismico("MAGNITUDO", Priorita.Critical, "messaggio", DateTime.Now.Ticks, sorgente.Stazione);
+            //allertaEventoAsync(evento);
         }
 
         public async System.Threading.Tasks.Task allertaEventoAsync(IEventoSismico evento)

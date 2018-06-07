@@ -215,7 +215,7 @@ namespace Sismio
             // 
             // homeDashboard1
             // 
-            this.homeDashboard1.Factory = null;
+            this.homeDashboard1.Sorgente = null;
             this.homeDashboard1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(215)))), ((int)(((byte)(215)))), ((int)(((byte)(215)))));
             this.homeDashboard1.Location = new System.Drawing.Point(0, 4);
             this.homeDashboard1.Name = "homeDashboard1";

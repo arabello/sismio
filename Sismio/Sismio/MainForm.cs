@@ -22,7 +22,8 @@ namespace Sismio
         {
             InitializeComponent();
 
-            this.homeDashboard1.Factory = factory;
+            this.homeDashboard1.Sorgente = factory.NuovaSorgenteLocale();
+            this.homeDashboard1.GestioneStazioniController = gestioneStazioniController;
 
             this.storico1.StoricoController = storico;
             this.homeGestioneUtenti1.UtentiController = gestioneUtentiController;

@@ -73,7 +73,7 @@ namespace Sismio
             if (_controller.Autentica(this.textUsername.Text, this.textPassword.Text) || true)  // TODO: levare true
             {
                 this.Hide();
-                Form mainForm = new MainForm(_gestioneUtentiController, _stazioniController,_storicoController, _factory);
+                Form mainForm = new MainForm(_gestioneUtentiController, _stazioniController, _storicoController, _factory);
                 DialogResult res = mainForm.ShowDialog();               
                 if (res.Equals(DialogResult.Abort))
                     this.Close();
