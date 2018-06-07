@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Text;
+using System.Media;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,6 +15,7 @@ using Sismio.io.sismio.eventi;
 using Sismio.io.sismio.sensore;
 using Sismio.io.sismio.sorgente;
 using Sismio.io.sismio.stazione;
+using Sismio.Properties;
 
 namespace Sismio.io.sismio.ui
 {
@@ -237,6 +239,10 @@ namespace Sismio.io.sismio.ui
         {
             this.Invoke((MethodInvoker)delegate
             {
+                // Avvio l'allarme sonoro
+                SoundPlayer simpleSound = new SoundPlayer(Resources.alarm);
+                simpleSound.Play();
+
                 // Running on the UI thread
                 allertaEventoAsync(evento);
             });
