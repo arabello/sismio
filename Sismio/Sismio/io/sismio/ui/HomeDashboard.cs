@@ -85,12 +85,14 @@ namespace Sismio.io.sismio.ui
             this.chartFrequenza.AxisX.Add(new Axis
             {
                 Title = "Orario",
-                LabelFormatter = value => new System.DateTime((long)(DateTime.Now.Ticks + (value * TimeSpan.FromMinutes(1).Ticks))).ToString("t") // Divido l'asse x discretamente ai minuti
+                LabelFormatter = value => new System.DateTime((long)(DateTime.Now.Ticks + (value * TimeSpan.FromSeconds(30).Ticks))).ToString("t") // Divido l'asse x discretamente ai minuti
             });
 
             this.chartFrequenza.AxisY.Add(new Axis
             {
-                Title = "Scosse/minuto"
+                Title = "Scosse/minuto",
+                MinValue = 0,
+                MaxValue = 15
             });
             this.chartFrequenza.Series = new SeriesCollection
             {
@@ -264,7 +266,7 @@ namespace Sismio.io.sismio.ui
                 this.labelMessaggioEvento.ForeColor = Color.Black;
             }
 
-            int criticita = (int)evento.Priorita + 1;
+            int criticita = ((int) evento.Priorita) + 1;
             await Task.Delay(TimeSpan.FromSeconds(criticita * ALLERTA_TIME_MULTIPLIER));
             this.panelAllertaEvento.Visible = false;
         }
