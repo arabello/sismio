@@ -171,7 +171,7 @@ namespace Sismio.io.sismio.stazione
                     if (risultato > 0)
                     {
                        stazione.Id = _connection.LastInsertRowId;
-                        // Se true, scrivo sul file di log
+                       // Se true, scrivo sul file di log
                        Logger.Scrivi("Registrata stazione: " + stazione);
                     }
                 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SQLite;
 using Sismio.io.sismio.database;
+using Sismio.io.sismio.log;
 
 namespace Sismio.io.sismio.utente
 {
@@ -77,7 +78,8 @@ namespace Sismio.io.sismio.utente
                     LoginRemoto = false
                 };
                 adminUtente.ImpostaPasswordDaOriginale("admin");
-                
+
+                Logger.Scrivi("Registrato utente admin: "+adminUtente);
                 // Lo aggiungo al database
                 Registra(adminUtente);
             }
@@ -124,8 +126,6 @@ namespace Sismio.io.sismio.utente
 
         public bool Elimina(Utente utente)
         {
-            // TODO Aggiungere il log dell'operazione
-
             // Assicurati che l'utente abbia l'id e quindi possa essere eliminato
             if (utente.Id == -1)
                 throw new InvalidOperationException("L'utente non contiene l'ID, quindi non può essere eliminato");
@@ -139,6 +139,9 @@ namespace Sismio.io.sismio.utente
                 try
                 {
                     risultato = cmd.ExecuteNonQuery();
+
+                    if (risultato > 0)
+                        Logger.Scrivi("Eliminato utente: " + utente);
                 }
                 catch (SQLiteException e)
                 {
@@ -207,8 +210,6 @@ namespace Sismio.io.sismio.utente
 
         public bool Registra(Utente utente)
         {
-            // TODO Aggiungere il log dell'operazione
-
             int risultato = -1;
             using (SQLiteCommand cmd = new SQLiteCommand(_connection))
             {
@@ -231,6 +232,7 @@ namespace Sismio.io.sismio.utente
                     if (risultato > 0)
                     {
                         utente.Id = _connection.LastInsertRowId;
+                        Logger.Scrivi("Registrato utente: " + utente);
                     }
                 }
                 catch (SQLiteException e)

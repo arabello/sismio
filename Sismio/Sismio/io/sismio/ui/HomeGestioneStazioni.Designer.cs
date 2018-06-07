@@ -158,6 +158,7 @@
             this.textCerca.Size = new System.Drawing.Size(120, 26);
             this.textCerca.TabIndex = 0;
             this.textCerca.Text = "Cerca qui";
+            this.textCerca.TextChanged += new System.EventHandler(this.textCerca_TextChanged);
             // 
             // iconCerca
             // 

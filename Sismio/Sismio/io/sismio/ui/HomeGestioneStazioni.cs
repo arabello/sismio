@@ -152,17 +152,17 @@ namespace Sismio.io.sismio.ui
             seedListView(null);
         }
 
+        private void listView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void textCerca_TextChanged(object sender, EventArgs e)
         {
             if (this.textCerca.Text != "Cerca qui")
             {
                 seedListView(this.textCerca.Text);
             }
-        }
-
-        private void listView_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

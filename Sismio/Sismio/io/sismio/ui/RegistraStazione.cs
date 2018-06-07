@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Sismio.io.sismio.stazione;
+using Sismio.io.sismio.utente;
 
 namespace Sismio.io.sismio.ui
 {
@@ -24,9 +25,9 @@ namespace Sismio.io.sismio.ui
 
         private String validation()
         {
-            if (inputNome.Text == "Nome stazione" || inputNome.Text == "") // TODO controllare altri vincoli del documento
+            if (inputNome.Text == "Nome stazione" || inputNome.Text == "" || ! (inputNome.Text.Length <= 20)) 
                 return "Nome stazione";
-            if (inputLocazione.Text == "Locazione" || inputLocazione.Text == "")
+            if (inputLocazione.Text == "Locazione" || inputLocazione.Text == "" || !(inputLocazione.Text.Length <= 100))
                 return "Locazione";
             if (inputIP.Text == "Indirizzo IP" || inputIP.Text == "" || ! IPAddress.TryParse(inputIP.Text, out IPAddress ind))
                 return "Indirizzo IP";
@@ -47,13 +48,15 @@ namespace Sismio.io.sismio.ui
 
             Stazione stazione;
 
+            string hash = HashUtil.GeneraSHA256(inputNome.Text); // TODO Aggiungere altri campi?
+            // TODO fix hash nella grafica
             stazione = new Stazione
             {
                 Nome = inputNome.Text,
                 Locazione = inputLocazione.Text,
                 IndirizzoDiRete = IPAddress.Parse(inputIP.Text),
                 Porta = Int32.Parse(inputPorta.Text),
-                ImprontaChiavePubblica = "AAGGA616625H2AG126G161AG16A1G62" // TODO
+                ImprontaChiavePubblica = hash 
             };
             
             bool res = Controller.Registra(stazione);

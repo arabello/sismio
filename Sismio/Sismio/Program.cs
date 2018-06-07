@@ -36,8 +36,8 @@ namespace Sismio
             threadSensore.Name = "Thread Sensore";
             threadSensore.Start();
 
-
-
+            IGestioneStazioniController stazioniController = new GestioneStazioniController(PERCORSO_DATABASE);
+            
             Stazione stazione = new Stazione
             {
                 Nome = "BolognaA1",
@@ -46,7 +46,7 @@ namespace Sismio
                 Porta = 8001,
                 ImprontaChiavePubblica = "E2C9153221FE658AFDCEBE095EE5D2392AF8C4AE"
             };
-
+            /*
             // Inizializzo il gestore delle stazioni
 
             IGestioneStazioniController stazioniController = new GestioneStazioniController(PERCORSO_DATABASE);
@@ -57,7 +57,7 @@ namespace Sismio
             stazione.IndirizzoDiRete = IPAddress.Parse("10.1.45.230");
             stazione.Porta = 5555;
 
-            stazioniController.Registra(stazione);
+            stazioniController.Registra(stazione);*/
 
             // Inizializzo il gestore utenti
 

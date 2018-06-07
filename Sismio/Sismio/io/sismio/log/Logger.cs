@@ -4,8 +4,7 @@ using System.IO;
 
 namespace Sismio.io.sismio.log
 {
-    // TODO test?
-    // Cambiato: aggiunyo override di Scrivi()
+    // Cambiato: aggiunto override di Scrivi()
 
     /// <summary>
     /// Singleton per la scrittura di log.
