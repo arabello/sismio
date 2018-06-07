@@ -26,6 +26,7 @@ namespace Sismio
 
             this.storico1.StoricoController = storico;
             this.homeGestioneUtenti1.UtentiController = gestioneUtentiController;
+            this.homeGestioneStazioni1.StazioniController = gestioneStazioniController;
 
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
