@@ -24,13 +24,13 @@ namespace Sismio.io.sismio.ui
 
         private String validation()
         {
-            if (inputNome.Text == "Nome stazione" || inputNome.Text == "")
+            if (inputNome.Text == "Nome stazione" || inputNome.Text == "") // TODO controllare altri vincoli del documento
                 return "Nome stazione";
             if (inputLocazione.Text == "Locazione" || inputLocazione.Text == "")
                 return "Locazione";
             if (inputIP.Text == "Indirizzo IP" || inputIP.Text == "" || ! IPAddress.TryParse(inputIP.Text, out IPAddress ind))
                 return "Indirizzo IP";
-            if (inputPorta.Text == "Porta" || inputPorta.Text == "" || ! int.TryParse(inputPorta.Text, out int number))
+            if (inputPorta.Text == "Porta" || inputPorta.Text == "" || ! int.TryParse(inputPorta.Text, out int number) || ! (int.Parse(inputPorta.Text) > 1024 && int.Parse(inputPorta.Text) < 65535))
                 return "Porta";
             return null;
         }

@@ -1,6 +1,6 @@
 ﻿namespace Sismio
 {
-    partial class RegistraStazioniForm
+    partial class RegistraStazioneForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,44 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
-            this.RegistraStazioneForm = new Sismio.io.sismio.ui.RegistraStazione();
-            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
+            this.registraStazione1 = new Sismio.io.sismio.ui.RegistraStazione();
             this.SuspendLayout();
             // 
-            // fileSystemWatcher1
+            // registraStazione1
             // 
-            this.fileSystemWatcher1.EnableRaisingEvents = true;
-            this.fileSystemWatcher1.SynchronizingObject = this;
-            this.fileSystemWatcher1.Changed += new System.IO.FileSystemEventHandler(this.fileSystemWatcher1_Changed);
+            this.registraStazione1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.registraStazione1.Location = new System.Drawing.Point(0, 64);
+            this.registraStazione1.MaximumSize = new System.Drawing.Size(600, 400);
+            this.registraStazione1.MinimumSize = new System.Drawing.Size(600, 400);
+            this.registraStazione1.Name = "registraStazione1";
+            this.registraStazione1.Size = new System.Drawing.Size(600, 400);
+            this.registraStazione1.TabIndex = 0;
             // 
             // RegistraStazioneForm
-            // 
-            this.RegistraStazioneForm.Location = new System.Drawing.Point(0, 63);
-            this.RegistraStazioneForm.MaximumSize = new System.Drawing.Size(600, 400);
-            this.RegistraStazioneForm.MinimumSize = new System.Drawing.Size(600, 400);
-            this.RegistraStazioneForm.Name = "RegistraStazioneForm";
-            this.RegistraStazioneForm.Size = new System.Drawing.Size(600, 400);
-            this.RegistraStazioneForm.TabIndex = 0;
-            // 
-            // RegistraStazioniForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 460);
-            this.Controls.Add(this.RegistraStazioneForm);
+            this.Controls.Add(this.registraStazione1);
             this.MaximumSize = new System.Drawing.Size(600, 460);
             this.MinimumSize = new System.Drawing.Size(600, 460);
-            this.Name = "RegistraStazioniForm";
+            this.Name = "RegistraStazioneForm";
             this.Text = "Aggiungi nuova stazione";
-            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
+            this.Load += new System.EventHandler(this.RegistraStazioneForm_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.IO.FileSystemWatcher fileSystemWatcher1;
-        private io.sismio.ui.RegistraStazione RegistraStazioneForm;
+        private io.sismio.ui.RegistraStazione registraStazione1;
     }
 }

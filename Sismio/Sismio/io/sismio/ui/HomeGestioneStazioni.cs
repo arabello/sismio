@@ -134,8 +134,8 @@ namespace Sismio.io.sismio.ui
 
         private void btnAggiungiNuovo_Click(object sender, EventArgs e)
         {
-            //RegistraStazioneForm f = new RegistraStazioneForm(StazioniController);
-            //f.ShowDialog();
+            RegistraStazioneForm f = new RegistraStazioneForm(StazioniController);
+            f.ShowDialog();
             seedListView(null);
         }
 
