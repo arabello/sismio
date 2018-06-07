@@ -70,14 +70,18 @@ namespace Sismio
 
             // Focus at the startup
             this.ActiveControl = this.textUsername;
+
+            // Precompilo il form
+            this.textUsername.Text = "admin";
+            this.textPassword.Text = "admin";
         }
 
         private void btnAccedi_Click(object sender, EventArgs e)
         {
-            if (_controller.Autentica(this.textUsername.Text, this.textPassword.Text) || true)  // TODO: levare true
+            if (_controller.Autentica(this.textUsername.Text, this.textPassword.Text))  // TODO: levare true
             {
                 this.Hide();
-                Form mainForm = new MainForm(_gestioneUtentiController, _stazioniController,_storicoController, _factory, _gestoreEventi);
+                Form mainForm = new MainForm(_gestioneUtentiController, _stazioniController,_storicoController, _factory, _gestoreEventi, _controller);
                 DialogResult res = mainForm.ShowDialog();               
                 if (res.Equals(DialogResult.Abort))
                     this.Close();
@@ -91,6 +95,11 @@ namespace Sismio
         }
 
         private void background_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void title_Click(object sender, EventArgs e)
         {
 
         }

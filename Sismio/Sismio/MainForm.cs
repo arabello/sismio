@@ -10,6 +10,7 @@ using System.Drawing.Text;
 using System.Windows.Forms;
 using Sismio.io.sismio.sensore;
 using Sismio.io.sismio.sorgente;
+using Sismio.io.sismio.user;
 
 namespace Sismio
 {
@@ -18,7 +19,8 @@ namespace Sismio
         public MainForm(IGestioneUtentiController gestioneUtentiController,
             IGestioneStazioniController gestioneStazioniController,
             IStoricoController storico,
-            SorgenteFactory factory, GestoreEventi gestoreEventi)
+            SorgenteFactory factory, GestoreEventi gestoreEventi,
+            AutenticazioneController autenticazioneController)
         {
             InitializeComponent();
 
@@ -42,6 +44,11 @@ namespace Sismio
             this.tabGestioneStazioni.BackColor = SismioColor.BackColor;
             this.tabGestioneUtenti.BackColor = SismioColor.BackColor;
             this.tabStorico.BackColor = SismioColor.BackColor;
+
+            // Nascondo i pulsanti in base ai permessi
+            IUtente utenteCorrente = autenticazioneController.UtenteAttivo;
+            this.navGestioneStazioni.Visible = utenteCorrente.PuoModificareStazioni();
+            this.navGestioneUtenti.Visible = utenteCorrente.PuoModificareUtenti();
         }
 
         private void changeTab(TabPage tabPage)
@@ -85,6 +92,11 @@ namespace Sismio
         }
 
         private void tabGestioneStazioni_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
         {
 
         }

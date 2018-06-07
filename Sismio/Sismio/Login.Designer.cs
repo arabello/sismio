@@ -65,6 +65,7 @@
             this.title.Size = new System.Drawing.Size(368, 85);
             this.title.TabIndex = 4;
             this.title.Text = "ismio";
+            this.title.Click += new System.EventHandler(this.title_Click);
             // 
             // pictureBox1
             // 
