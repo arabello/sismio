@@ -1,4 +1,6 @@
-﻿namespace Sismio.io.sismio.eventi
+﻿using System.Threading;
+
+namespace Sismio.io.sismio.eventi
 {
     public delegate void OnEventoSismico(IEventoSismico eventoSismico);
 
@@ -15,11 +17,16 @@
 
         public void NotificaEvento(EventoSismico evnt)
         {
-            // Send the event to every receiver, while making sure they are not null
-            RicevitoriEventoSismico?.Invoke(evnt);
+            // Notifico l'evento e lo registro in maniera asincrona
+            Thread _threadNotifica = new Thread(() =>
+            {
+                // Send the event to every receiver, while making sure they are not null
+                RicevitoriEventoSismico?.Invoke(evnt);
 
-            // Save the event using the EventoSismico Repository
-            _storicoController.RegistraEvento(evnt);
+                // Save the event using the EventoSismico Repository
+                _storicoController.RegistraEvento(evnt);
+            });
+            _threadNotifica.Start();
         }
     }
 }

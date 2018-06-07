@@ -27,8 +27,8 @@ namespace Sismio
         static void Main()
         {
             // Inizializzo il sensore
-            ISensore sensore = new MockSensore();
-            //ISensore sensore = new SensoreSeriale("COM10", 74880);
+            //ISensore sensore = new MockSensore();
+            ISensore sensore = new SensoreSeriale("COM10", 74880);
             //sensore.RicevitoriDatiSensore += dati => Console.WriteLine(String.Join(",", dati));
 
             // Creo il thread del sensore e lo avvio
@@ -107,9 +107,5 @@ namespace Sismio
             Form loginForm = new Login(autenticazioneController, gestioneUtentiController, stazioniController, storicoController, factory, gestoreEventi);
             Application.Run(loginForm);
         }
-    }
-
-    internal class SismioServer
-    {
     }
 }

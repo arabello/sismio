@@ -6,12 +6,17 @@ namespace Sismio.io.sismio.analisi
     // TODO
     public class AnalisiMagnitudine: Analisi
     {
+        private const int DistanzaMinimaTraAvvisi = 1000;  // In millisecondi
+        private long _tempoUltimoAvviso = 0;
+
         public override event OnRisultatoAnalisi RicevitoriRisultato;
 
         private int[] Soglie = new int[] {2,3,5,7,8};
 
         public override void Analizza(int[] buffer)
         {
+            long tempoAttuale = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+
             // Trova il massimo elemento
             int max = -1;
             for (int i = 0; i < buffer.Length; i++)
@@ -36,7 +41,7 @@ namespace Sismio.io.sismio.analisi
             }
 
             // Se la supera, creo un evento
-            if (indiceSoglia >= 0)
+            if (indiceSoglia >= 0 && (tempoAttuale - _tempoUltimoAvviso) > DistanzaMinimaTraAvvisi)
             {
                 EventoSismico evento = new EventoSismico
                 {
@@ -47,6 +52,7 @@ namespace Sismio.io.sismio.analisi
                     Timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds()
                 };
                 GestoreEventi.NotificaEvento(evento);
+                _tempoUltimoAvviso = tempoAttuale;
             }
 
             // Notifica il risultato

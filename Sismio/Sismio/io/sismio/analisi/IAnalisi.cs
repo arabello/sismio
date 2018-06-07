@@ -8,9 +8,15 @@ namespace Sismio.io.sismio.analisi
 
     public interface IAnalisi
     {
+        // Aggiunti gestore eventi, stazione e ciclo principale
+
         event OnRisultatoAnalisi RicevitoriRisultato;
         void OnDatiDisponibili(int[] data);
+
         IStazione Stazione { get; set; }
         GestoreEventi GestoreEventi { get; set; }
+
+        void Avvia();
+        void Ferma();
     }
 }

@@ -1,4 +1,6 @@
-﻿using Sismio.io.sismio.analisi;
+﻿using System.Collections.Generic;
+using System.Threading;
+using Sismio.io.sismio.analisi;
 using Sismio.io.sismio.eventi;
 using Sismio.io.sismio.stazione;
 
@@ -23,11 +25,15 @@ namespace Sismio.io.sismio.sorgente
             analisi.Stazione = Stazione;
             analisi.GestoreEventi = _gestoreEventi;
             RicevitoriDati += analisi.OnDatiDisponibili;
+
+            // Avvio il thread dell'analisi
+            analisi.Avvia();
         }
 
         public void RimuoviAnalisi(IAnalisi analisi)
         {
             RicevitoriDati -= analisi.OnDatiDisponibili;
+            analisi.Ferma();
         }
 
         protected void NotificaDatiDisponibili(int[] data)
