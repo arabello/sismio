@@ -27,8 +27,8 @@ namespace Sismio
         static void Main()
         {
             // Inizializzo il sensore
-            ISensore sensore = new MockSensore();
-            //ISensore sensore = new SensoreSeriale("COM10", 74880);
+            //ISensore sensore = new MockSensore();
+            ISensore sensore = new SensoreSeriale("COM10", 74880);
             //sensore.RicevitoriDatiSensore += dati => Console.WriteLine(String.Join(",", dati));
 
             // Creo il thread del sensore e lo avvio
@@ -96,6 +96,7 @@ namespace Sismio
 
             // Avvio il server della stazione
             ServerStazione server = new ServerStazione(sensore, gestioneUtentiController, Sismio.CertificatoResource.certificato, "passwordsismio");
+            server.IndirizzoServer = "192.168.1.105";  // TODO: cambiare con il proprio locale
             server.Avvia();
 
             CreatoreConnessioni creatore = new CreatoreConnessioni(stazioniController);

@@ -18,6 +18,7 @@ namespace Sismio.io.sismio.trasmissione
     public class ServerStazione
     {
         public int PortaServer { get; set; } = 8001;
+        public string IndirizzoServer { get; set; }
 
         private readonly ISensore _sensore;
         private readonly IGestioneUtentiController _gestioneUtentiController = null;
@@ -60,7 +61,7 @@ namespace Sismio.io.sismio.trasmissione
         private void Run()
         {
             // Ottieni l'indirizzo locale
-            IPAddress ipAddress = IPAddress.Parse("127.0.0.1");
+            IPAddress ipAddress = IPAddress.Parse(IndirizzoServer);
 
             // Avvia l'ascoltatore TCP
             TcpListener tcpListener = new TcpListener(ipAddress, PortaServer);
