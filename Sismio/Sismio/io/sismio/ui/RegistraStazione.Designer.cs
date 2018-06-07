@@ -68,7 +68,7 @@
             this.inputNome.SelectedText = "";
             this.inputNome.SelectionLength = 0;
             this.inputNome.SelectionStart = 0;
-            this.inputNome.Size = new System.Drawing.Size(192, 23);
+            this.inputNome.Size = new System.Drawing.Size(192, 25);
             this.inputNome.TabIndex = 1;
             this.inputNome.TabStop = false;
             this.inputNome.Text = "Nome stazione";
@@ -86,7 +86,7 @@
             this.inputLocazione.SelectedText = "";
             this.inputLocazione.SelectionLength = 0;
             this.inputLocazione.SelectionStart = 0;
-            this.inputLocazione.Size = new System.Drawing.Size(192, 23);
+            this.inputLocazione.Size = new System.Drawing.Size(192, 25);
             this.inputLocazione.TabIndex = 1;
             this.inputLocazione.TabStop = false;
             this.inputLocazione.Text = "Locazione";
@@ -104,7 +104,7 @@
             this.inputIP.SelectedText = "";
             this.inputIP.SelectionLength = 0;
             this.inputIP.SelectionStart = 0;
-            this.inputIP.Size = new System.Drawing.Size(192, 23);
+            this.inputIP.Size = new System.Drawing.Size(192, 25);
             this.inputIP.TabIndex = 1;
             this.inputIP.TabStop = false;
             this.inputIP.Text = "Indirizzo IP";
@@ -122,7 +122,7 @@
             this.inputPorta.SelectedText = "";
             this.inputPorta.SelectionLength = 0;
             this.inputPorta.SelectionStart = 0;
-            this.inputPorta.Size = new System.Drawing.Size(192, 23);
+            this.inputPorta.Size = new System.Drawing.Size(192, 25);
             this.inputPorta.TabIndex = 1;
             this.inputPorta.TabStop = false;
             this.inputPorta.Text = "Porta";

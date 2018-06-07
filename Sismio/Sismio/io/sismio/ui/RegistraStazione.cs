@@ -48,15 +48,13 @@ namespace Sismio.io.sismio.ui
 
             Stazione stazione;
 
-            string hash = HashUtil.GeneraSHA256(inputNome.Text); // TODO Aggiungere altri campi?
-            // TODO fix hash nella grafica
             stazione = new Stazione
             {
                 Nome = inputNome.Text,
                 Locazione = inputLocazione.Text,
                 IndirizzoDiRete = IPAddress.Parse(inputIP.Text),
                 Porta = Int32.Parse(inputPorta.Text),
-                ImprontaChiavePubblica = hash 
+                ImprontaChiavePubblica = "E2C9153221FE658AFDCEBE095EE5D2392AF8C4AE"  // TODO: andrebbe richiesta al server dinamicamente, versione 2.0
             };
             
             bool res = Controller.Registra(stazione);
