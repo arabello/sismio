@@ -51,7 +51,7 @@ namespace Sismio.io.sismio.analisi
                     Tag = "Magnitudo",
                     Timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds()
                 };
-                GestoreEventi.NotificaEvento(evento);
+                GestoreEventi.NotificaEventoAsync(evento);
                 _tempoUltimoAvviso = tempoAttuale;
             }
 

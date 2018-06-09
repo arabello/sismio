@@ -69,7 +69,7 @@ namespace Sismio.io.sismio.analisi
                     Tag = "Frequenta",
                     Timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds()
                 };
-                GestoreEventi.NotificaEvento(evento);
+                GestoreEventi.NotificaEventoAsync(evento);
             }
 
             // Notifica il risultato
