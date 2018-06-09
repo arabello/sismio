@@ -104,7 +104,7 @@ namespace Sismio.io.sismio.ui
                 DateTime date = UnixTimeStampToDateTime(evento.Timestamp);
                 var version = new string[]
                 {
-                    date.Date.ToString(), evento.Tag, evento.Stazione?.Nome, evento.Messaggio, evento.Priorita.ToString()
+                    date.ToString(), evento.Tag, evento.Stazione?.Nome, evento.Messaggio, evento.Priorita.ToString()
                 };
                 var item = new ListViewItem(version);
                 item.BackColor = Color.AliceBlue;
